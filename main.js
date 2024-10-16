@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain, globalShortcut } = require('electron');
 const path = require('node:path')
 const fs = require('fs');
 const xmlbuilder = require('xmlbuilder');
-let testObject = {
+let xmlBase = {
   Header:{
   CollectionDetails:{
       Collection:"ILR",
@@ -22,7 +22,9 @@ let testObject = {
   LearningProvider:{
       UKPRN:"10085696"
   },
-  
+  Learner: [
+
+  ]
   }
 
 function createWindow() {
@@ -59,7 +61,7 @@ ipcMain.on('upload-csv', (event, dataArray) => {
   console.log(dataArray);
   
   // Create XML from testObject
-  const xml = xmlbuilder.create(testObject).end({ pretty: true });
+  const xml = xmlbuilder.create(xmlBase).end({ pretty: true });
   
   fs.writeFile("data.xml", xml, (err) => {
     if (err) {
