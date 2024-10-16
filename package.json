@@ -4,7 +4,8 @@
   "description": "The DFE tool for creating XML files that can be uploaded to their website is slow and limited in its function. We have an airtable that contains all the information it asks for but its hard to move that information. To fixt this we built a tool that takes the CSV values generated from our airtable and processes them to a XML file withouth having to refill any information.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."},
+    "start": "electron ."
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -12,6 +13,8 @@
     "electron": "^33.0.0"
   },
   "dependencies": {
-    "csv-parse": "^5.5.6"
+    "csv-parse": "^5.5.6",
+    "papaparse": "^5.4.1",
+    "xmlbuilder": "^15.1.1"
   }
 }

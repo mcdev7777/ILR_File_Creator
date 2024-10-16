@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<Header>
+  <CollectionDetails>
+    <Collection>ILR</Collection>
+    <Year>2324</Year>
+    <FilePreparationDate>2024-09-11</FilePreparationDate>
+  </CollectionDetails>
+  <Source>
+    <ProtectiveMarking>OFFICIAL-SENSITIVE-Personal</ProtectiveMarking>
+    <UKPRN>10085696</UKPRN>
+    <SoftwareSupplier>Education &amp; Skills Funding Agency</SoftwareSupplier>
+    <SoftwarePackage>ILR Learner Entry</SoftwarePackage>
+    <Release>2324.1.92.0</Release>
+    <SerialNo>01</SerialNo>
+    <DateTime>2024-09-11T05:09:12</DateTime>
+  </Source>
+</Header>
+<LearningProvider>
+  <UKPRN>10085696</UKPRN>
+</LearningProvider>
