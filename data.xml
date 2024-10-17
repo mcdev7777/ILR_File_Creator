@@ -1,20 +1,46 @@
-<?xml version="1.0"?>
-<Header>
-  <CollectionDetails>
-    <Collection>ILR</Collection>
-    <Year>2324</Year>
-    <FilePreparationDate>2024-09-11</FilePreparationDate>
-  </CollectionDetails>
-  <Source>
-    <ProtectiveMarking>OFFICIAL-SENSITIVE-Personal</ProtectiveMarking>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Message xmlns="ESFA/ILR/2023-24" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Header>
+    <CollectionDetails>
+      <Collection>ILR</Collection>
+      <Year>2324</Year>
+      <FilePreparationDate>2024-09-11</FilePreparationDate>
+    </CollectionDetails>
+    <Source>
+      <ProtectiveMarking>OFFICIAL-SENSITIVE-Personal</ProtectiveMarking>
+      <UKPRN>10085696</UKPRN>
+      <SoftwareSupplier>Education &amp; Skills Funding Agency</SoftwareSupplier>
+      <SoftwarePackage>ILR Learner Entry</SoftwarePackage>
+      <Release>2324.1.92.0</Release>
+      <SerialNo>01</SerialNo>
+      <DateTime>2024-09-11T05:09:12</DateTime>
+    </Source>
+  </Header>
+  <LearningProvider>
     <UKPRN>10085696</UKPRN>
-    <SoftwareSupplier>Education &amp; Skills Funding Agency</SoftwareSupplier>
-    <SoftwarePackage>ILR Learner Entry</SoftwarePackage>
-    <Release>2324.1.92.0</Release>
-    <SerialNo>01</SerialNo>
-    <DateTime>2024-09-11T05:09:12</DateTime>
-  </Source>
-</Header>
-<LearningProvider>
-  <UKPRN>10085696</UKPRN>
-</LearningProvider>
+  </LearningProvider>
+  <Learner>
+    <Name>Marika Bertelli</Name>
+    <ULN>7026723870</ULN>
+    <GivenNames>Marika</GivenNames>
+    <FamilyName>Bertelli</FamilyName>
+    <Sex>Female </Sex>
+    <DateOfBirth>13/5/1987</DateOfBirth>
+  </Learner>
+  <Learner>
+    <Name>Jason  Warren</Name>
+    <ULN>fake number</ULN>
+    <GivenNames>Jason</GivenNames>
+    <FamilyName> Warren</FamilyName>
+    <Sex>Male</Sex>
+    <DateOfBirth>23/5/1985</DateOfBirth>
+  </Learner>
+  <Learner>
+    <Name>William Man</Name>
+    <ULN>9562002011</ULN>
+    <GivenNames>William</GivenNames>
+    <FamilyName>Man</FamilyName>
+    <Sex>Male</Sex>
+    <DateOfBirth>7/2/1993</DateOfBirth>
+  </Learner>
+</Message>

@@ -18,11 +18,15 @@ let xmlBase = {
       SerialNo: "01",
       DateTime: "2024-09-11T05:09:12",
     },
+   
   },
   LearningProvider: {
     UKPRN: "10085696",
   },
-  Learner: [],
+   Learner:
+    [
+ 
+    ]
 };
 
 function createWindow() {
@@ -59,19 +63,39 @@ ipcMain.on("upload-csv", (event, dataArray) => {
   }
 else{ 
   console.log(dataArray);
-
-  const xml = xmlbuilder.create(xmlBase).end({ pretty: true });
+for (let i = 1; i < dataArray.length; i++) {
+  xmlBase.Learner.push({
+    Name: dataArray[i][0],
+    ULN: dataArray[i][1],
+    GivenNames: dataArray[i][2],
+    FamilyName: dataArray[i][3],
+    Sex: dataArray[i][4],
+    DateOfBirth: dataArray[i][5],
+    
+  });
+}
+  const xml = xmlbuilder.create({
+    Message: xmlBase
+  }, {
+    encoding: 'UTF-8',
+    standalone: true
+  })
+  .att('xmlns', 'ESFA/ILR/2023-24')
+  .att('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance')
+  .end({ pretty: true });
 
   fs.writeFile("data.xml", xml, (err) => {
     if (err) {
       console.error(err);
+      event.reply('xml-creation-failed', err.message);
     } else {
       console.log("The XML file was saved successfully.");
+      event.reply('xml-created', 'data.xml');
     }
   });
-}
+
   // Create XML from testObject
- 
+}
 });
 
 app.on("window-all-closed", () => {

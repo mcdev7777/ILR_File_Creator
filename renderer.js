@@ -22,3 +22,17 @@ form.addEventListener('submit', (e) => {
    
     
 });
+
+ipcRenderer.on('xml-created', (event, filename) => {
+  const outputDiv = document.getElementById('output');
+  const downloadLink = document.createElement('a');
+  downloadLink.href = `${filename}`;
+  downloadLink.download = filename;
+  downloadLink.textContent = 'Download XML File';
+  outputDiv.appendChild(downloadLink);
+});
+
+ipcRenderer.on('xml-creation-failed', (event, errorMessage) => {
+  const outputDiv = document.getElementById('output');
+  outputDiv.textContent = `Error creating XML: ${errorMessage}`;
+});
