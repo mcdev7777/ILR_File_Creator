@@ -2,6 +2,9 @@ const { app, BrowserWindow, ipcMain, globalShortcut } = require("electron");
 const path = require("node:path");
 const fs = require("fs");
 const xmlbuilder = require("xmlbuilder");
+const currentDate = new Date(Date());
+
+const isoWithoutMsOrZ = currentDate.toISOString().split('.')[0];
 let xmlBase = {
   Header: {
     CollectionDetails: {
@@ -16,7 +19,7 @@ let xmlBase = {
       SoftwarePackage: "ILR Learner Entry",
       Release: "2324.1.92.0",
       SerialNo: "01",
-      DateTime: "2024-09-11T05:09:12",
+      DateTime: isoWithoutMsOrZ,
     },
    
   },
@@ -101,3 +104,4 @@ for (let i = 1; i < dataArray.length; i++) {
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
+
