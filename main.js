@@ -3,20 +3,24 @@ const path = require("node:path");
 const fs = require("fs");
 const xmlbuilder = require("xmlbuilder");
 const currentDate = new Date(Date());
-
 const isoWithoutMsOrZ = currentDate.toISOString().split('.')[0];
+const dateOnlyString = isoWithoutMsOrZ.replace(/T.*/, '');
+
 let xmlBase = {
   Header: {
     CollectionDetails: {
       Collection: "ILR",
+      // replace with value from field
       Year: "2324",
-      FilePreparationDate: "2024-09-11",
+      // make a date
+      FilePreparationDate: dateOnlyString,
     },
     Source: {
       ProtectiveMarking: "OFFICIAL-SENSITIVE-Personal",
       UKPRN: "10085696",
       SoftwareSupplier: "Education & Skills Funding Agency",
       SoftwarePackage: "ILR Learner Entry",
+      // check that this is ILR software version then replace with field
       Release: "2324.1.92.0",
       SerialNo: "01",
       DateTime: isoWithoutMsOrZ,
