@@ -64,12 +64,15 @@ app.whenReady().then(() => {
 });
 
 ipcMain.on("upload-csv", (event, dataArray) => {
-  console.log("upload-csv event");
-  if (dataArray.some((learner) => learner.some((item) => item === ""))) {
-    event.reply('show-alert', 'data missing');
+  console.log(dataArray);
+  // edit to allow date applies to irl and small employer to be empty
+  if (dataArray.some((learner) => 
+    learner.some((item, index) => 
+      item === "" && index !== 18 && index !== 38
+    )
+  )) {    event.reply('show-alert', 'data missing');
   }
 else{ 
-  console.log(dataArray);
 for (let i = 1; i < dataArray.length; i++) {
   xmlBase.Learner.push({
     Name: dataArray[i][0],
