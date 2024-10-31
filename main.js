@@ -68,7 +68,7 @@ ipcMain.on("upload-csv", (event, dataArray) => {
   if (dataArray.some((learner) => 
     learner.some((item, index) => 
       // add additional exceptions see if you can say which row is missing
-      item === "" && index !== 18 && index !== 38
+      item === "" && index !== 18 && index !== 38 && index !==21 && index !==23
     )
   )) {    event.reply('show-alert', 'data missing');
   }
@@ -99,32 +99,23 @@ for (let i = 1; i < dataArray.length; i++) {
       PriorLevel: dataArray[i][15], 
       DateLevelApp: dataArray[i][14]
     },
+    EmpStat: dataArray[i][16], 
+
     LearnerEmploymentStatus: [
-      {
-        // encode to number
-        EmpStat: dataArray[i][16], 
-        DateEmpStatApp: dataArray[i][17],
-        // some have more than two employment status monitoring
-        EmploymentStatusMonitoring: {
-          //looks like some have LOU sections some hca EII some both order inconsistent
-          //LOE and SEM exist too
-          //check precence of 18 or 20 to see if they should exist
-          // mess with tool to figure out
-          ESMType: 'LOU',
-          ESMCode: dataArray[i][18] ? '1' : '2'
-        }
-      },
-      {
-        //where does this 10 come from
-        EmpStat: '10',
-        DateEmpStatApp: [i][20],
-        EmploymentStatusMonitoring: {
-          //where do these come from?
-          ESMType: 'EII',
-// probably drop down response "paid employment like"
-          ESMCode: '1'
-        }
-      }
+      ...(dataArray[i][20] ? [{  // DateEmpStatApp
+        EmpStat: dataArray[i][16],
+        DateEmpStatApp: dataArray[i][20],
+        EmploymentStatusMonitoring: [
+          ...(dataArray[i][21] ? [{  // If EII exists
+            ESMType: "EII",
+            ESMCode: dataArray[i][21]
+          }] : []),
+          ...(dataArray[i][23] ? [{  // If LOE exists
+            ESMType: "LOE",
+            ESMCode: dataArray[i][23]
+          }] : [])
+        ]
+      }] : [])
     ],
     LearningDelivery: [
       {
@@ -158,13 +149,14 @@ for (let i = 1; i < dataArray.length; i++) {
             AFinType: dataArray[i][40],
             AFinCode: dataArray[i][41],
             AFinDate: dataArray[i][42],
-            AFinAmount: dataArray[i][43].replace('£', '')
+            //get rid of money sign
+            AFinAmount: dataArray[i][43]
           },
           {
             AFinType: dataArray[i][44],
             AFinCode: dataArray[i][45],
             AFinDate: dataArray[i][46],
-            AFinAmount: dataArray[i][47].replace('£', '')
+            AFinAmount: dataArray[i][47]
           }
         ]
       },
