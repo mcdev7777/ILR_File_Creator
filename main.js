@@ -7,6 +7,7 @@ const isoWithoutMsOrZ = currentDate.toISOString().split('.')[0];
 const dateOnlyString = isoWithoutMsOrZ.replace(/T.*/, '');
 
 let xmlBase = {
+  //is ther a larger outer layer check schema
   Header: {
     CollectionDetails: {
       Collection: "ILR",
@@ -65,12 +66,21 @@ app.whenReady().then(() => {
 
 ipcMain.on("upload-csv", (event, dataArray) => {
   console.log(dataArray);
-  if (dataArray.some((learner) => 
-    learner.some((item, index) => 
-      // add additional exceptions see if you can say which row is missing
-      item === "" && index !== 18 && index !== 38 && index !==21 && index !==23
-    )
-  )) {    event.reply('show-alert', 'data missing');
+  if (dataArray.some((learner, learnerIndex) => 
+    learner.some((item, index) => {
+      const exceptionIndices = [0,11,16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 35, 36, 37, 38, 
+        39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 
+        60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76];
+      if (item === "" && !exceptionIndices.includes(index)) {
+        const missingField = dataArray[0][index] || `Field at index ${index}`;
+        event.reply('show-alert', `Data missing: ${missingField} for learner ${learnerIndex}`);
+        return true;
+      }
+      return false;
+    })
+  )) {
+    // Optional: If you want a summary message after individual alerts
+    event.reply('show-alert', 'Please fill in all required fields');
   }
 else{ 
   let refNumber = 0
@@ -99,20 +109,111 @@ for (let i = 1; i < dataArray.length; i++) {
       PriorLevel: dataArray[i][15], 
       DateLevelApp: dataArray[i][14]
     },
-    EmpStat: dataArray[i][16], 
 
     LearnerEmploymentStatus: [
-      ...(dataArray[i][20] ? [{  // DateEmpStatApp
-        EmpStat: dataArray[i][16],
-        DateEmpStatApp: dataArray[i][20],
+      //test if we need these spread operators to return arrays or if its ai halucination shit
+    
+      ...(dataArray[i][18] ? [{  
+        EmpStat: dataArray[i][18],
+        DateEmpStatApp: dataArray[i][17],
         EmploymentStatusMonitoring: [
-          ...(dataArray[i][21] ? [{  // If EII exists
+          ...(dataArray[i][21] ? [{  // 
             ESMType: "EII",
             ESMCode: dataArray[i][21]
           }] : []),
-          ...(dataArray[i][23] ? [{  // If LOE exists
+          ...(dataArray[i][23] ? [{ 
             ESMType: "LOE",
             ESMCode: dataArray[i][23]
+          }] : []),
+          // cant find value on airtable mirroring loe
+          ...(dataArray[i][23] ? [{  
+            ESMType: "BSE",
+            ESMCode: dataArray[i][23]
+          }] : []),
+          ...(dataArray[i][22] ? [{  
+            ESMType: "LOU",
+            ESMCode: dataArray[i][22]
+          }] : []),
+          ...(dataArray[i][19] ? [{  
+            ESMType: "SEI",
+            ESMCode: "1"
+          }] : []),
+          //no full time education on air table
+          ...(dataArray[i][19] ? [{  
+            ESMType: "PEI",
+            ESMCode: "1"
+          }] : []),
+          // no small enployer for first entry
+          ...(dataArray[i][27] ? [{  
+            ESMType: "SEM",
+            ESMCode: "1"
+          }] : []),
+          // no made redundant
+          ...(dataArray[i][19] ? [{  
+            ESMType: "OET",
+            ESMCode: "1"
+          }] : []),
+          //no small or medium employer
+          ...(dataArray[i][19] ? [{  
+            ESMType: "OET",
+            ESMCode: "2"
+          }] : []),
+          // no employer has changed
+          ...(dataArray[i][19] ? [{  
+            ESMType: "OET",
+            ESMCode: "3"
+          }] : [])
+        ]
+      }] : []),
+      ...(dataArray[i][24] ? [{  
+        EmpStat: dataArray[i][24],
+        DateEmpStatApp: dataArray[i][23],
+        EmploymentStatusMonitoring: [
+          ...(dataArray[i][25] ? [{  // 
+            ESMType: "EII",
+            ESMCode: dataArray[i][25]
+          }] : []),
+          ...(dataArray[i][28] ? [{ 
+            ESMType: "LOE",
+            ESMCode: dataArray[i][28]
+          }] : []),
+          // cant find value on airtable mirroring loe
+          ...(dataArray[i][23] ? [{  
+            ESMType: "BSE",
+            ESMCode: dataArray[i][23]
+          }] : []),
+          //no unemployment lenght for 2nd entry
+          ...(dataArray[i][22] ? [{  
+            ESMType: "LOU",
+            ESMCode: dataArray[i][22]
+          }] : []),
+          ...(dataArray[i][26] ? [{  
+            ESMType: "SEI",
+            ESMCode: "1"
+          }] : []),
+          //no full time education on air table
+          ...(dataArray[i][19] ? [{  
+            ESMType: "PEI",
+            ESMCode: "1"
+          }] : []),
+          ...(dataArray[i][27] ? [{  
+            ESMType: "SEM",
+            ESMCode: "1"
+          }] : []),
+          // no made redundant
+          ...(dataArray[i][19] ? [{  
+            ESMType: "OET",
+            ESMCode: "1"
+          }] : []),
+          //no small or medium employer
+          ...(dataArray[i][19] ? [{  
+            ESMType: "OET",
+            ESMCode: "2"
+          }] : []),
+          // no employer has changed
+          ...(dataArray[i][19] ? [{  
+            ESMType: "OET",
+            ESMCode: "3"
           }] : [])
         ]
       }] : [])
