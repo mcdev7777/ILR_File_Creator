@@ -13,7 +13,7 @@
       <SoftwarePackage>ILR Learner Entry</SoftwarePackage>
       <Release>2324.1.92.0</Release>
       <SerialNo>01</SerialNo>
-      <DateTime>2024-11-01T11:56:33</DateTime>
+      <DateTime>2024-11-01T17:03:24</DateTime>
     </Source>
   </Header>
   <LearningProvider>
@@ -67,56 +67,39 @@
       </EmploymentStatusMonitoring>
     </LearnerEmploymentStatus>
     <LearningDelivery>
-      <LearnAimRef/>
-      <AimType/>
+      <LearnAimRef>ZPROG001</LearnAimRef>
+      <AimType>1</AimType>
       <AimSeqNumber>1</AimSeqNumber>
-      <LearnStartDate/>
-      <LearnPlanEndDate/>
-      <FundModel/>
-      <PHours>2023-12-07</PHours>
-      <ProgType>1</ProgType>
-      <StdCode>ZPROG001</StdCode>
-      <DelLocPostCode>2023-09-14</DelLocPostCode>
-      <EPAOrgID>32</EPAOrgID>
-      <CompStatus/>
-      <SWSupAimId>temp ID till we figure out what goes here</SWSupAimId>
+      <LearnStartDate>2023-09-14</LearnStartDate>
+      <LearnPlanEndDate>2023-12-07</LearnPlanEndDate>
+      <FundModel>37</FundModel>
+      <PHours>72</PHours>
+      <ProgType>32</ProgType>
+      <StdCode/>
+      <DelLocPostCode>N4 3HH</DelLocPostCode>
+      <EPAOrgID/>
+      <CompStatus>1</CompStatus>
+      <SWSupAimId>1ff182a9-7752-41f1-a053-62080aa54e1b</SWSupAimId>
       <LearningDeliveryFAM>
         <LearnDelFAMType>SOF</LearnDelFAMType>
-        <LearnDelFAMCode/>
+        <LearnDelFAMCode>105</LearnDelFAMCode>
       </LearningDeliveryFAM>
-      <LearningDeliveryFAM>
-        <LearnDelFAMType/>
-        <LearnDelFAMCode>N4 3HH</LearnDelFAMCode>
-        <LearnDelFAMDateFrom>72</LearnDelFAMDateFrom>
-      </LearningDeliveryFAM>
-      <AppFinRecord>
-        <AFinType>SBD-1133-252 </AFinType>
-        <AFinCode/>
-        <AFinDate/>
-        <AFinAmount/>
-      </AppFinRecord>
-      <AppFinRecord>
-        <AFinType/>
-        <AFinCode>105</AFinCode>
-        <AFinDate/>
-        <AFinAmount/>
-      </AppFinRecord>
     </LearningDelivery>
     <LearningDelivery>
-      <LearnAimRef/>
-      <AimType/>
+      <LearnAimRef>Z0060322</LearnAimRef>
+      <AimType>3</AimType>
       <AimSeqNumber>2</AimSeqNumber>
-      <LearnStartDate/>
-      <LearnPlanEndDate/>
-      <FundModel>1 </FundModel>
-      <ProgType/>
-      <StdCode>1</StdCode>
-      <DelLocPostCode/>
-      <CompStatus/>
-      <SWSupAimId>temp ID till we figure out what goes here</SWSupAimId>
+      <LearnStartDate>2023-09-14</LearnStartDate>
+      <LearnPlanEndDate>2010-10-20</LearnPlanEndDate>
+      <FundModel>37</FundModel>
+      <ProgType>32</ProgType>
+      <StdCode/>
+      <DelLocPostCode>N4 3HH</DelLocPostCode>
+      <CompStatus>The learner is continuing the learning activities towards the learning aim</CompStatus>
+      <SWSupAimId>a07cdc7b-7617-482b-805f-14e2144e632e</SWSupAimId>
       <LearningDeliveryFAM>
         <LearnDelFAMType>SOF</LearnDelFAMType>
-        <LearnDelFAMCode/>
+        <LearnDelFAMCode>105</LearnDelFAMCode>
       </LearningDeliveryFAM>
     </LearningDelivery>
   </Learner>
@@ -220,56 +203,56 @@
       </EmploymentStatusMonitoring>
     </LearnerEmploymentStatus>
     <LearningDelivery>
-      <LearnAimRef>8</LearnAimRef>
-      <AimType>10</AimType>
+      <LearnAimRef>ZPROG001</LearnAimRef>
+      <AimType>1</AimType>
       <AimSeqNumber>1</AimSeqNumber>
-      <LearnStartDate/>
-      <LearnPlanEndDate>1 checked out of 1</LearnPlanEndDate>
-      <FundModel>4</FundModel>
-      <PHours>2024-10-11</PHours>
-      <ProgType>1</ProgType>
-      <StdCode>ZPROG001</StdCode>
-      <DelLocPostCode>2023-05-11</DelLocPostCode>
-      <EPAOrgID>25</EPAOrgID>
-      <CompStatus>2023-11-05</CompStatus>
-      <SWSupAimId>temp ID till we figure out what goes here</SWSupAimId>
+      <LearnStartDate>2023-05-11</LearnStartDate>
+      <LearnPlanEndDate>2024-10-11</LearnPlanEndDate>
+      <FundModel>36</FundModel>
+      <PHours>504</PHours>
+      <ProgType>25</ProgType>
+      <StdCode>2</StdCode>
+      <DelLocPostCode>N4 3HH</DelLocPostCode>
+      <EPAOrgID>EPAO0001</EPAOrgID>
+      <CompStatus>2</CompStatus>
+      <SWSupAimId>7648d694-8c5a-4e33-baa1-415ad208c4bf</SWSupAimId>
       <LearningDeliveryFAM>
         <LearnDelFAMType>SOF</LearnDelFAMType>
-        <LearnDelFAMCode>EPAO0001</LearnDelFAMCode>
+        <LearnDelFAMCode>105</LearnDelFAMCode>
       </LearningDeliveryFAM>
       <LearningDeliveryFAM>
-        <LearnDelFAMType>2</LearnDelFAMType>
-        <LearnDelFAMCode>N4 3HH</LearnDelFAMCode>
-        <LearnDelFAMDateFrom>504</LearnDelFAMDateFrom>
+        <LearnDelFAMType>ACT</LearnDelFAMType>
+        <LearnDelFAMCode>1</LearnDelFAMCode>
+        <LearnDelFAMDateFrom>2023-11-05</LearnDelFAMDateFrom>
       </LearningDeliveryFAM>
       <AppFinRecord>
-        <AFinType/>
-        <AFinCode>ACT</AFinCode>
-        <AFinDate>1</AFinDate>
-        <AFinAmount>2023-11-05</AFinAmount>
+        <AFinType>TNP</AFinType>
+        <AFinCode>1</AFinCode>
+        <AFinDate>2023-11-05</AFinDate>
+        <AFinAmount>1600</AFinAmount>
       </AppFinRecord>
       <AppFinRecord>
-        <AFinType/>
-        <AFinCode>105</AFinCode>
-        <AFinDate>TNP</AFinDate>
-        <AFinAmount>1</AFinAmount>
+        <AFinType>TNP</AFinType>
+        <AFinCode>2</AFinCode>
+        <AFinDate>2023-11-05</AFinDate>
+        <AFinAmount>18000</AFinAmount>
       </AppFinRecord>
     </LearningDelivery>
     <LearningDelivery>
-      <LearnAimRef>TNP</LearnAimRef>
-      <AimType>1600</AimType>
+      <LearnAimRef>Z0001947</LearnAimRef>
+      <AimType>3</AimType>
       <AimSeqNumber>2</AimSeqNumber>
-      <LearnStartDate>2</LearnStartDate>
-      <LearnPlanEndDate>2023-11-05</LearnPlanEndDate>
-      <FundModel/>
-      <ProgType>18000</ProgType>
+      <LearnStartDate>2023-11-05</LearnStartDate>
+      <LearnPlanEndDate>2024-10-11</LearnPlanEndDate>
+      <FundModel>36</FundModel>
+      <ProgType>25</ProgType>
       <StdCode>2</StdCode>
-      <DelLocPostCode>2024-05-24</DelLocPostCode>
-      <CompStatus/>
-      <SWSupAimId>temp ID till we figure out what goes here</SWSupAimId>
+      <DelLocPostCode>N4 3HH</DelLocPostCode>
+      <CompStatus>The learner has completed the activities towards the learning aim</CompStatus>
+      <SWSupAimId>6244b3b6-44bc-4eb4-8524-9b9578265967</SWSupAimId>
       <LearningDeliveryFAM>
         <LearnDelFAMType>SOF</LearnDelFAMType>
-        <LearnDelFAMCode>1</LearnDelFAMCode>
+        <LearnDelFAMCode>105</LearnDelFAMCode>
       </LearningDeliveryFAM>
     </LearningDelivery>
   </Learner>
