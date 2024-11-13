@@ -111,7 +111,6 @@ for (let i = 1; i < dataArray.length; i++) {
     },
 
     LearnerEmploymentStatus: [
-      //test if we need these spread operators to return arrays or if its ai halucination shit
     
       ...(dataArray[i][18] ? [{  
         EmpStat: dataArray[i][18],
@@ -125,11 +124,7 @@ for (let i = 1; i < dataArray.length; i++) {
             ESMType: "LOE",
             ESMCode: dataArray[i][23]
           }] : []),
-          // cant find value on airtable mirroring loe
-          ...(dataArray[i][23] ? [{  
-            ESMType: "BSE",
-            ESMCode: dataArray[i][23]
-          }] : []),
+
           ...(dataArray[i][22] ? [{  
             ESMType: "LOU",
             ESMCode: dataArray[i][22]
@@ -138,11 +133,7 @@ for (let i = 1; i < dataArray.length; i++) {
             ESMType: "SEI",
             ESMCode: "1"
           }] : []),
-          //no full time education on air table
-          ...(dataArray[i][19] ? [{  
-            ESMType: "PEI",
-            ESMCode: "1"
-          }] : []),
+
           // no small enployer for first entry
           ...(dataArray[i][27] ? [{  
             ESMType: "SEM",
@@ -152,16 +143,6 @@ for (let i = 1; i < dataArray.length; i++) {
           ...(dataArray[i][19] ? [{  
             ESMType: "OET",
             ESMCode: "1"
-          }] : []),
-          //no small or medium employer
-          ...(dataArray[i][19] ? [{  
-            ESMType: "OET",
-            ESMCode: "2"
-          }] : []),
-          // no employer has changed
-          ...(dataArray[i][19] ? [{  
-            ESMType: "OET",
-            ESMCode: "3"
           }] : [])
         ]
       }] : []),
@@ -177,11 +158,7 @@ for (let i = 1; i < dataArray.length; i++) {
             ESMType: "LOE",
             ESMCode: dataArray[i][28]
           }] : []),
-          // cant find value on airtable mirroring loe
-          ...(dataArray[i][23] ? [{  
-            ESMType: "BSE",
-            ESMCode: dataArray[i][23]
-          }] : []),
+         
           //no unemployment lenght for 2nd entry
           ...(dataArray[i][22] ? [{  
             ESMType: "LOU",
@@ -191,11 +168,7 @@ for (let i = 1; i < dataArray.length; i++) {
             ESMType: "SEI",
             ESMCode: "1"
           }] : []),
-          //no full time education on air table
-          ...(dataArray[i][19] ? [{  
-            ESMType: "PEI",
-            ESMCode: "1"
-          }] : []),
+          
           ...(dataArray[i][27] ? [{  
             ESMType: "SEM",
             ESMCode: "1"
@@ -204,16 +177,6 @@ for (let i = 1; i < dataArray.length; i++) {
           ...(dataArray[i][19] ? [{  
             ESMType: "OET",
             ESMCode: "1"
-          }] : []),
-          //no small or medium employer
-          ...(dataArray[i][19] ? [{  
-            ESMType: "OET",
-            ESMCode: "2"
-          }] : []),
-          // no employer has changed
-          ...(dataArray[i][19] ? [{  
-            ESMType: "OET",
-            ESMCode: "3"
           }] : [])
         ]
       }] : [])
@@ -264,6 +227,7 @@ for (let i = 1; i < dataArray.length; i++) {
       {
         LearnAimRef: dataArray[i][50],
         AimType: dataArray[i][49],
+        //its when it was added first 2nd 3rd ect
         AimSeqNumber: '2',
         LearnStartDate: dataArray[i][51],
         LearnPlanEndDate: dataArray[i][52],

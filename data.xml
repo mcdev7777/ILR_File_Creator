@@ -4,7 +4,7 @@
     <CollectionDetails>
       <Collection>ILR</Collection>
       <Year>2324</Year>
-      <FilePreparationDate>2024-11-01</FilePreparationDate>
+      <FilePreparationDate>2024-11-12</FilePreparationDate>
     </CollectionDetails>
     <Source>
       <ProtectiveMarking>OFFICIAL-SENSITIVE-Personal</ProtectiveMarking>
@@ -13,7 +13,7 @@
       <SoftwarePackage>ILR Learner Entry</SoftwarePackage>
       <Release>2324.1.92.0</Release>
       <SerialNo>01</SerialNo>
-      <DateTime>2024-11-01T11:56:33</DateTime>
+      <DateTime>2024-11-12T13:50:32</DateTime>
     </Source>
   </Header>
   <LearningProvider>
@@ -21,255 +21,301 @@
   </LearningProvider>
   <Learner>
     <LearnRefNumber>0001</LearnRefNumber>
-    <ULN>7473989609</ULN>
-    <FamilyName>Pates</FamilyName>
-    <GivenNames>Jessica Lucy</GivenNames>
-    <DateOfBirth>1990-07-18</DateOfBirth>
-    <Ethnicity>31</Ethnicity>
-    <Sex>F</Sex>
-    <LLDDHealthProb>99</LLDDHealthProb>
-    <NINumber>JK807246C</NINumber>
-    <PlanLearnHours>2023-12-07</PlanLearnHours>
-    <PostcodePrior>SW12 8PP</PostcodePrior>
-    <Postcode>SW12 8PP</Postcode>
-    <AddLine1>Flat 13, 53 Oldridge Road</AddLine1>
-    <TelNo>07795823258</TelNo>
+    <ULN>7026723870</ULN>
+    <FamilyName>Bertelli</FamilyName>
+    <GivenNames>Marika</GivenNames>
+    <DateOfBirth>13/5/1987</DateOfBirth>
+    <Ethnicity>Any other White Background</Ethnicity>
+    <Sex>Female </Sex>
+    <LLDDHealthProb>99 Not provided</LLDDHealthProb>
+    <NINumber>SS520351D</NINumber>
+    <PlanLearnHours>504</PlanLearnHours>
+    <PostcodePrior>E5 0TZ</PostcodePrior>
+    <Postcode>E5 0TZ</Postcode>
+    <AddLine1>2 Yatesbury Court, Studley Close</AddLine1>
+    <TelNo>07517782427</TelNo>
     <PriorAttain>
-      <PriorLevel>9</PriorLevel>
-      <DateLevelApp>2023-09-07</DateLevelApp>
+      <PriorLevel>10 - Level 7: Master's degree or PhD</PriorLevel>
+      <DateLevelApp>16/9/2024</DateLevelApp>
     </PriorAttain>
     <LearnerEmploymentStatus>
-      <EmpStat>11</EmpStat>
-      <DateEmpStatApp>2023-09-07</DateEmpStatApp>
+      <EmpStat>1</EmpStat>
+      <DateEmpStatApp>Up to 3 months</DateEmpStatApp>
+      <EmploymentStatusMonitoring>
+        <ESMType>EII</ESMType>
+        <ESMCode>ZPROG001</ESMCode>
+      </EmploymentStatusMonitoring>
+      <EmploymentStatusMonitoring>
+        <ESMType>LOE</ESMType>
+        <ESMCode>36</ESMCode>
+      </EmploymentStatusMonitoring>
       <EmploymentStatusMonitoring>
         <ESMType>LOU</ESMType>
-        <ESMCode>3</ESMCode>
+        <ESMCode>0 checked out of 1</ESMCode>
       </EmploymentStatusMonitoring>
       <EmploymentStatusMonitoring>
         <ESMType>SEI</ESMType>
         <ESMCode>1</ESMCode>
       </EmploymentStatusMonitoring>
       <EmploymentStatusMonitoring>
-        <ESMType>PEI</ESMType>
+        <ESMType>SEM</ESMType>
         <ESMCode>1</ESMCode>
       </EmploymentStatusMonitoring>
       <EmploymentStatusMonitoring>
         <ESMType>OET</ESMType>
         <ESMCode>1</ESMCode>
-      </EmploymentStatusMonitoring>
-      <EmploymentStatusMonitoring>
-        <ESMType>OET</ESMType>
-        <ESMCode>2</ESMCode>
-      </EmploymentStatusMonitoring>
-      <EmploymentStatusMonitoring>
-        <ESMType>OET</ESMType>
-        <ESMCode>3</ESMCode>
       </EmploymentStatusMonitoring>
     </LearnerEmploymentStatus>
     <LearningDelivery>
-      <LearnAimRef/>
-      <AimType/>
+      <LearnAimRef>ZPROG001</LearnAimRef>
+      <AimType>1</AimType>
       <AimSeqNumber>1</AimSeqNumber>
-      <LearnStartDate/>
-      <LearnPlanEndDate/>
-      <FundModel/>
-      <PHours>2023-12-07</PHours>
-      <ProgType>1</ProgType>
-      <StdCode>ZPROG001</StdCode>
-      <DelLocPostCode>2023-09-14</DelLocPostCode>
-      <EPAOrgID>32</EPAOrgID>
-      <CompStatus/>
+      <LearnStartDate>16/9/2024</LearnStartDate>
+      <LearnPlanEndDate>16/3/2026</LearnPlanEndDate>
+      <FundModel>36</FundModel>
+      <PHours>504</PHours>
+      <ProgType>25</ProgType>
+      <StdCode>2</StdCode>
+      <DelLocPostCode>N4 3HH</DelLocPostCode>
+      <EPAOrgID>EPA0475</EPAOrgID>
+      <CompStatus>1 Learner is continuing the activities towards the learning aim</CompStatus>
       <SWSupAimId>temp ID till we figure out what goes here</SWSupAimId>
       <LearningDeliveryFAM>
         <LearnDelFAMType>SOF</LearnDelFAMType>
-        <LearnDelFAMCode/>
+        <LearnDelFAMCode>105</LearnDelFAMCode>
       </LearningDeliveryFAM>
       <LearningDeliveryFAM>
-        <LearnDelFAMType/>
-        <LearnDelFAMCode>N4 3HH</LearnDelFAMCode>
-        <LearnDelFAMDateFrom>72</LearnDelFAMDateFrom>
+        <LearnDelFAMType>ACT</LearnDelFAMType>
+        <LearnDelFAMCode>1</LearnDelFAMCode>
+        <LearnDelFAMDateFrom>16/9/2024</LearnDelFAMDateFrom>
       </LearningDeliveryFAM>
       <AppFinRecord>
-        <AFinType>SBD-1133-252 </AFinType>
-        <AFinCode/>
-        <AFinDate/>
-        <AFinAmount/>
+        <AFinType>TNP</AFinType>
+        <AFinCode>1</AFinCode>
+        <AFinDate>16/9/2024</AFinDate>
+        <AFinAmount>16150</AFinAmount>
       </AppFinRecord>
       <AppFinRecord>
-        <AFinType/>
-        <AFinCode>105</AFinCode>
-        <AFinDate/>
-        <AFinAmount/>
+        <AFinType>TNP</AFinType>
+        <AFinCode>2</AFinCode>
+        <AFinDate>16/9/2024</AFinDate>
+        <AFinAmount>£1850</AFinAmount>
       </AppFinRecord>
     </LearningDelivery>
     <LearningDelivery>
-      <LearnAimRef/>
-      <AimType/>
+      <LearnAimRef>Z0001947</LearnAimRef>
+      <AimType>3</AimType>
       <AimSeqNumber>2</AimSeqNumber>
-      <LearnStartDate/>
-      <LearnPlanEndDate/>
-      <FundModel>1 </FundModel>
-      <ProgType/>
-      <StdCode>1</StdCode>
-      <DelLocPostCode/>
-      <CompStatus/>
+      <LearnStartDate>16/9/2024</LearnStartDate>
+      <LearnPlanEndDate>16/3/2026</LearnPlanEndDate>
+      <FundModel>36</FundModel>
+      <ProgType>25</ProgType>
+      <StdCode>2</StdCode>
+      <DelLocPostCode>N4 3HH</DelLocPostCode>
       <SWSupAimId>temp ID till we figure out what goes here</SWSupAimId>
       <LearningDeliveryFAM>
         <LearnDelFAMType>SOF</LearnDelFAMType>
-        <LearnDelFAMCode/>
+        <LearnDelFAMCode>1 Learner is continuing the activities towards the learning aim</LearnDelFAMCode>
       </LearningDeliveryFAM>
     </LearningDelivery>
   </Learner>
   <Learner>
     <LearnRefNumber>0002</LearnRefNumber>
-    <ULN>8870347612</ULN>
-    <FamilyName>Azzopardi</FamilyName>
-    <GivenNames>Elisabeth Jane Antonia</GivenNames>
-    <DateOfBirth>1999-01-04</DateOfBirth>
-    <Ethnicity>31</Ethnicity>
-    <Sex>F</Sex>
-    <LLDDHealthProb>94</LLDDHealthProb>
-    <NINumber>PE539260A</NINumber>
-    <PlanLearnHours>2024-10-11</PlanLearnHours>
-    <PostcodePrior>N5 1AU</PostcodePrior>
-    <Postcode>N5 1AU</Postcode>
-    <AddLine1>176 Highbury Hill</AddLine1>
-    <TelNo/>
+    <ULN>5484836491</ULN>
+    <FamilyName> Warren</FamilyName>
+    <GivenNames>Jason</GivenNames>
+    <DateOfBirth>23/5/1985</DateOfBirth>
+    <Ethnicity>English/Welsh/Scottish/Northern Irish/British</Ethnicity>
+    <Sex>Male</Sex>
+    <LLDDHealthProb>94 Other specific learning difficulty (e.g. ADHD; Dyspraxia)</LLDDHealthProb>
+    <NINumber>JW661714C</NINumber>
+    <PlanLearnHours>504</PlanLearnHours>
+    <PostcodePrior>E17 8QJ</PostcodePrior>
+    <Postcode>E17 8QJ</Postcode>
+    <AddLine1>36 Devonshire Road, London, E17 8QJ</AddLine1>
+    <TelNo>07725913649</TelNo>
     <PriorAttain>
-      <PriorLevel>9</PriorLevel>
-      <DateLevelApp>2023-05-04</DateLevelApp>
+      <PriorLevel>10 - Level 7: Master's degree or PhD</PriorLevel>
+      <DateLevelApp>9/9/2024</DateLevelApp>
     </PriorAttain>
     <LearnerEmploymentStatus>
-      <EmpStat>11</EmpStat>
-      <DateEmpStatApp>2023-05-04</DateEmpStatApp>
+      <EmpStat>1</EmpStat>
+      <DateEmpStatApp>Up to 3 months</DateEmpStatApp>
       <EmploymentStatusMonitoring>
-        <ESMType>LOE</ESMType>
-        <ESMCode>2023-05-11</ESMCode>
+        <ESMType>EII</ESMType>
+        <ESMCode>ZPROG001</ESMCode>
       </EmploymentStatusMonitoring>
       <EmploymentStatusMonitoring>
-        <ESMType>BSE</ESMType>
-        <ESMCode>2023-05-11</ESMCode>
+        <ESMType>LOE</ESMType>
+        <ESMCode>36</ESMCode>
       </EmploymentStatusMonitoring>
       <EmploymentStatusMonitoring>
         <ESMType>LOU</ESMType>
-        <ESMCode>1</ESMCode>
+        <ESMCode>1 checked out of 1</ESMCode>
       </EmploymentStatusMonitoring>
       <EmploymentStatusMonitoring>
         <ESMType>SEI</ESMType>
         <ESMCode>1</ESMCode>
       </EmploymentStatusMonitoring>
       <EmploymentStatusMonitoring>
-        <ESMType>PEI</ESMType>
-        <ESMCode>1</ESMCode>
-      </EmploymentStatusMonitoring>
-      <EmploymentStatusMonitoring>
         <ESMType>SEM</ESMType>
         <ESMCode>1</ESMCode>
       </EmploymentStatusMonitoring>
       <EmploymentStatusMonitoring>
         <ESMType>OET</ESMType>
         <ESMCode>1</ESMCode>
-      </EmploymentStatusMonitoring>
-      <EmploymentStatusMonitoring>
-        <ESMType>OET</ESMType>
-        <ESMCode>2</ESMCode>
-      </EmploymentStatusMonitoring>
-      <EmploymentStatusMonitoring>
-        <ESMType>OET</ESMType>
-        <ESMCode>3</ESMCode>
-      </EmploymentStatusMonitoring>
-    </LearnerEmploymentStatus>
-    <LearnerEmploymentStatus>
-      <EmpStat>10</EmpStat>
-      <DateEmpStatApp>2023-05-11</DateEmpStatApp>
-      <EmploymentStatusMonitoring>
-        <ESMType>EII</ESMType>
-        <ESMCode>8</ESMCode>
-      </EmploymentStatusMonitoring>
-      <EmploymentStatusMonitoring>
-        <ESMType>LOE</ESMType>
-        <ESMCode>4</ESMCode>
-      </EmploymentStatusMonitoring>
-      <EmploymentStatusMonitoring>
-        <ESMType>BSE</ESMType>
-        <ESMCode>2023-05-11</ESMCode>
-      </EmploymentStatusMonitoring>
-      <EmploymentStatusMonitoring>
-        <ESMType>LOU</ESMType>
-        <ESMCode>1</ESMCode>
-      </EmploymentStatusMonitoring>
-      <EmploymentStatusMonitoring>
-        <ESMType>PEI</ESMType>
-        <ESMCode>1</ESMCode>
-      </EmploymentStatusMonitoring>
-      <EmploymentStatusMonitoring>
-        <ESMType>SEM</ESMType>
-        <ESMCode>1</ESMCode>
-      </EmploymentStatusMonitoring>
-      <EmploymentStatusMonitoring>
-        <ESMType>OET</ESMType>
-        <ESMCode>1</ESMCode>
-      </EmploymentStatusMonitoring>
-      <EmploymentStatusMonitoring>
-        <ESMType>OET</ESMType>
-        <ESMCode>2</ESMCode>
-      </EmploymentStatusMonitoring>
-      <EmploymentStatusMonitoring>
-        <ESMType>OET</ESMType>
-        <ESMCode>3</ESMCode>
       </EmploymentStatusMonitoring>
     </LearnerEmploymentStatus>
     <LearningDelivery>
-      <LearnAimRef>8</LearnAimRef>
-      <AimType>10</AimType>
+      <LearnAimRef>ZPROG001</LearnAimRef>
+      <AimType>1</AimType>
       <AimSeqNumber>1</AimSeqNumber>
-      <LearnStartDate/>
-      <LearnPlanEndDate>1 checked out of 1</LearnPlanEndDate>
-      <FundModel>4</FundModel>
-      <PHours>2024-10-11</PHours>
-      <ProgType>1</ProgType>
-      <StdCode>ZPROG001</StdCode>
-      <DelLocPostCode>2023-05-11</DelLocPostCode>
-      <EPAOrgID>25</EPAOrgID>
-      <CompStatus>2023-11-05</CompStatus>
+      <LearnStartDate>9/9/2024</LearnStartDate>
+      <LearnPlanEndDate>9/6/2026</LearnPlanEndDate>
+      <FundModel>36</FundModel>
+      <PHours>504</PHours>
+      <ProgType>25</ProgType>
+      <StdCode>2</StdCode>
+      <DelLocPostCode>N4 3HH</DelLocPostCode>
+      <EPAOrgID>EPA0475</EPAOrgID>
+      <CompStatus>1 Learner is continuing the activities towards the learning aim</CompStatus>
       <SWSupAimId>temp ID till we figure out what goes here</SWSupAimId>
       <LearningDeliveryFAM>
         <LearnDelFAMType>SOF</LearnDelFAMType>
-        <LearnDelFAMCode>EPAO0001</LearnDelFAMCode>
+        <LearnDelFAMCode>105</LearnDelFAMCode>
       </LearningDeliveryFAM>
       <LearningDeliveryFAM>
-        <LearnDelFAMType>2</LearnDelFAMType>
-        <LearnDelFAMCode>N4 3HH</LearnDelFAMCode>
-        <LearnDelFAMDateFrom>504</LearnDelFAMDateFrom>
+        <LearnDelFAMType>ACT</LearnDelFAMType>
+        <LearnDelFAMCode>1</LearnDelFAMCode>
+        <LearnDelFAMDateFrom>9/9/2024</LearnDelFAMDateFrom>
       </LearningDeliveryFAM>
       <AppFinRecord>
-        <AFinType/>
-        <AFinCode>ACT</AFinCode>
-        <AFinDate>1</AFinDate>
-        <AFinAmount>2023-11-05</AFinAmount>
+        <AFinType>TNP</AFinType>
+        <AFinCode>1</AFinCode>
+        <AFinDate>9/9/2024</AFinDate>
+        <AFinAmount>16150</AFinAmount>
       </AppFinRecord>
       <AppFinRecord>
-        <AFinType/>
-        <AFinCode>105</AFinCode>
-        <AFinDate>TNP</AFinDate>
-        <AFinAmount>1</AFinAmount>
+        <AFinType>TNP</AFinType>
+        <AFinCode>2</AFinCode>
+        <AFinDate>9/9/2024</AFinDate>
+        <AFinAmount>£1850</AFinAmount>
       </AppFinRecord>
     </LearningDelivery>
     <LearningDelivery>
-      <LearnAimRef>TNP</LearnAimRef>
-      <AimType>1600</AimType>
+      <LearnAimRef>Z0001947</LearnAimRef>
+      <AimType>3</AimType>
       <AimSeqNumber>2</AimSeqNumber>
-      <LearnStartDate>2</LearnStartDate>
-      <LearnPlanEndDate>2023-11-05</LearnPlanEndDate>
-      <FundModel/>
-      <ProgType>18000</ProgType>
+      <LearnStartDate>9/9/2024</LearnStartDate>
+      <LearnPlanEndDate>9/6/2026</LearnPlanEndDate>
+      <FundModel>36</FundModel>
+      <ProgType>25</ProgType>
       <StdCode>2</StdCode>
-      <DelLocPostCode>2024-05-24</DelLocPostCode>
-      <CompStatus/>
+      <DelLocPostCode>N4 3HH</DelLocPostCode>
       <SWSupAimId>temp ID till we figure out what goes here</SWSupAimId>
       <LearningDeliveryFAM>
         <LearnDelFAMType>SOF</LearnDelFAMType>
+        <LearnDelFAMCode>1 Learner is continuing the activities towards the learning aim</LearnDelFAMCode>
+      </LearningDeliveryFAM>
+    </LearningDelivery>
+  </Learner>
+  <Learner>
+    <LearnRefNumber>0003</LearnRefNumber>
+    <ULN>9562002011</ULN>
+    <FamilyName>Man</FamilyName>
+    <GivenNames>William</GivenNames>
+    <DateOfBirth>7/2/1993</DateOfBirth>
+    <Ethnicity>Chinese</Ethnicity>
+    <Sex>Male</Sex>
+    <LLDDHealthProb>95 Other medical condition (for example epilepsy asthma diabetes)</LLDDHealthProb>
+    <NINumber>JW838085B</NINumber>
+    <PlanLearnHours>504</PlanLearnHours>
+    <PostcodePrior>E10 6RJ</PostcodePrior>
+    <Postcode>E10 6RJ</Postcode>
+    <AddLine1>29, Crawley Road</AddLine1>
+    <TelNo>0744 795 7768</TelNo>
+    <PriorAttain>
+      <PriorLevel>9 - Level 6: Batchelor's degree,6 - Full Level 3: 2 or more A-levels or equivalent,4 - Full Level 2: GCSE 5+ grades A-C </PriorLevel>
+      <DateLevelApp>9/9/2024</DateLevelApp>
+    </PriorAttain>
+    <LearnerEmploymentStatus>
+      <EmpStat>1</EmpStat>
+      <DateEmpStatApp>Up to 3 months</DateEmpStatApp>
+      <EmploymentStatusMonitoring>
+        <ESMType>EII</ESMType>
+        <ESMCode>ZPROG001</ESMCode>
+      </EmploymentStatusMonitoring>
+      <EmploymentStatusMonitoring>
+        <ESMType>LOE</ESMType>
+        <ESMCode>36</ESMCode>
+      </EmploymentStatusMonitoring>
+      <EmploymentStatusMonitoring>
+        <ESMType>LOU</ESMType>
+        <ESMCode>0 checked out of 1</ESMCode>
+      </EmploymentStatusMonitoring>
+      <EmploymentStatusMonitoring>
+        <ESMType>SEI</ESMType>
+        <ESMCode>1</ESMCode>
+      </EmploymentStatusMonitoring>
+      <EmploymentStatusMonitoring>
+        <ESMType>SEM</ESMType>
+        <ESMCode>1</ESMCode>
+      </EmploymentStatusMonitoring>
+      <EmploymentStatusMonitoring>
+        <ESMType>OET</ESMType>
+        <ESMCode>1</ESMCode>
+      </EmploymentStatusMonitoring>
+    </LearnerEmploymentStatus>
+    <LearningDelivery>
+      <LearnAimRef>ZPROG001</LearnAimRef>
+      <AimType>1</AimType>
+      <AimSeqNumber>1</AimSeqNumber>
+      <LearnStartDate>9/9/2024</LearnStartDate>
+      <LearnPlanEndDate>9/3/2026</LearnPlanEndDate>
+      <FundModel>36</FundModel>
+      <PHours>504</PHours>
+      <ProgType>25</ProgType>
+      <StdCode>2</StdCode>
+      <DelLocPostCode>N4 3HH</DelLocPostCode>
+      <EPAOrgID>EPA0475</EPAOrgID>
+      <CompStatus>1 Learner is continuing the activities towards the learning aim</CompStatus>
+      <SWSupAimId>temp ID till we figure out what goes here</SWSupAimId>
+      <LearningDeliveryFAM>
+        <LearnDelFAMType>SOF</LearnDelFAMType>
+        <LearnDelFAMCode>105</LearnDelFAMCode>
+      </LearningDeliveryFAM>
+      <LearningDeliveryFAM>
+        <LearnDelFAMType>ACT</LearnDelFAMType>
         <LearnDelFAMCode>1</LearnDelFAMCode>
+        <LearnDelFAMDateFrom>9/9/2024</LearnDelFAMDateFrom>
+      </LearningDeliveryFAM>
+      <AppFinRecord>
+        <AFinType>TNP</AFinType>
+        <AFinCode>1</AFinCode>
+        <AFinDate>9/9/2024</AFinDate>
+        <AFinAmount>16150</AFinAmount>
+      </AppFinRecord>
+      <AppFinRecord>
+        <AFinType>TNP</AFinType>
+        <AFinCode>2</AFinCode>
+        <AFinDate>9/9/2024</AFinDate>
+        <AFinAmount>£1850</AFinAmount>
+      </AppFinRecord>
+    </LearningDelivery>
+    <LearningDelivery>
+      <LearnAimRef>Z0001947</LearnAimRef>
+      <AimType>3</AimType>
+      <AimSeqNumber>2</AimSeqNumber>
+      <LearnStartDate>9/9/2024</LearnStartDate>
+      <LearnPlanEndDate>9/3/2026</LearnPlanEndDate>
+      <FundModel>36</FundModel>
+      <ProgType>25</ProgType>
+      <StdCode>2</StdCode>
+      <DelLocPostCode>N4 3HH</DelLocPostCode>
+      <SWSupAimId>temp ID till we figure out what goes here</SWSupAimId>
+      <LearningDeliveryFAM>
+        <LearnDelFAMType>SOF</LearnDelFAMType>
+        <LearnDelFAMCode>1 Learner is continuing the activities towards the learning aim</LearnDelFAMCode>
       </LearningDeliveryFAM>
     </LearningDelivery>
   </Learner>
