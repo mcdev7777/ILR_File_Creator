@@ -11,7 +11,6 @@ let xmlBase = {
   Header: {
     CollectionDetails: {
       Collection: "ILR",
-      // replace with value from field
       Year: "2324",
     
       FilePreparationDate: dateOnlyString,
@@ -21,7 +20,6 @@ let xmlBase = {
       UKPRN: "10085696",
       SoftwareSupplier: "Education & Skills Funding Agency",
       SoftwarePackage: "ILR Learner Entry",
-      // check that this is ILR software version then replace with field
       Release: "2324.1.92.0",
       SerialNo: "01",
       DateTime: isoWithoutMsOrZ,
@@ -64,7 +62,7 @@ app.whenReady().then(() => {
   });
 });
 
-ipcMain.on("upload-csv", (event, dataArray) => {
+ipcMain.on("upload-csv", (event, dataArray, version) => {
   console.log(dataArray);
   if (dataArray.some((learner, learnerIndex) => 
     learner.some((item, index) => {
@@ -79,24 +77,23 @@ ipcMain.on("upload-csv", (event, dataArray) => {
       return false;
     })
   )) {
-    // Optional: If you want a summary message after individual alerts
     event.reply('show-alert', 'Please fill in all required fields');
   }
 else{ 
+  // test this works and require it
+  xmlBase.Header.Source.Release = version
+  xmlBase.Header.CollectionDetails.Year = version.split('.')[0];
   let refNumber = 0
 for (let i = 1; i < dataArray.length; i++) {
   refNumber = i.toString().padStart(4, '0');
   xmlBase.Learner.push({
-    //learner refference number just aceding
     LearnRefNumber: refNumber,
     ULN: dataArray[i][1],
     FamilyName: dataArray[i][3],
     GivenNames: dataArray[i][2],
      DateOfBirth: dataArray[i][5],
-     //need to encode to number
     Ethnicity: dataArray[i][7],
     Sex: dataArray[i][4],
-    //need to encode to number
     LLDDHealthProb: dataArray[i][12],
     NINumber: dataArray[i][6],
     PlanLearnHours: dataArray[i][32],
@@ -105,7 +102,6 @@ for (let i = 1; i < dataArray.length; i++) {
     AddLine1: dataArray[i][10],
     TelNo: dataArray[i][11],
     PriorAttain: {
-      // need to encode to number
       PriorLevel: dataArray[i][15], 
       DateLevelApp: dataArray[i][14]
     },
@@ -195,59 +191,114 @@ for (let i = 1; i < dataArray.length; i++) {
         StdCode: dataArray[i][35],
         DelLocPostCode: dataArray[i][36],
         EPAOrgID: dataArray[i][39],
-        CompStatus: dataArray[i][55],
+        
+        CompStatus: dataArray[i][72],
+        LearnActEndDate: dataArray[i][69],
+        Outcome: dataArray[i][69],
+        //not always an achdate
+        AchDate: dataArray[i][69],
+        // not always and out grade
+        OutGrade: dataArray[i][69],
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
-          {
+          //69 is placeholder number use row info where this comes from
+          ...(dataArray[i][69] ? [{
+              
+            LearnDelFAMType: 'FFI',
+            LearnDelFAMCode: dataArray[i][69]
+          }]: []),
+          ...(dataArray[i][69] ? [{
+              
             LearnDelFAMType: 'SOF',
-            LearnDelFAMCode: dataArray[i][45]
-          },
-          ...(dataArray[i][41] ? [{
-            LearnDelFAMType: dataArray[i][41],
-            LearnDelFAMCode: dataArray[i][42],
-            LearnDelFAMDateFrom: dataArray[i][43]
-          }] : [])
+            LearnDelFAMCode: dataArray[i][69]
+          }]: []),
+          ...(dataArray[i][69] ? [{
+              
+            LearnDelFAMType: 'ACT',
+            LearnDelFAMCode: dataArray[i][69]
+          }]: [])
         ],
-        AppFinRecord: [
-          ...(dataArray[i][46] ? [{
-            AFinType: dataArray[i][46],
-            AFinCode: dataArray[i][47],
-            AFinDate: dataArray[i][48],
-            AFinAmount: dataArray[i][49]?.replace('£', '')
-          }] : []),
-          ...(dataArray[i][50] ? [{
-            AFinType: dataArray[i][50],
-            AFinCode: dataArray[i][51],
-            AFinDate: dataArray[i][52],
-            AFinAmount: dataArray[i][54]?.replace('£', '')
-          }] : [])
-        ]
+  AppFinRecord: [
+        //69 is a place hodler get dates from file
+        ...(dataArray[i][69] ? [{
+          AFinType: "TNP",      
+          AFinCode: '1',
+          AFinDate: dataArray[i][69],
+          AFinAmount: dataArray[i][69]
 
+        }]: []),
+        ...(dataArray[i][69] ? [{
+          AFinType: "TNP",      
+          AFinCode: '2',
+          AFinDate: dataArray[i][69],
+          AFinAmount: dataArray[i][69]
+        }]: [])
+
+      ]
       }] : []),
 
       // Second aim - only include if required fields are present
+      // note only 2 aims supported
       ...(dataArray[i][61] ? [{
         LearnAimRef: dataArray[i][62],
         AimType: dataArray[i][61],
-                //its when it was added first 2nd 3rd ect
-
         AimSeqNumber: '2',
         LearnStartDate: dataArray[i][63],
         LearnPlanEndDate: dataArray[i][64],
         FundModel: dataArray[i][65],
+        PHours: dataArray[i][37],
         ProgType: dataArray[i][66],
         StdCode: dataArray[i][67],
+        DelLocPostCode: dataArray[i][36],
+        EPAOrgID: dataArray[i][39],
         DelLocPostCode: dataArray[i][68],
         CompStatus: dataArray[i][72],
+        LearnActEndDate: dataArray[i][69],
+        Outcome: dataArray[i][69],
+        //not always an achdate
+        AchDate: dataArray[i][69],
+        // not always and out grade
+        OutGrade: dataArray[i][69],
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
-          {
+          //69 is placeholder number use row info where this comes from
+          ...(dataArray[i][69] ? [{
+              
+            LearnDelFAMType: 'FFI',
+            LearnDelFAMCode: dataArray[i][69]
+          }]: []),
+          ...(dataArray[i][69] ? [{
+              
             LearnDelFAMType: 'SOF',
             LearnDelFAMCode: dataArray[i][69]
-          }
-        ]
+          }]: []),
+          ...(dataArray[i][69] ? [{
+              
+            LearnDelFAMType: 'ACT',
+            LearnDelFAMCode: dataArray[i][69]
+          }]: [])
+        ],
+  AppFinRecord: [
+        //69 is a place hodler get dates from file
+        ...(dataArray[i][69] ? [{
+          AFinType: "TNP",      
+          AFinCode: '1',
+          AFinDate: dataArray[i][69],
+          AFinAmount: dataArray[i][69]
+
+        }]: []),
+        ...(dataArray[i][69] ? [{
+          AFinType: "TNP",      
+          AFinCode: '2',
+          AFinDate: dataArray[i][69],
+          AFinAmount: dataArray[i][69]
+        }]: [])
+
+      ]
       }] : [])
-    ]
+    ],
+    
+    
   });
 }
   const xml = xmlbuilder.create({
@@ -270,7 +321,6 @@ for (let i = 1; i < dataArray.length; i++) {
     }
   });
 
-  // Create XML from testObject
 }
 });
 

@@ -12,11 +12,13 @@ ipcRenderer.on('show-alert', (event, message) => {
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
+    let version = document.getElementById('releaseVersion').value;
     let file = document.getElementById('csvFile').files[0];
     Papa.parse(file, {
         complete: (results) => {
             const dataArray = results.data;
-             ipcRenderer.send('upload-csv', dataArray);
+             ipcRenderer.send('upload-csv', dataArray, version);
+            
         }
       });
    
