@@ -14,6 +14,7 @@
       <Release>2324.1.92.0</Release>
       <SerialNo>01</SerialNo>
       <DateTime>2024-11-12T13:50:32</DateTime>
+
     </Source>
   </Header>
   <LearningProvider>
@@ -80,42 +81,28 @@
       <EPAOrgID>EPA0475</EPAOrgID>
       <CompStatus>1 Learner is continuing the activities towards the learning aim</CompStatus>
       <SWSupAimId>temp ID till we figure out what goes here</SWSupAimId>
+
       <LearningDeliveryFAM>
         <LearnDelFAMType>SOF</LearnDelFAMType>
         <LearnDelFAMCode>105</LearnDelFAMCode>
       </LearningDeliveryFAM>
-      <LearningDeliveryFAM>
-        <LearnDelFAMType>ACT</LearnDelFAMType>
-        <LearnDelFAMCode>1</LearnDelFAMCode>
-        <LearnDelFAMDateFrom>16/9/2024</LearnDelFAMDateFrom>
-      </LearningDeliveryFAM>
-      <AppFinRecord>
-        <AFinType>TNP</AFinType>
-        <AFinCode>1</AFinCode>
-        <AFinDate>16/9/2024</AFinDate>
-        <AFinAmount>16150</AFinAmount>
-      </AppFinRecord>
-      <AppFinRecord>
-        <AFinType>TNP</AFinType>
-        <AFinCode>2</AFinCode>
-        <AFinDate>16/9/2024</AFinDate>
-        <AFinAmount>£1850</AFinAmount>
-      </AppFinRecord>
+
     </LearningDelivery>
     <LearningDelivery>
-      <LearnAimRef>Z0001947</LearnAimRef>
+      <LearnAimRef>Z0060322</LearnAimRef>
       <AimType>3</AimType>
       <AimSeqNumber>2</AimSeqNumber>
-      <LearnStartDate>16/9/2024</LearnStartDate>
-      <LearnPlanEndDate>16/3/2026</LearnPlanEndDate>
-      <FundModel>36</FundModel>
-      <ProgType>25</ProgType>
-      <StdCode>2</StdCode>
+      <LearnStartDate>2023-09-14</LearnStartDate>
+      <LearnPlanEndDate>2010-10-20</LearnPlanEndDate>
+      <FundModel>37</FundModel>
+      <ProgType>32</ProgType>
+      <StdCode/>
       <DelLocPostCode>N4 3HH</DelLocPostCode>
-      <SWSupAimId>temp ID till we figure out what goes here</SWSupAimId>
+      <CompStatus>The learner is continuing the learning activities towards the learning aim</CompStatus>
+      <SWSupAimId>a07cdc7b-7617-482b-805f-14e2144e632e</SWSupAimId>
       <LearningDeliveryFAM>
         <LearnDelFAMType>SOF</LearnDelFAMType>
-        <LearnDelFAMCode>1 Learner is continuing the activities towards the learning aim</LearnDelFAMCode>
+        <LearnDelFAMCode>105</LearnDelFAMCode>
       </LearningDeliveryFAM>
     </LearningDelivery>
   </Learner>
@@ -270,8 +257,9 @@
       <LearnAimRef>ZPROG001</LearnAimRef>
       <AimType>1</AimType>
       <AimSeqNumber>1</AimSeqNumber>
-      <LearnStartDate>9/9/2024</LearnStartDate>
-      <LearnPlanEndDate>9/3/2026</LearnPlanEndDate>
+
+      <LearnStartDate>2023-05-11</LearnStartDate>
+      <LearnPlanEndDate>2024-10-11</LearnPlanEndDate>
       <FundModel>36</FundModel>
       <PHours>504</PHours>
       <ProgType>25</ProgType>
@@ -280,6 +268,9 @@
       <EPAOrgID>EPA0475</EPAOrgID>
       <CompStatus>1 Learner is continuing the activities towards the learning aim</CompStatus>
       <SWSupAimId>temp ID till we figure out what goes here</SWSupAimId>
+      <EPAOrgID>EPAO0001</EPAOrgID>
+      <CompStatus>2</CompStatus>
+      <SWSupAimId>7648d694-8c5a-4e33-baa1-415ad208c4bf</SWSupAimId>
       <LearningDeliveryFAM>
         <LearnDelFAMType>SOF</LearnDelFAMType>
         <LearnDelFAMCode>105</LearnDelFAMCode>
@@ -288,18 +279,24 @@
         <LearnDelFAMType>ACT</LearnDelFAMType>
         <LearnDelFAMCode>1</LearnDelFAMCode>
         <LearnDelFAMDateFrom>9/9/2024</LearnDelFAMDateFrom>
+        <LearnDelFAMDateFrom>2023-11-05</LearnDelFAMDateFrom>
       </LearningDeliveryFAM>
       <AppFinRecord>
         <AFinType>TNP</AFinType>
         <AFinCode>1</AFinCode>
         <AFinDate>9/9/2024</AFinDate>
         <AFinAmount>16150</AFinAmount>
+        <AFinDate>2023-11-05</AFinDate>
+        <AFinAmount>1600</AFinAmount>
       </AppFinRecord>
       <AppFinRecord>
         <AFinType>TNP</AFinType>
         <AFinCode>2</AFinCode>
         <AFinDate>9/9/2024</AFinDate>
         <AFinAmount>£1850</AFinAmount>
+
+        <AFinDate>2023-11-05</AFinDate>
+        <AFinAmount>18000</AFinAmount>
       </AppFinRecord>
     </LearningDelivery>
     <LearningDelivery>
@@ -308,6 +305,8 @@
       <AimSeqNumber>2</AimSeqNumber>
       <LearnStartDate>9/9/2024</LearnStartDate>
       <LearnPlanEndDate>9/3/2026</LearnPlanEndDate>
+      <LearnStartDate>2023-11-05</LearnStartDate>
+      <LearnPlanEndDate>2024-10-11</LearnPlanEndDate>
       <FundModel>36</FundModel>
       <ProgType>25</ProgType>
       <StdCode>2</StdCode>
@@ -316,6 +315,11 @@
       <LearningDeliveryFAM>
         <LearnDelFAMType>SOF</LearnDelFAMType>
         <LearnDelFAMCode>1 Learner is continuing the activities towards the learning aim</LearnDelFAMCode>
+      <CompStatus>The learner has completed the activities towards the learning aim</CompStatus>
+      <SWSupAimId>6244b3b6-44bc-4eb4-8524-9b9578265967</SWSupAimId>
+      <LearningDeliveryFAM>
+        <LearnDelFAMType>SOF</LearnDelFAMType>
+        <LearnDelFAMCode>105</LearnDelFAMCode>
       </LearningDeliveryFAM>
     </LearningDelivery>
   </Learner>
