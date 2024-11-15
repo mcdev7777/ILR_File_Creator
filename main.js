@@ -64,7 +64,9 @@ app.whenReady().then(() => {
 
 ipcMain.on("upload-csv", (event, dataArray, version) => {
   console.log(dataArray);
-  if (dataArray.some((learner, learnerIndex) => 
+  console.log("Funding Indicator (Index 51):", dataArray[0][51]);
+  console.log("1st value Funding Indicator (Index 51):", dataArray[1][51]);
+    if (dataArray.some((learner, learnerIndex) => 
     learner.some((item, index) => {
       // might need to add exceptions based on things that are missing from examples
       // const exceptionIndices = [0,11,16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 35, 36, 37, 38, 
@@ -208,12 +210,12 @@ for (let i = 1; i < dataArray.length; i++) {
         LearningDeliveryFAM: [
           ...(dataArray[i][51] ? [{
             LearnDelFAMType: 'FFI',
-            LearnDelFAMCode: dataArray[i][51] // something wrong this is a date
+            LearnDelFAMCode: dataArray[i][51] 
           }] : []),
           ...(dataArray[i][52] ? [{
               
             LearnDelFAMType: 'SOF',
-            LearnDelFAMCode: dataArray[i][52] // something wrong this is a date
+            LearnDelFAMCode: dataArray[i][52] 
           }] : []),
           ...(dataArray[i][69] ? [{
               
@@ -240,293 +242,209 @@ for (let i = 1; i < dataArray.length; i++) {
       }] : []),
 
       // Second aim - only include if required fields are present
-      ...(dataArray[i][61] ? [{
-        LearnAimRef: dataArray[i][62],
-        AimType: dataArray[i][61],
+      ...(dataArray[i][67] ? [{
+        LearnAimRef: dataArray[i][68],
+        AimType: dataArray[i][67],
         AimSeqNumber: '2',
-        LearnStartDate: dataArray[i][63],
-        LearnPlanEndDate: dataArray[i][64],
-        FundModel: dataArray[i][65],
-        PHours: dataArray[i][37],
-        ProgType: dataArray[i][66],
-        StdCode: dataArray[i][67],
-        DelLocPostCode: dataArray[i][36],
-        EPAOrgID: dataArray[i][39],
-        DelLocPostCode: dataArray[i][68],
-        CompStatus: dataArray[i][72],
-        LearnActEndDate: dataArray[i][69],
-        Outcome: dataArray[i][69],
-        //not always an achdate
-        AchDate: dataArray[i][69],
-        // not always and out grade
-        OutGrade: dataArray[i][69],
+        LearnStartDate: dataArray[i][69],
+        LearnPlanEndDate: dataArray[i][70],
+        FundModel: dataArray[i][71],
+        ProgType: dataArray[i][72],
+        DelLocPostCode: dataArray[i][74],
+        PHours: dataArray[i][75],
+        ActualHours: dataArray[i][76],
+        EPAOrgID: dataArray[i][77],
+        ConRefNumber: dataArray[i][78],
+        CompStatus: dataArray[i][93],
+        LearnActEndDate: dataArray[i][94],
+        WithdrawReason: dataArray[i][96],
+        Outcome: dataArray[i][95],
+        AchDate: dataArray[i][97],
+        OutGrade: dataArray[i][98],
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
-          //69 is placeholder number use row info where this comes from
-          ...(dataArray[i][69] ? [{
-              
+          ...(dataArray[i][83] ? [{
             LearnDelFAMType: 'FFI',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: []),
-          ...(dataArray[i][69] ? [{
-              
+            LearnDelFAMCode: dataArray[i][83] 
+          }] : []),
+          ...(dataArray[i][84] ? [{
             LearnDelFAMType: 'SOF',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: []),
-          ...(dataArray[i][69] ? [{
-              
-            LearnDelFAMType: 'ACT',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: [])
+            LearnDelFAMCode: dataArray[i][84] 
+          }] : []),
+          ...(dataArray[i][89] ? [{
+            LearnDelFAMType: dataArray[i][85],
+            LearnDelFAMCode: dataArray[i][86],
+            LearnDelFAMDateFrom: dataArray[i][87],
+            LearnDelFAMDateTo: dataArray[i][88]
+          }] : [])
         ],
-  AppFinRecord: [
-        //69 is a place hodler get dates from file
-        ...(dataArray[i][69] ? [{
-          AFinType: "TNP",      
-          AFinCode: '1',
-          AFinDate: dataArray[i][69],
-          AFinAmount: dataArray[i][69]
+        AppFinRecord: [
+          ...(dataArray[i][90] ? [{
+            AFinType: dataArray[i][90],
+            AFinCode: dataArray[i][91],
+            AFinDate: dataArray[i][92],
+            AFinAmount: dataArray[i][93]
+          }] : []),
+          ...(dataArray[i][94] ? [{
+            AFinType: dataArray[i][94],
+            AFinCode: dataArray[i][95],
+            AFinDate: dataArray[i][96],
+            AFinAmount: dataArray[i][97]
+          }] : [])
+        ]
+      }] : []),
 
-        }]: []),
-        ...(dataArray[i][69] ? [{
-          AFinType: "TNP",      
-          AFinCode: '2',
-          AFinDate: dataArray[i][69],
-          AFinAmount: dataArray[i][69]
-        }]: []),
-        //third learning aim
-        ...(dataArray[i][29] ? [{
-        LearnAimRef: dataArray[i][30],
-        AimType: dataArray[i][29],
+      // Third aim - only include if required fields are present
+      ...(dataArray[i][99] ? [{
+        LearnAimRef: dataArray[i][100],
+        AimType: dataArray[i][99],
         AimSeqNumber: '3',
-        LearnStartDate: dataArray[i][31],
-        LearnPlanEndDate: dataArray[i][32],
-        FundModel: dataArray[i][33],
-        PHours: dataArray[i][37],
-        ProgType: dataArray[i][34],
-        StdCode: dataArray[i][35],
-        DelLocPostCode: dataArray[i][36],
-        EPAOrgID: dataArray[i][39],
-        
-        CompStatus: dataArray[i][72],
-        LearnActEndDate: dataArray[i][69],
-        Outcome: dataArray[i][69],
-        //not always an achdate
-        AchDate: dataArray[i][69],
-        // not always and out grade
-        OutGrade: dataArray[i][69],
+        LearnStartDate: dataArray[i][101],
+        LearnPlanEndDate: dataArray[i][102],
+        FundModel: dataArray[i][103],
+        ProgType: dataArray[i][104],
+        DelLocPostCode: dataArray[i][106],
+        PHours: dataArray[i][107],
+        ActualHours: dataArray[i][108],
+        EPAOrgID: dataArray[i][109],
+        ConRefNumber: dataArray[i][110],
+        CompStatus: dataArray[i][125],
+        LearnActEndDate: dataArray[i][126],
+        WithdrawReason: dataArray[i][128],
+        Outcome: dataArray[i][127],
+        AchDate: dataArray[i][129],
+        OutGrade: dataArray[i][130],
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
-          //69 is placeholder number use row info where this comes from
-          ...(dataArray[i][69] ? [{
-              
+          ...(dataArray[i][115] ? [{
             LearnDelFAMType: 'FFI',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: []),
-          ...(dataArray[i][69] ? [{
-              
+            LearnDelFAMCode: dataArray[i][115] 
+          }] : []),
+          ...(dataArray[i][116] ? [{
             LearnDelFAMType: 'SOF',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: []),
-          ...(dataArray[i][69] ? [{
-              
-            LearnDelFAMType: 'ACT',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: [])
+            LearnDelFAMCode: dataArray[i][116] 
+          }] : []),
+          ...(dataArray[i][121] ? [{
+            LearnDelFAMType: dataArray[i][117],
+            LearnDelFAMCode: dataArray[i][118],
+            LearnDelFAMDateFrom: dataArray[i][119],
+            LearnDelFAMDateTo: dataArray[i][120]
+          }] : [])
         ],
-  AppFinRecord: [
-        //69 is a place hodler get dates from file
-        ...(dataArray[i][69] ? [{
-          AFinType: "TNP",      
-          AFinCode: '1',
-          AFinDate: dataArray[i][69],
-          AFinAmount: dataArray[i][69]
-
-        }]: []),
-        ...(dataArray[i][69] ? [{
-          AFinType: "TNP",      
-          AFinCode: '2',
-          AFinDate: dataArray[i][69],
-          AFinAmount: dataArray[i][69]
-        }]: [])
-
-      ]
+        AppFinRecord: [
+          ...(dataArray[i][122] ? [{
+            AFinType: dataArray[i][122],
+            AFinCode: dataArray[i][123],
+            AFinDate: dataArray[i][124],
+            AFinAmount: dataArray[i][125]
+          }] : []),
+          ...(dataArray[i][126] ? [{
+            AFinType: dataArray[i][126],
+            AFinCode: dataArray[i][127],
+            AFinDate: dataArray[i][128],
+            AFinAmount: dataArray[i][129]
+          }] : [])
+        ]
       }] : []),
-      ...(dataArray[i][29] ? [{
-        LearnAimRef: dataArray[i][30],
-        AimType: dataArray[i][29],
-        AimSeqNumber: '1',
-        LearnStartDate: dataArray[i][31],
-        LearnPlanEndDate: dataArray[i][32],
-        FundModel: dataArray[i][33],
-        PHours: dataArray[i][37],
-        ProgType: dataArray[i][34],
-        StdCode: dataArray[i][35],
-        DelLocPostCode: dataArray[i][36],
-        EPAOrgID: dataArray[i][39],
-        
-        CompStatus: dataArray[i][72],
-        LearnActEndDate: dataArray[i][69],
-        Outcome: dataArray[i][69],
-        //not always an achdate
-        AchDate: dataArray[i][69],
-        // not always and out grade
-        OutGrade: dataArray[i][69],
-        SWSupAimId: crypto.randomUUID(),
-        LearningDeliveryFAM: [
-          //69 is placeholder number use row info where this comes from
-          ...(dataArray[i][69] ? [{
-              
-            LearnDelFAMType: 'FFI',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: []),
-          ...(dataArray[i][69] ? [{
-              
-            LearnDelFAMType: 'SOF',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: []),
-          ...(dataArray[i][69] ? [{
-              
-            LearnDelFAMType: 'ACT',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: [])
-        ],
-  AppFinRecord: [
-        //69 is a place hodler get dates from file
-        ...(dataArray[i][69] ? [{
-          AFinType: "TNP",      
-          AFinCode: '1',
-          AFinDate: dataArray[i][69],
-          AFinAmount: dataArray[i][69]
 
-        }]: []),
-        ...(dataArray[i][69] ? [{
-          AFinType: "TNP",      
-          AFinCode: '2',
-          AFinDate: dataArray[i][69],
-          AFinAmount: dataArray[i][69]
-        }]: [])
-
-      ]
-      }] : []),
-      //4th learner delivery
-      ...(dataArray[i][29] ? [{
-        LearnAimRef: dataArray[i][30],
-        AimType: dataArray[i][29],
+      // Fourth aim - only include if required fields are present
+      ...(dataArray[i][131] ? [{
+        LearnAimRef: dataArray[i][132],
+        AimType: dataArray[i][131],
         AimSeqNumber: '4',
-        LearnStartDate: dataArray[i][31],
-        LearnPlanEndDate: dataArray[i][32],
-        FundModel: dataArray[i][33],
-        PHours: dataArray[i][37],
-        ProgType: dataArray[i][34],
-        StdCode: dataArray[i][35],
-        DelLocPostCode: dataArray[i][36],
-        EPAOrgID: dataArray[i][39],
-        
-        CompStatus: dataArray[i][72],
-        LearnActEndDate: dataArray[i][69],
-        Outcome: dataArray[i][69],
-        //not always an achdate
-        AchDate: dataArray[i][69],
-        // not always and out grade
-        OutGrade: dataArray[i][69],
+        LearnStartDate: dataArray[i][133],
+        LearnPlanEndDate: dataArray[i][134],
+        FundModel: dataArray[i][135],
+        ProgType: dataArray[i][136],
+        DelLocPostCode: dataArray[i][138],
+        PHours: dataArray[i][139],
+        ActualHours: dataArray[i][140],
+        EPAOrgID: dataArray[i][141],
+        ConRefNumber: dataArray[i][142],
+        CompStatus: dataArray[i][157],
+        LearnActEndDate: dataArray[i][158],
+        WithdrawReason: dataArray[i][160],
+        Outcome: dataArray[i][159],
+        AchDate: dataArray[i][161],
+        OutGrade: dataArray[i][162],
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
-          //69 is placeholder number use row info where this comes from
-          ...(dataArray[i][69] ? [{
-              
+          ...(dataArray[i][163] ? [{
             LearnDelFAMType: 'FFI',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: []),
-          ...(dataArray[i][69] ? [{
-              
+            LearnDelFAMCode: dataArray[i][163] 
+          }] : []),
+          ...(dataArray[i][164] ? [{
             LearnDelFAMType: 'SOF',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: []),
-          ...(dataArray[i][69] ? [{
-              
-            LearnDelFAMType: 'ACT',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: [])
+            LearnDelFAMCode: dataArray[i][164] 
+          }] : []),
+          ...(dataArray[i][169] ? [{
+            LearnDelFAMType: dataArray[i][165],
+            LearnDelFAMCode: dataArray[i][166],
+            LearnDelFAMDateFrom: dataArray[i][167],
+            LearnDelFAMDateTo: dataArray[i][168]
+          }] : [])
         ],
-  AppFinRecord: [
-        //69 is a place hodler get dates from file
-        ...(dataArray[i][69] ? [{
-          AFinType: "TNP",      
-          AFinCode: '1',
-          AFinDate: dataArray[i][69],
-          AFinAmount: dataArray[i][69]
-
-        }]: []),
-        ...(dataArray[i][69] ? [{
-          AFinType: "TNP",      
-          AFinCode: '2',
-          AFinDate: dataArray[i][69],
-          AFinAmount: dataArray[i][69]
-        }]: [])
-
-      ]
+        AppFinRecord: [
+          ...(dataArray[i][170] ? [{
+            AFinType: dataArray[i][170],
+            AFinCode: dataArray[i][171],
+            AFinDate: dataArray[i][172],
+            AFinAmount: dataArray[i][173]
+          }] : []),
+          ...(dataArray[i][174] ? [{
+            AFinType: dataArray[i][174],
+            AFinCode: dataArray[i][175],
+            AFinDate: dataArray[i][176],
+            AFinAmount: dataArray[i][177]
+          }] : [])
+        ]
       }] : []),
-      //5th learning aim
-      ...(dataArray[i][29] ? [{
-        LearnAimRef: dataArray[i][30],
-        AimType: dataArray[i][29],
+
+      // Fifth aim - only include if required fields are present
+      ...(dataArray[i][163] ? [{
+        LearnAimRef: dataArray[i][164],
+        AimType: dataArray[i][163],
         AimSeqNumber: '5',
-        LearnStartDate: dataArray[i][31],
-        LearnPlanEndDate: dataArray[i][32],
-        FundModel: dataArray[i][33],
-        PHours: dataArray[i][37],
-        ProgType: dataArray[i][34],
-        StdCode: dataArray[i][35],
-        DelLocPostCode: dataArray[i][36],
-        EPAOrgID: dataArray[i][39],
-        
-        CompStatus: dataArray[i][72],
-        LearnActEndDate: dataArray[i][69],
-        Outcome: dataArray[i][69],
-        //not always an achdate
-        AchDate: dataArray[i][69],
-        // not always and out grade
-        OutGrade: dataArray[i][69],
+        LearnStartDate: dataArray[i][165],
+        LearnPlanEndDate: dataArray[i][166],
+        FundModel: dataArray[i][167],
+        ProgType: dataArray[i][168],
+        DelLocPostCode: dataArray[i][170],
+        PHours: dataArray[i][171],
+        ActualHours: dataArray[i][172],
+        EPAOrgID: dataArray[i][173],
+        ConRefNumber: dataArray[i][174],
+        CompStatus: dataArray[i][189],
+        LearnActEndDate: dataArray[i][190],
+        WithdrawReason: dataArray[i][192],
+        Outcome: dataArray[i][191],
+        AchDate: dataArray[i][193],
+        OutGrade: dataArray[i][194],
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
-          //69 is placeholder number use row info where this comes from
-          ...(dataArray[i][69] ? [{
-              
+          ...(dataArray[i][195] ? [{
             LearnDelFAMType: 'FFI',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: []),
-          ...(dataArray[i][69] ? [{
-              
+            LearnDelFAMCode: dataArray[i][195] 
+          }] : []),
+          ...(dataArray[i][196] ? [{
             LearnDelFAMType: 'SOF',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: []),
-          ...(dataArray[i][69] ? [{
-              
-            LearnDelFAMType: 'ACT',
-            LearnDelFAMCode: dataArray[i][69]
-          }]: [])
+            LearnDelFAMCode: dataArray[i][196] 
+          }] : []),
+          ...(dataArray[i][201] ? [{
+            LearnDelFAMType: dataArray[i][197],
+            LearnDelFAMCode: dataArray[i][198],
+            LearnDelFAMDateFrom: dataArray[i][199],
+            LearnDelFAMDateTo: dataArray[i][200]
+          }] : [])
         ],
-  AppFinRecord: [
-        //69 is a place hodler get dates from file
-        ...(dataArray[i][69] ? [{
-          AFinType: "TNP",      
-          AFinCode: '1',
-          AFinDate: dataArray[i][69],
-          AFinAmount: dataArray[i][69]
-
-        }]: []),
-        ...(dataArray[i][69] ? [{
-          AFinType: "TNP",      
-          AFinCode: '2',
-          AFinDate: dataArray[i][69],
-          AFinAmount: dataArray[i][69]
-        }]: [])
-
-      ]
-      }] : []),
-
-      ]
+        AppFinRecord: [
+          ...(dataArray[i][202] ? [{
+            AFinType: dataArray[i][202],
+            AFinCode: dataArray[i][203],
+            AFinDate: dataArray[i][204],
+            AFinAmount: dataArray[i][205]
+          }] : [])
+        ]
       }] : [])
     ],
     
