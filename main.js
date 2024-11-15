@@ -188,16 +188,16 @@ for (let i = 1; i < dataArray.length; i++) {
         DelLocPostCode: dataArray[i][42],
         EPAOrgID: dataArray[i][46],
         ConRefNumber:dataArray[i][45],
-        CompStatus: dataArray[i][72],
-        LearnActEndDate: dataArray[i][69],
-        Outcome: dataArray[i][69],
+        CompStatus: dataArray[i][61],
+        LearnActEndDate: dataArray[i][62],
+        WithdrawReason:  dataArray[i][65],
+        Outcome: dataArray[i][64],
         //not always an achdate
-        AchDate: dataArray[i][69],
+        AchDate: dataArray[i][63],
         // not always and out grade
-        OutGrade: dataArray[i][69],
+        OutGrade: dataArray[i][66],
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
-          //69 is placeholder number use row info where this comes from
           ...(dataArray[i][51] ? [{
               
             LearnDelFAMType: 'FFI',
@@ -211,23 +211,24 @@ for (let i = 1; i < dataArray.length; i++) {
           ...(dataArray[i][69] ? [{
               
             LearnDelFAMType: dataArray[i][47],
-            LearnDelFAMCode: dataArray[i][48]
+            LearnDelFAMCode: dataArray[i][48],
+            LearnDelFAMDateFrom: dataArray[i][49],
+            LearnDelFAMDateTo: dataArray[i][50]
           }]: [])
         ],
   AppFinRecord: [
-        //69 is a place hodler get dates from file
-        ...(dataArray[i][69] ? [{
-          AFinType: "TNP",      
-          AFinCode: '1',
-          AFinDate: dataArray[i][69],
-          AFinAmount: dataArray[i][69]
+        ...(dataArray[i][53] ? [{
+          AFinType: dataArray[i][53],      
+          AFinCode: dataArray[i][54],
+          AFinDate: dataArray[i][55],
+          AFinAmount: dataArray[i][56]
 
         }]: []),
-        ...(dataArray[i][69] ? [{
-          AFinType: "TNP",      
-          AFinCode: '2',
-          AFinDate: dataArray[i][69],
-          AFinAmount: dataArray[i][69]
+        ...(dataArray[i][57] ? [{
+          AFinType: dataArray[i][57],      
+          AFinCode: dataArray[i][58] ,
+          AFinDate: dataArray[i][59],
+          AFinAmount: dataArray[i][60]
         }]: [])
 
       ]
