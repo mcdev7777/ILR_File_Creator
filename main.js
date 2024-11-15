@@ -66,10 +66,12 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
   console.log(dataArray);
   if (dataArray.some((learner, learnerIndex) => 
     learner.some((item, index) => {
-      const exceptionIndices = [0,11,16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 35, 36, 37, 38, 
-        39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 
-        60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76];
-      if (item === "" && !exceptionIndices.includes(index)) {
+      // might need to add exceptions based on things that are missing from examples
+      // const exceptionIndices = [0,11,16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 35, 36, 37, 38, 
+      //   39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 
+      //   60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76];
+let exceptionIndices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192];
+    if (item === "" && !exceptionIndices.includes(index)) {
         const missingField = dataArray[0][index] || `Field at index ${index}`;
         event.reply('show-alert', `Data missing: ${missingField} for learner ${learnerIndex}`);
         return true;
@@ -96,7 +98,7 @@ for (let i = 1; i < dataArray.length; i++) {
     Sex: dataArray[i][5],
     LLDDHealthProb: dataArray[i][12],
     NINumber: dataArray[i][7],
-    PlanLearnHours: dataArray[i][32],
+    PlanLearnHours: dataArray[i][32],// empty tag
     PostcodePrior: dataArray[i][9],
     Postcode: dataArray[i][10],
     AddLine1: dataArray[i][11],
@@ -105,21 +107,29 @@ for (let i = 1; i < dataArray.length; i++) {
       PriorLevel: dataArray[i][16], 
       DateLevelApp: dataArray[i][15]
     },
-
+/* missing
+<LLDDandHealthProblem>
+      <LLDDCat>99</LLDDCat>
+      <PrimaryLLDD>1</PrimaryLLDD>
+    </LLDDandHealthProblem> */
     LearnerEmploymentStatus: [
     
       ...(dataArray[i][19] ? [{  
         EmpStat: dataArray[i][19],
         DateEmpStatApp: dataArray[i][18],
+        EmpId: dataArray[i][20],// unsure all are empty in view 
+        // add emp ID to others
         EmploymentStatusMonitoring: [
+         ...(dataArray[i][24] ? [{ 
+            ESMType: "LOE",
+            ESMCode: dataArray[i][24]
+            // change orders in other aims
+          }] : []),
           ...(dataArray[i][25] ? [{  // 
             ESMType: "EII",
             ESMCode: dataArray[i][25]
           }] : []),
-          ...(dataArray[i][24] ? [{ 
-            ESMType: "LOE",
-            ESMCode: dataArray[i][24]
-          }] : []),
+       
 
           ...(dataArray[i][26] ? [{  
             ESMType: "LOU",
@@ -187,51 +197,46 @@ for (let i = 1; i < dataArray.length; i++) {
         StdCode: dataArray[i][41],
         DelLocPostCode: dataArray[i][42],
         EPAOrgID: dataArray[i][46],
-        ConRefNumber:dataArray[i][45],
+        ConRefNumber: dataArray[i][45],
         CompStatus: dataArray[i][61],
         LearnActEndDate: dataArray[i][62],
-        WithdrawReason:  dataArray[i][65],
+        WithdrawReason: dataArray[i][65],
         Outcome: dataArray[i][64],
-        //not always an achdate
         AchDate: dataArray[i][63],
-        // not always and out grade
         OutGrade: dataArray[i][66],
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
           ...(dataArray[i][51] ? [{
-              
             LearnDelFAMType: 'FFI',
-            LearnDelFAMCode: dataArray[i][51]
-          }]: []),
+            LearnDelFAMCode: dataArray[i][51] // something wrong this is a date
+          }] : []),
           ...(dataArray[i][52] ? [{
               
             LearnDelFAMType: 'SOF',
-            LearnDelFAMCode: dataArray[i][52]
-          }]: []),
+            LearnDelFAMCode: dataArray[i][52] // something wrong this is a date
+          }] : []),
           ...(dataArray[i][69] ? [{
               
             LearnDelFAMType: dataArray[i][47],
             LearnDelFAMCode: dataArray[i][48],
             LearnDelFAMDateFrom: dataArray[i][49],
             LearnDelFAMDateTo: dataArray[i][50]
-          }]: [])
+          }] : [])
         ],
-  AppFinRecord: [
-        ...(dataArray[i][53] ? [{
-          AFinType: dataArray[i][53],      
-          AFinCode: dataArray[i][54],
-          AFinDate: dataArray[i][55],
-          AFinAmount: dataArray[i][56]
-
-        }]: []),
-        ...(dataArray[i][57] ? [{
-          AFinType: dataArray[i][57],      
-          AFinCode: dataArray[i][58] ,
-          AFinDate: dataArray[i][59],
-          AFinAmount: dataArray[i][60]
-        }]: [])
-
-      ]
+        AppFinRecord: [
+          ...(dataArray[i][53] ? [{
+            AFinType: dataArray[i][53],
+            AFinCode: dataArray[i][54],
+            AFinDate: dataArray[i][55],
+            AFinAmount: dataArray[i][56]
+          }] : []),
+          ...(dataArray[i][57] ? [{
+            AFinType: dataArray[i][57],
+            AFinCode: dataArray[i][58],
+            AFinDate: dataArray[i][59],
+            AFinAmount: dataArray[i][60]
+          }] : [])
+        ]
       }] : []),
 
       // Second aim - only include if required fields are present
