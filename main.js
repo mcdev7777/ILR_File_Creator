@@ -8,6 +8,7 @@ const dateOnlyString = isoWithoutMsOrZ.replace(/T.*/, '');
 
 let xmlBase = {
   //is ther a larger outer layer check schema
+  
   Header: {
     CollectionDetails: {
       Collection: "ILR",
@@ -95,18 +96,18 @@ for (let i = 1; i < dataArray.length; i++) {
     ULN: dataArray[i][2],
     FamilyName: dataArray[i][4],
     GivenNames: dataArray[i][3],
-     DateOfBirth: dataArray[i][6],
+    DateOfBirth: dataArray[i][6],
     Ethnicity: dataArray[i][8],
     Sex: dataArray[i][5],
     LLDDHealthProb: dataArray[i][12],
     NINumber: dataArray[i][7],
-    PlanLearnHours: dataArray[i][32],// empty tag
+    PlanLearnHours: dataArray[i][32] || undefined,
     PostcodePrior: dataArray[i][9],
     Postcode: dataArray[i][10],
     AddLine1: dataArray[i][11],
     TelNo: dataArray[i][12],
     PriorAttain: {
-      PriorLevel: dataArray[i][16], 
+      PriorLevel: dataArray[i][16],
       DateLevelApp: dataArray[i][15]
     },
 /* missing
@@ -115,69 +116,60 @@ for (let i = 1; i < dataArray.length; i++) {
       <PrimaryLLDD>1</PrimaryLLDD>
     </LLDDandHealthProblem> */
     LearnerEmploymentStatus: [
-    
-      ...(dataArray[i][19] ? [{  
+      ...(dataArray[i][19] ? [{
         EmpStat: dataArray[i][19],
         DateEmpStatApp: dataArray[i][18],
         EmpId: dataArray[i][20],// unsure all are empty in view 
         // add emp ID to others
         EmploymentStatusMonitoring: [
-         ...(dataArray[i][24] ? [{ 
+          ...(dataArray[i][24] ? [{
             ESMType: "LOE",
             ESMCode: dataArray[i][24]
             // change orders in other aims
           }] : []),
-          ...(dataArray[i][25] ? [{  // 
+          ...(dataArray[i][25] ? [{
             ESMType: "EII",
             ESMCode: dataArray[i][25]
           }] : []),
-       
-
-          ...(dataArray[i][26] ? [{  
+          ...(dataArray[i][26] ? [{
             ESMType: "LOU",
             ESMCode: dataArray[i][26]
           }] : []),
-          ...(dataArray[i][22] ? [{  
+          ...(dataArray[i][22] ? [{
             ESMType: "SEI",
             ESMCode: "1"
           }] : []),
-
-          ...(dataArray[i][21] ? [{  
+          ...(dataArray[i][21] ? [{
             ESMType: "SEM",
             ESMCode: "1"
           }] : []),
-          // no made redundant
-          ...(dataArray[i][23] ? [{  
+          ...(dataArray[i][23] ? [{
             ESMType: "OET",
             ESMCode: "1"
           }] : [])
         ]
       }] : []),
-      ...(dataArray[i][28] ? [{  
+      ...(dataArray[i][28] ? [{
         EmpStat: dataArray[i][28],
         DateEmpStatApp: dataArray[i][27],
-        // are this and previous missing and id code for emplyoer
         EmploymentStatusMonitoring: [
-          ...(dataArray[i][30] ? [{  // 
+          ...(dataArray[i][30] ? [{
             ESMType: "EII",
             ESMCode: dataArray[i][30]
           }] : []),
-          ...(dataArray[i][34] ? [{ 
+          ...(dataArray[i][34] ? [{
             ESMType: "LOE",
             ESMCode: dataArray[i][34]
           }] : []),
-         
-// used to be a lenght of unemployment but deleted becaue there is no airtable for it
-          ...(dataArray[i][32] ? [{  
+          ...(dataArray[i][32] ? [{
             ESMType: "SEI",
             ESMCode: "1"
           }] : []),
-          
-          ...(dataArray[i][33] ? [{  
+          ...(dataArray[i][33] ? [{
             ESMType: "SEM",
             ESMCode: "1"
           }] : []),
-          ...(dataArray[i][31] ? [{  
+          ...(dataArray[i][31] ? [{
             ESMType: "OET",
             ESMCode: "1"
           }] : [])
@@ -194,31 +186,29 @@ for (let i = 1; i < dataArray.length; i++) {
         LearnPlanEndDate: dataArray[i][38],
         FundModel: dataArray[i][39],
         PHours: dataArray[i][43],
-        OTJActHours: dataArray[i][44],
+        OTJActHours: dataArray[i][44] || undefined,
         ProgType: dataArray[i][40],
         StdCode: dataArray[i][41],
         DelLocPostCode: dataArray[i][42],
         EPAOrgID: dataArray[i][46],
-        ConRefNumber: dataArray[i][45],
+        ConRefNumber: dataArray[i][45] || undefined,
         CompStatus: dataArray[i][61],
-        LearnActEndDate: dataArray[i][62],
-        WithdrawReason: dataArray[i][65],
-        Outcome: dataArray[i][64],
-        AchDate: dataArray[i][63],
-        OutGrade: dataArray[i][66],
+        LearnActEndDate: dataArray[i][62] || undefined,
+        WithdrawReason: dataArray[i][65] || undefined,
+        Outcome: dataArray[i][64]|| undefined,
+        AchDate: dataArray[i][63] || undefined,
+        OutGrade: dataArray[i][66]|| undefined,
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
           ...(dataArray[i][51] ? [{
             LearnDelFAMType: 'FFI',
-            LearnDelFAMCode: dataArray[i][51] 
+            LearnDelFAMCode: dataArray[i][51]
           }] : []),
           ...(dataArray[i][52] ? [{
-              
             LearnDelFAMType: 'SOF',
-            LearnDelFAMCode: dataArray[i][52] 
+            LearnDelFAMCode: dataArray[i][52]
           }] : []),
           ...(dataArray[i][69] ? [{
-              
             LearnDelFAMType: dataArray[i][47],
             LearnDelFAMCode: dataArray[i][48],
             LearnDelFAMDateFrom: dataArray[i][49],
@@ -229,18 +219,19 @@ for (let i = 1; i < dataArray.length; i++) {
           ...(dataArray[i][53] ? [{
             AFinType: dataArray[i][53],
             AFinCode: dataArray[i][54],
-            AFinDate: dataArray[i][55],
-            AFinAmount: dataArray[i][56]
+            AFinDate: dataArray[i][55] || undefined,
+            AFinAmount: dataArray[i][56] || undefined
           }] : []),
           ...(dataArray[i][57] ? [{
             AFinType: dataArray[i][57],
             AFinCode: dataArray[i][58],
-            AFinDate: dataArray[i][59],
-            AFinAmount: dataArray[i][60]
+            AFinDate: dataArray[i][59] || undefined,
+            AFinAmount: dataArray[i][60] || undefined
           }] : [])
         ]
       }] : []),
-
+      // Aims 2, 3, 4, and 5 are commented out for focus
+      /*
       // Second aim - only include if required fields are present
       ...(dataArray[i][67] ? [{
         LearnAimRef: dataArray[i][68],
@@ -446,22 +437,27 @@ for (let i = 1; i < dataArray.length; i++) {
           }] : [])
         ]
       }] : [])
+      */
     ],
-    
-    
   });
 }
   const xml = xmlbuilder.create({
     Message: xmlBase
   }, {
-    encoding: 'UTF-8',
-    standalone: true
+    encoding: 'utf-8',
   })
-  .att('xmlns', 'ESFA/ILR/2023-24')
+  //make version specific
+  .att('xmlns', 'ESFA/ILR/2024-25')
   .att('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance')
   .end({ pretty: true });
 
-  fs.writeFile("data.xml", xml, (err) => {
+  const formatDateTime = (date) => {
+    const yyyymmdd = date.toISOString().split('T')[0].replace(/-/g, '');
+    const hhmmss = date.toTimeString().split(' ')[0].replace(/:/g, '');
+    return `${yyyymmdd}-${hhmmss}`;
+  };
+
+  fs.writeFile(`ILR-10085696-${version.split('.')[0]}-${formatDateTime(currentDate)}-01.xml`, xml, (err) => {
     if (err) {
       console.error(err);
       event.reply('xml-creation-failed', err.message);

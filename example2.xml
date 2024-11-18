@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Message xmlns="ESFA/ILR/2024-25" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Header>
+    <CollectionDetails>
+      <Collection>ILR</Collection>
+      <Year>2425</Year>
+      <FilePreparationDate>2024-11-18</FilePreparationDate>
+    </CollectionDetails>
+    <Source>
+      <ProtectiveMarking>OFFICIAL-SENSITIVE-Personal</ProtectiveMarking>
+      <UKPRN>1212122</UKPRN>
+      <SoftwareSupplier>Education &amp; Skills Funding Agency</SoftwareSupplier>
+      <SoftwarePackage>ILR Learner Entry</SoftwarePackage>
+      <Release>2425.1.49.0</Release>
+      <SerialNo>01</SerialNo>
+      <DateTime>2024-11-18T11:22:30</DateTime>
+    </Source>
+  </Header>
+  <LearningProvider>
+    <UKPRN>1212122</UKPRN>
+  </LearningProvider>
+  <Learner>
+    <LearnRefNumber>0002</LearnRefNumber>
+    <ULN>11</ULN>
+    <FamilyName>11</FamilyName>
+    <GivenNames>11</GivenNames>
+    <Ethnicity>31</Ethnicity>
+    <Sex>F</Sex>
+    <LLDDHealthProb>1</LLDDHealthProb>
+    <PostcodePrior>1</PostcodePrior>
+    <Postcode>11</Postcode>
+    <LearningDelivery>
+      <LearnAimRef>11</LearnAimRef>
+      <AimType>3</AimType>
+      <AimSeqNumber>1</AimSeqNumber>
+      <LearnStartDate>2024-11-28</LearnStartDate>
+      <LearnPlanEndDate>2024-11-12</LearnPlanEndDate>
+      <FundModel>82</FundModel>
+      <DelLocPostCode>11</DelLocPostCode>
+      <CompStatus>1</CompStatus>
+      <SWSupAimId>7d42ad87-22f0-4299-810a-bd85a848163f</SWSupAimId>
+    </LearningDelivery>
+  </Learner>
+</Message>
