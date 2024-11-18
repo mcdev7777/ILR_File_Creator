@@ -106,10 +106,13 @@ for (let i = 1; i < dataArray.length; i++) {
     Postcode: dataArray[i][10],
     AddLine1: dataArray[i][11],
     TelNo: dataArray[i][12],
+   //placeholder no disability
+    LLDDHealthProb:2,
     PriorAttain: {
       PriorLevel: dataArray[i][16],
       DateLevelApp: dataArray[i][15]
     },
+  
 /* missing
 <LLDDandHealthProblem>
       <LLDDCat>99</LLDDCat>
@@ -119,7 +122,7 @@ for (let i = 1; i < dataArray.length; i++) {
       ...(dataArray[i][19] ? [{
         EmpStat: dataArray[i][19],
         DateEmpStatApp: dataArray[i][18],
-        EmpId: dataArray[i][20],// unsure all are empty in view 
+        EmpId: dataArray[i][20] || undefined,// unsure all are empty in view 
         // add emp ID to others
         EmploymentStatusMonitoring: [
           ...(dataArray[i][24] ? [{
@@ -212,7 +215,7 @@ for (let i = 1; i < dataArray.length; i++) {
             LearnDelFAMType: dataArray[i][47],
             LearnDelFAMCode: dataArray[i][48],
             LearnDelFAMDateFrom: dataArray[i][49],
-            LearnDelFAMDateTo: dataArray[i][50]
+            LearnDelFAMDateTo: dataArray[i][50] || undefined
           }] : [])
         ],
         AppFinRecord: [
@@ -463,7 +466,7 @@ for (let i = 1; i < dataArray.length; i++) {
       event.reply('xml-creation-failed', err.message);
     } else {
       console.log("The XML file was saved successfully.");
-      event.reply('xml-created', 'data.xml');
+      event.reply('xml-created', `ILR-10085696-${version.split('.')[0]}-${formatDateTime(currentDate)}-01.xml`);
     }
   });
 
