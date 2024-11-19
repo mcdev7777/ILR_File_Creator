@@ -105,19 +105,20 @@ for (let i = 1; i < dataArray.length; i++) {
     PostcodePrior: dataArray[i][9],
     Postcode: dataArray[i][10],
     AddLine1: dataArray[i][11],
-    TelNo: dataArray[i][12],
-   //placeholder no disability
-    LLDDHealthProb:2,
+    TelNo: dataArray[i][12] || undefined,
+    LLDDHealthProb: (dataArray[i][14] != "99"? 1 : 9),
     PriorAttain: {
       PriorLevel: dataArray[i][16],
       DateLevelApp: dataArray[i][15]
     },
   
-/* missing
-<LLDDandHealthProblem>
-      <LLDDCat>99</LLDDCat>
-      <PrimaryLLDD>1</PrimaryLLDD>
-    </LLDDandHealthProblem> */
+    LLDDandHealthProblem:(dataArray[i][14] != "99"? [
+      {LLDDCat:dataArray[i][14],
+        PrimaryLLDD:1 
+    },
+  {
+    LLDDCat:dataArray[i][13]
+  }]: undefined),
     LearnerEmploymentStatus: [
       ...(dataArray[i][19] ? [{
         EmpStat: dataArray[i][19],
@@ -188,19 +189,19 @@ for (let i = 1; i < dataArray.length; i++) {
         LearnStartDate: dataArray[i][37],
         LearnPlanEndDate: dataArray[i][38],
         FundModel: dataArray[i][39],
-        PHours: dataArray[i][43],
+        PHours: dataArray[i][43] || undefined,
         OTJActHours: dataArray[i][44] || undefined,
         ProgType: dataArray[i][40],
         StdCode: dataArray[i][41],
         DelLocPostCode: dataArray[i][42],
-        EPAOrgID: dataArray[i][46],
+        EPAOrgID: dataArray[i][46] || undefined,
         ConRefNumber: dataArray[i][45] || undefined,
-        CompStatus: dataArray[i][61],
+        CompStatus: dataArray[i][61] || undefined,
         LearnActEndDate: dataArray[i][62] || undefined,
         WithdrawReason: dataArray[i][65] || undefined,
-        Outcome: dataArray[i][64]|| undefined,
+        Outcome: dataArray[i][64] || undefined,
         AchDate: dataArray[i][63] || undefined,
-        OutGrade: dataArray[i][66]|| undefined,
+        OutGrade: dataArray[i][66] || undefined,
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
           ...(dataArray[i][51] ? [{
@@ -214,27 +215,26 @@ for (let i = 1; i < dataArray.length; i++) {
           ...(dataArray[i][69] ? [{
             LearnDelFAMType: dataArray[i][47],
             LearnDelFAMCode: dataArray[i][48],
-            LearnDelFAMDateFrom: dataArray[i][49],
+            LearnDelFAMDateFrom: dataArray[i][49] || undefined,
             LearnDelFAMDateTo: dataArray[i][50] || undefined
           }] : [])
         ],
         AppFinRecord: [
           ...(dataArray[i][53] ? [{
             AFinType: dataArray[i][53],
-            AFinCode: dataArray[i][54],
+            AFinCode: dataArray[i][54] || undefined,
             AFinDate: dataArray[i][55] || undefined,
             AFinAmount: dataArray[i][56] || undefined
           }] : []),
           ...(dataArray[i][57] ? [{
             AFinType: dataArray[i][57],
-            AFinCode: dataArray[i][58],
+            AFinCode: dataArray[i][58] || undefined,
             AFinDate: dataArray[i][59] || undefined,
             AFinAmount: dataArray[i][60] || undefined
           }] : [])
         ]
       }] : []),
-      // Aims 2, 3, 4, and 5 are commented out for focus
-      /*
+      
       // Second aim - only include if required fields are present
       ...(dataArray[i][67] ? [{
         LearnAimRef: dataArray[i][68],
@@ -245,16 +245,16 @@ for (let i = 1; i < dataArray.length; i++) {
         FundModel: dataArray[i][71],
         ProgType: dataArray[i][72],
         DelLocPostCode: dataArray[i][74],
-        PHours: dataArray[i][75],
-        ActualHours: dataArray[i][76],
-        EPAOrgID: dataArray[i][77],
-        ConRefNumber: dataArray[i][78],
-        CompStatus: dataArray[i][93],
-        LearnActEndDate: dataArray[i][94],
-        WithdrawReason: dataArray[i][96],
-        Outcome: dataArray[i][95],
-        AchDate: dataArray[i][97],
-        OutGrade: dataArray[i][98],
+        PHours: dataArray[i][75] || undefined,
+        OTJActHours: dataArray[i][76] || undefined,
+        EPAOrgID: dataArray[i][77] || undefined,
+        ConRefNumber: dataArray[i][78] || undefined,
+        CompStatus: dataArray[i][93] || undefined,
+        LearnActEndDate: dataArray[i][94] || undefined,
+        WithdrawReason: dataArray[i][96] || undefined,
+        Outcome: dataArray[i][95] || undefined,
+        AchDate: dataArray[i][97] || undefined,
+        OutGrade: dataArray[i][98] || undefined,
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
           ...(dataArray[i][83] ? [{
@@ -268,22 +268,22 @@ for (let i = 1; i < dataArray.length; i++) {
           ...(dataArray[i][89] ? [{
             LearnDelFAMType: dataArray[i][85],
             LearnDelFAMCode: dataArray[i][86],
-            LearnDelFAMDateFrom: dataArray[i][87],
-            LearnDelFAMDateTo: dataArray[i][88]
+            LearnDelFAMDateFrom: dataArray[i][87] || undefined,
+            LearnDelFAMDateTo: dataArray[i][88] || undefined
           }] : [])
         ],
         AppFinRecord: [
           ...(dataArray[i][90] ? [{
             AFinType: dataArray[i][90],
-            AFinCode: dataArray[i][91],
-            AFinDate: dataArray[i][92],
-            AFinAmount: dataArray[i][93]
+            AFinCode: dataArray[i][91] || undefined,
+            AFinDate: dataArray[i][92] || undefined,
+            AFinAmount: dataArray[i][93] || undefined
           }] : []),
           ...(dataArray[i][94] ? [{
             AFinType: dataArray[i][94],
-            AFinCode: dataArray[i][95],
-            AFinDate: dataArray[i][96],
-            AFinAmount: dataArray[i][97]
+            AFinCode: dataArray[i][95] || undefined,
+            AFinDate: dataArray[i][96] || undefined,
+            AFinAmount: dataArray[i][97] || undefined
           }] : [])
         ]
       }] : []),
@@ -298,16 +298,16 @@ for (let i = 1; i < dataArray.length; i++) {
         FundModel: dataArray[i][103],
         ProgType: dataArray[i][104],
         DelLocPostCode: dataArray[i][106],
-        PHours: dataArray[i][107],
-        ActualHours: dataArray[i][108],
-        EPAOrgID: dataArray[i][109],
-        ConRefNumber: dataArray[i][110],
-        CompStatus: dataArray[i][125],
-        LearnActEndDate: dataArray[i][126],
-        WithdrawReason: dataArray[i][128],
-        Outcome: dataArray[i][127],
-        AchDate: dataArray[i][129],
-        OutGrade: dataArray[i][130],
+        PHours: dataArray[i][107] || undefined,
+        OTJActHours: dataArray[i][108] || undefined,
+        EPAOrgID: dataArray[i][109] || undefined,
+        ConRefNumber: dataArray[i][110] || undefined,
+        CompStatus: dataArray[i][125] || undefined,
+        LearnActEndDate: dataArray[i][126] || undefined, 
+        WithdrawReason: dataArray[i][128] || undefined,
+        Outcome: dataArray[i][127] || undefined,
+        AchDate: dataArray[i][129] || undefined,
+        OutGrade: dataArray[i][130] || undefined,
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
           ...(dataArray[i][115] ? [{
@@ -321,22 +321,22 @@ for (let i = 1; i < dataArray.length; i++) {
           ...(dataArray[i][121] ? [{
             LearnDelFAMType: dataArray[i][117],
             LearnDelFAMCode: dataArray[i][118],
-            LearnDelFAMDateFrom: dataArray[i][119],
-            LearnDelFAMDateTo: dataArray[i][120]
+            LearnDelFAMDateFrom: dataArray[i][119] || undefined,
+            LearnDelFAMDateTo: dataArray[i][120] || undefined
           }] : [])
         ],
         AppFinRecord: [
           ...(dataArray[i][122] ? [{
             AFinType: dataArray[i][122],
-            AFinCode: dataArray[i][123],
-            AFinDate: dataArray[i][124],
-            AFinAmount: dataArray[i][125]
+            AFinCode: dataArray[i][123] || undefined,
+            AFinDate: dataArray[i][124] || undefined,
+            AFinAmount: dataArray[i][125] || undefined
           }] : []),
           ...(dataArray[i][126] ? [{
             AFinType: dataArray[i][126],
-            AFinCode: dataArray[i][127],
-            AFinDate: dataArray[i][128],
-            AFinAmount: dataArray[i][129]
+            AFinCode: dataArray[i][127] || undefined,
+            AFinDate: dataArray[i][128] || undefined,
+            AFinAmount: dataArray[i][129] || undefined
           }] : [])
         ]
       }] : []),
@@ -351,16 +351,16 @@ for (let i = 1; i < dataArray.length; i++) {
         FundModel: dataArray[i][135],
         ProgType: dataArray[i][136],
         DelLocPostCode: dataArray[i][138],
-        PHours: dataArray[i][139],
-        ActualHours: dataArray[i][140],
-        EPAOrgID: dataArray[i][141],
-        ConRefNumber: dataArray[i][142],
-        CompStatus: dataArray[i][157],
-        LearnActEndDate: dataArray[i][158],
-        WithdrawReason: dataArray[i][160],
-        Outcome: dataArray[i][159],
-        AchDate: dataArray[i][161],
-        OutGrade: dataArray[i][162],
+        PHours: dataArray[i][139] || undefined,
+        OTJActHours: dataArray[i][140] || undefined,
+        EPAOrgID: dataArray[i][141] || undefined,
+        ConRefNumber: dataArray[i][142] || undefined,
+        CompStatus: dataArray[i][157] || undefined,
+        LearnActEndDate: dataArray[i][158] || undefined,
+        WithdrawReason: dataArray[i][160] || undefined,
+        Outcome: dataArray[i][159] || undefined,
+        AchDate: dataArray[i][161] || undefined,
+        OutGrade: dataArray[i][162] || undefined,
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
           ...(dataArray[i][163] ? [{
@@ -374,22 +374,22 @@ for (let i = 1; i < dataArray.length; i++) {
           ...(dataArray[i][169] ? [{
             LearnDelFAMType: dataArray[i][165],
             LearnDelFAMCode: dataArray[i][166],
-            LearnDelFAMDateFrom: dataArray[i][167],
-            LearnDelFAMDateTo: dataArray[i][168]
+            LearnDelFAMDateFrom: dataArray[i][167] || undefined,
+            LearnDelFAMDateTo: dataArray[i][168] || undefined
           }] : [])
         ],
         AppFinRecord: [
           ...(dataArray[i][170] ? [{
             AFinType: dataArray[i][170],
-            AFinCode: dataArray[i][171],
-            AFinDate: dataArray[i][172],
-            AFinAmount: dataArray[i][173]
+            AFinCode: dataArray[i][171] || undefined,
+            AFinDate: dataArray[i][172] || undefined,
+            AFinAmount: dataArray[i][173] || undefined
           }] : []),
           ...(dataArray[i][174] ? [{
             AFinType: dataArray[i][174],
-            AFinCode: dataArray[i][175],
-            AFinDate: dataArray[i][176],
-            AFinAmount: dataArray[i][177]
+            AFinCode: dataArray[i][175] || undefined,
+            AFinDate: dataArray[i][176] || undefined,
+            AFinAmount: dataArray[i][177] || undefined
           }] : [])
         ]
       }] : []),
@@ -404,16 +404,16 @@ for (let i = 1; i < dataArray.length; i++) {
         FundModel: dataArray[i][167],
         ProgType: dataArray[i][168],
         DelLocPostCode: dataArray[i][170],
-        PHours: dataArray[i][171],
-        ActualHours: dataArray[i][172],
-        EPAOrgID: dataArray[i][173],
-        ConRefNumber: dataArray[i][174],
-        CompStatus: dataArray[i][189],
-        LearnActEndDate: dataArray[i][190],
-        WithdrawReason: dataArray[i][192],
-        Outcome: dataArray[i][191],
-        AchDate: dataArray[i][193],
-        OutGrade: dataArray[i][194],
+        PHours: dataArray[i][171] || undefined,
+        OTJActHours: dataArray[i][172] || undefined,
+        EPAOrgID: dataArray[i][173] || undefined,
+        ConRefNumber: dataArray[i][174] || undefined,
+        CompStatus: dataArray[i][189] || undefined,
+        LearnActEndDate: dataArray[i][190] || undefined,
+        WithdrawReason: dataArray[i][192] || undefined,
+        Outcome: dataArray[i][191] || undefined,
+        AchDate: dataArray[i][193] || undefined,
+        OutGrade: dataArray[i][194] || undefined,
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
           ...(dataArray[i][195] ? [{
@@ -427,20 +427,20 @@ for (let i = 1; i < dataArray.length; i++) {
           ...(dataArray[i][201] ? [{
             LearnDelFAMType: dataArray[i][197],
             LearnDelFAMCode: dataArray[i][198],
-            LearnDelFAMDateFrom: dataArray[i][199],
-            LearnDelFAMDateTo: dataArray[i][200]
+            LearnDelFAMDateFrom: dataArray[i][199] || undefined,
+            LearnDelFAMDateTo: dataArray[i][200] || undefined
           }] : [])
         ],
         AppFinRecord: [
           ...(dataArray[i][202] ? [{
             AFinType: dataArray[i][202],
-            AFinCode: dataArray[i][203],
-            AFinDate: dataArray[i][204],
-            AFinAmount: dataArray[i][205]
+            AFinCode: dataArray[i][203] || undefined,
+            AFinDate: dataArray[i][204] || undefined,
+            AFinAmount: dataArray[i][205] || undefined
           }] : [])
         ]
       }] : [])
-      */
+      
     ],
   });
 }
