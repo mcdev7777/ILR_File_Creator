@@ -7,7 +7,6 @@ const isoWithoutMsOrZ = currentDate.toISOString().split('.')[0];
 const dateOnlyString = isoWithoutMsOrZ.replace(/T.*/, '');
 
 let xmlBase = {
-  //is ther a larger outer layer check schema
   
   Header: {
     CollectionDetails: {
@@ -128,7 +127,6 @@ for (let i = 1; i < dataArray.length; i++) {
           ...(dataArray[i][24] ? [{
             ESMType: "LOE",
             ESMCode: dataArray[i][24]
-            // change orders in other aims
           }] : []),
           ...(dataArray[i][25] ? [{
             ESMType: "EII",
@@ -464,6 +462,10 @@ for (let i = 1; i < dataArray.length; i++) {
     encoding: 'utf-8',
   })
   //make version specific
+  /*something like this 
+  let str = "abcd";
+let result = str.replace(/^(.)(.)(.)(.?)$/, "$1$2-$3$4");
+console.log(result); // Outputs: "ab-cd"*/ 
   .att('xmlns', 'ESFA/ILR/2024-25')
   .att('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance')
   .end({ pretty: true });
