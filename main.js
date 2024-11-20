@@ -66,7 +66,6 @@ app.whenReady().then(() => {
 ipcMain.on("upload-csv", (event, dataArray, version) => {
   console.log(dataArray);
   console.log("Funding Indicator (Index 51):", dataArray[0][51]);
-  console.log("1st value Funding Indicator (Index 51):", dataArray[1][51]);
     if (dataArray.some((learner, learnerIndex) => 
     learner.some((item, index) => {
       // might need to add exceptions based on things that are missing from examples
@@ -140,6 +139,7 @@ for (let i = 1; i < dataArray.length; i++) {
             ESMCode: dataArray[i][26]
           }] : []),
           ...(dataArray[i][22] ? [{
+            //showing up as 0 of 1 marked
             ESMType: "SEI",
             ESMCode: "1"
           }] : []),
@@ -298,6 +298,7 @@ for (let i = 1; i < dataArray.length; i++) {
         LearnPlanEndDate: dataArray[i][102], // Planned end date (aim 3)
         FundModel: dataArray[i][103], // Funding module (aim 3)
         ProgType: dataArray[i][104], // Programme type (aim 3)
+        StdCode: dataArray[i][105], // Apprentice standard (aim 3)
         DelLocPostCode: dataArray[i][106], // Delivery postcode (aim 3)
         PHours: dataArray[i][107] || undefined, // Planned hours (aim 3)
         OTJActHours: dataArray[i][108] || undefined, // Actual hours (aim 3)
@@ -351,6 +352,7 @@ for (let i = 1; i < dataArray.length; i++) {
         LearnPlanEndDate: dataArray[i][134], // Planned end date (aim 4)
         FundModel: dataArray[i][135], // Funding module (aim 4)
         ProgType: dataArray[i][136], // Programme type (aim 4)
+        StdCode: dataArray[i][137], // Apprentice standard (aim 4)
         DelLocPostCode: dataArray[i][138], // Delivery postcode (aim 4)
         PHours: dataArray[i][139] || undefined, // Planned hours (aim 4)
         OTJActHours: dataArray[i][140] || undefined, // Actual hours (aim 4)
@@ -404,6 +406,7 @@ for (let i = 1; i < dataArray.length; i++) {
         LearnPlanEndDate: dataArray[i][166], // Planned end date (aim 5)
         FundModel: dataArray[i][167], // Funding module (aim 5)
         ProgType: dataArray[i][168], // Programme type (aim 5)
+        StdCode: dataArray[i][169], // Apprentice standard (aim 5)
         DelLocPostCode: dataArray[i][170], // Delivery postcode (aim 5)
         PHours: dataArray[i][171] || undefined, // Planned hours (aim 5)
         OTJActHours: dataArray[i][172] || undefined, // Actual hours (aim 5)
