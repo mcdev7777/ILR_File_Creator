@@ -121,8 +121,7 @@ for (let i = 1; i < dataArray.length; i++) {
       ...(dataArray[i][19] ? [{
         EmpStat: dataArray[i][19],
         DateEmpStatApp: dataArray[i][18],
-        EmpId: dataArray[i][20] || undefined,// unsure all are empty in view 
-        // add emp ID to others
+        EmpId: dataArray[i][20] || undefined,
         EmploymentStatusMonitoring: [
           ...(dataArray[i][24] ? [{
             ESMType: "LOE",
@@ -154,6 +153,7 @@ for (let i = 1; i < dataArray.length; i++) {
       ...(dataArray[i][28] ? [{
         EmpStat: dataArray[i][28],
         DateEmpStatApp: dataArray[i][27],
+        EmpId: dataArray[i][29]|| undefined,
         EmploymentStatusMonitoring: [
           ...(dataArray[i][30] ? [{
             ESMType: "EII",
