@@ -104,74 +104,72 @@ for (let i = 1; i < dataArray.length; i++) {
     Postcode: dataArray[i][10],
     AddLine1: dataArray[i][11],
     TelNo: dataArray[i][12] || undefined,
-    LLDDHealthProb: (dataArray[i][14] != "99"? 1 : 9),
+    LLDDHealthProb: (dataArray[i][13] != "99"? 1 : 9),
     PriorAttain: {
-      PriorLevel: dataArray[i][16],
-      DateLevelApp: dataArray[i][15]
+      PriorLevel: dataArray[i][15],
+      DateLevelApp: dataArray[i][14]
     },
   
-    LLDDandHealthProblem:(dataArray[i][14] != "99"? [
-      {LLDDCat:dataArray[i][14],
+    LLDDandHealthProblem:(dataArray[i][13] != "99"? [
+      {LLDDCat:dataArray[i][13],
         PrimaryLLDD:1 
     },
-  {
-    LLDDCat:dataArray[i][13]
-  }]: undefined),
+ ]: undefined),
     LearnerEmploymentStatus: [
-      ...(dataArray[i][19] ? [{
-        EmpStat: dataArray[i][19],
-        DateEmpStatApp: dataArray[i][18],
-        EmpId: dataArray[i][20] || undefined,
+      ...(dataArray[i][18] ? [{
+        EmpStat: dataArray[i][18],
+        DateEmpStatApp: dataArray[i][17],
+        EmpId: dataArray[i][19] || undefined,
         EmploymentStatusMonitoring: [
-          ...(dataArray[i][24] ? [{
+          ...(dataArray[i][23] ? [{
             ESMType: "LOE",
+            ESMCode: dataArray[i][23]
+          }] : []),
+          ...(dataArray[i][24] ? [{
+            ESMType: "EII",
             ESMCode: dataArray[i][24]
           }] : []),
           ...(dataArray[i][25] ? [{
-            ESMType: "EII",
+            ESMType: "LOU",
             ESMCode: dataArray[i][25]
           }] : []),
-          ...(dataArray[i][26] ? [{
-            ESMType: "LOU",
-            ESMCode: dataArray[i][26]
-          }] : []),
-          ...(dataArray[i][22] ? [{
+          ...(dataArray[i][21] ? [{
             //showing up as 0 of 1 marked
             ESMType: "SEI",
             ESMCode: "1"
           }] : []),
-          ...(dataArray[i][21] ? [{
+          ...(dataArray[i][20] ? [{
             ESMType: "SEM",
             ESMCode: "1"
           }] : []),
-          ...(dataArray[i][23] ? [{
+          ...(dataArray[i][22] ? [{
             ESMType: "OET",
             ESMCode: "1"
           }] : [])
         ]
       }] : []),
-      ...(dataArray[i][28] ? [{
-        EmpStat: dataArray[i][28],
-        DateEmpStatApp: dataArray[i][27],
-        EmpId: dataArray[i][29]|| undefined,
+      ...(dataArray[i][27] ? [{
+        EmpStat: dataArray[i][27],
+        DateEmpStatApp: dataArray[i][26],
+        EmpId: dataArray[i][28]|| undefined,
         EmploymentStatusMonitoring: [
-          ...(dataArray[i][30] ? [{
+          ...(dataArray[i][29] ? [{
             ESMType: "EII",
-            ESMCode: dataArray[i][30]
+            ESMCode: dataArray[i][29]
           }] : []),
-          ...(dataArray[i][34] ? [{
+          ...(dataArray[i][33] ? [{
             ESMType: "LOE",
-            ESMCode: dataArray[i][34]
+            ESMCode: dataArray[i][33]
           }] : []),
-          ...(dataArray[i][32] ? [{
+          ...(dataArray[i][31] ? [{
             ESMType: "SEI",
             ESMCode: "1"
           }] : []),
-          ...(dataArray[i][33] ? [{
+          ...(dataArray[i][32] ? [{
             ESMType: "SEM",
             ESMCode: "1"
           }] : []),
-          ...(dataArray[i][31] ? [{
+          ...(dataArray[i][30] ? [{
             ESMType: "OET",
             ESMCode: "1"
           }] : [])
@@ -180,217 +178,217 @@ for (let i = 1; i < dataArray.length; i++) {
     ],
     LearningDelivery: [
       // First aim - only include if required fields are present
-      ...(dataArray[i][35] ? [{ // Aim type (programme aim 1)
-        LearnAimRef: dataArray[i][36], // Programme aim 1 Learning ref
-        AimType: dataArray[i][35], // Aim type (programme aim 1)
+      ...(dataArray[i][34] ? [{ // Aim type (programme aim 1)
+        LearnAimRef: dataArray[i][35], // Programme aim 1 Learning ref
+        AimType: dataArray[i][34], // Aim type (programme aim 1)
         AimSeqNumber: '1',
-        LearnStartDate: dataArray[i][37], // Start date (aim 1)
-        LearnPlanEndDate: dataArray[i][38], // Planned end date (aim 1)
-        FundModel: dataArray[i][39], // Funding module (aim 1)
-        PHours: dataArray[i][43] || undefined, // Planned hours (aim 1)
-        OTJActHours: dataArray[i][44] || undefined, // Actual hours (aim 1)
-        ProgType: dataArray[i][40], // Programme type (aim 1)
-        StdCode: dataArray[i][41], // Apprentice standard (aim 1)
-        DelLocPostCode: dataArray[i][42], // Delivery postcode (aim 1)
-        EPAOrgID: dataArray[i][46] || undefined, // EPAO ID (aim 1)
-        ConRefNumber: dataArray[i][45] || undefined, // Contract Ref (aim 1)
-        CompStatus: dataArray[i][61] || undefined, // Completion status (aim 1)
-        LearnActEndDate: dataArray[i][62] || undefined, // Actual end date (aim 1)
-        WithdrawReason: dataArray[i][65] || undefined, // Withdrawal reason (aim 1)
-        Outcome: dataArray[i][64] || undefined, // Outcome (aim 1)
-        AchDate: dataArray[i][63] || undefined, // Achievement date (aim 1)
-        OutGrade: dataArray[i][66] || undefined, // Outcome grade (aim 1)
+        LearnStartDate: dataArray[i][36], // Start date (aim 1)
+        LearnPlanEndDate: dataArray[i][37], // Planned end date (aim 1)
+        FundModel: dataArray[i][38], // Funding module (aim 1)
+        PHours: dataArray[i][42] || undefined, // Planned hours (aim 1)
+        OTJActHours: dataArray[i][43] || undefined, // Actual hours (aim 1)
+        ProgType: dataArray[i][39], // Programme type (aim 1)
+        StdCode: dataArray[i][40], // Apprentice standard (aim 1)
+        DelLocPostCode: dataArray[i][41], // Delivery postcode (aim 1)
+        EPAOrgID: dataArray[i][45] || undefined, // EPAO ID (aim 1)
+        ConRefNumber: dataArray[i][44] || undefined, // Contract Ref (aim 1)
+        CompStatus: dataArray[i][60] || undefined, // Completion status (aim 1)
+        LearnActEndDate: dataArray[i][61] || undefined, // Actual end date (aim 1)
+        WithdrawReason: dataArray[i][64] || undefined, // Withdrawal reason (aim 1)
+        Outcome: dataArray[i][63] || undefined, // Outcome (aim 1)
+        AchDate: dataArray[i][62] || undefined, // Achievement date (aim 1)
+        OutGrade: dataArray[i][65] || undefined, // Outcome grade (aim 1)
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
-          ...(dataArray[i][51] ? [{ // Funding indicator (aim 1)
+          ...(dataArray[i][50] ? [{ // Funding indicator (aim 1)
             LearnDelFAMType: 'FFI',
+            LearnDelFAMCode: dataArray[i][50]
+          }] : []),
+          ...(dataArray[i][51] ? [{ // Source of funding (aim 1)
+            LearnDelFAMType: 'SOF',
             LearnDelFAMCode: dataArray[i][51]
           }] : []),
-          ...(dataArray[i][52] ? [{ // Source of funding (aim 1)
-            LearnDelFAMType: 'SOF',
-            LearnDelFAMCode: dataArray[i][52]
-          }] : []),
-          ...(dataArray[i][69] ? [{ // Contract type (aim 1)
-            LearnDelFAMType: dataArray[i][47],
-            LearnDelFAMCode: dataArray[i][48],
-            LearnDelFAMDateFrom: dataArray[i][49] || undefined, // Date applies from (aim 1)
-            LearnDelFAMDateTo: dataArray[i][50] || undefined // Date applies to (aim 1)
+          ...(dataArray[i][46] ? [{ // Contract type (aim 1)
+            LearnDelFAMType: dataArray[i][46],
+            LearnDelFAMCode: dataArray[i][47],
+            LearnDelFAMDateFrom: dataArray[i][48] || undefined, // Date applies from (aim 1)
+            LearnDelFAMDateTo: dataArray[i][49] || undefined // Date applies to (aim 1)
           }] : [])
         ],
         AppFinRecord: [
-          ...(dataArray[i][53] ? [{ // Financial type 1 (aim 1)
-            AFinType: dataArray[i][53],
-            AFinCode: dataArray[i][54] || undefined, // Financial code 1 (aim 1)
-            AFinDate: dataArray[i][55] || undefined, // Financial start date 1 (aim 1)
-            AFinAmount: dataArray[i][56] || undefined // Training price (aim 1)
+          ...(dataArray[i][52] ? [{ // Financial type 1 (aim 1)
+            AFinType: dataArray[i][52],
+            AFinCode: dataArray[i][53] || undefined, // Financial code 1 (aim 1)
+            AFinDate: dataArray[i][54] || undefined, // Financial start date 1 (aim 1)
+            AFinAmount: dataArray[i][55] || undefined // Training price (aim 1)
           }] : []),
-          ...(dataArray[i][57] ? [{ // Financial type 2 (aim 1)
-            AFinType: dataArray[i][57],
-            AFinCode: dataArray[i][58] || undefined, // Financial code 2 (aim 1)
-            AFinDate: dataArray[i][59] || undefined, // Financial start date 2 (aim 1)
-            AFinAmount: dataArray[i][60] || undefined // Total assessment price (aim 1)
+          ...(dataArray[i][56] ? [{ // Financial type 2 (aim 1)
+            AFinType: dataArray[i][56],
+            AFinCode: dataArray[i][57] || undefined, // Financial code 2 (aim 1)
+            AFinDate: dataArray[i][58] || undefined, // Financial start date 2 (aim 1)
+            AFinAmount: dataArray[i][59] || undefined // Total assessment price (aim 1)
           }] : [])
         ]
       }] : []),
       
       // Second aim - only include if required fields are present
-      ...(dataArray[i][67] ? [{
-        LearnAimRef: dataArray[i][68], // Programme aim 2 Learning ref
-        AimType: dataArray[i][67], // Aim type (programme aim 2)
+      ...(dataArray[i][66] ? [{
+        LearnAimRef: dataArray[i][67], // Programme aim 2 Learning ref
+        AimType: dataArray[i][66], // Aim type (programme aim 2)
         AimSeqNumber: '2',
-        LearnStartDate: dataArray[i][69], // Start date (aim 2)
-        LearnPlanEndDate: dataArray[i][70], // Planned end date (aim 2)
-        FundModel: dataArray[i][71], // Funding module (aim 2)
-        ProgType: dataArray[i][72], // Programme type (aim 2)
-        StdCode: dataArray[i][73], // Apprentice standard (aim 2)
-        DelLocPostCode: dataArray[i][74], // Delivery postcode (aim 2)
-        PHours: dataArray[i][75] || undefined, // Planned hours (aim 2)
-        OTJActHours: dataArray[i][76] || undefined, // Actual hours (aim 2)
-        EPAOrgID: dataArray[i][78] || undefined, // EPAO ID (aim 2)
-        ConRefNumber: dataArray[i][77] || undefined, // Contract Ref (aim 2)
-        CompStatus: dataArray[i][93] || undefined, // Completion status (aim 2)
-        LearnActEndDate: dataArray[i][94] || undefined, // Actual end date (aim 2)
-        WithdrawReason: dataArray[i][97] || undefined, // Withdrawal reason (aim 2)
-        Outcome: dataArray[i][96] || undefined, // Outcome (aim 2)
-        AchDate: dataArray[i][95] || undefined, // Achievement date (aim 2)
-        OutGrade: dataArray[i][98] || undefined, // Outcome grade (aim 2)
+        LearnStartDate: dataArray[i][68], // Start date (aim 2)
+        LearnPlanEndDate: dataArray[i][69], // Planned end date (aim 2)
+        FundModel: dataArray[i][70], // Funding module (aim 2)
+        ProgType: dataArray[i][71], // Programme type (aim 2)
+        StdCode: dataArray[i][72], // Apprentice standard (aim 2)
+        DelLocPostCode: dataArray[i][73], // Delivery postcode (aim 2)
+        PHours: dataArray[i][74] || undefined, // Planned hours (aim 2)
+        OTJActHours: dataArray[i][75] || undefined, // Actual hours (aim 2)
+        EPAOrgID: dataArray[i][77] || undefined, // EPAO ID (aim 2)
+        ConRefNumber: dataArray[i][76] || undefined, // Contract Ref (aim 2)
+        CompStatus: dataArray[i][92] || undefined, // Completion status (aim 2)
+        LearnActEndDate: dataArray[i][93] || undefined, // Actual end date (aim 2)
+        WithdrawReason: dataArray[i][96] || undefined, // Withdrawal reason (aim 2)
+        Outcome: dataArray[i][95] || undefined, // Outcome (aim 2)
+        AchDate: dataArray[i][94] || undefined, // Achievement date (aim 2)
+        OutGrade: dataArray[i][97] || undefined, // Outcome grade (aim 2)
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
-          ...(dataArray[i][83] ? [{ // Funding indicator (aim 2)
+          ...(dataArray[i][82] ? [{ // Funding indicator (aim 2)
             LearnDelFAMType: 'FFI',
+            LearnDelFAMCode: dataArray[i][82]
+          }] : []),
+          ...(dataArray[i][83] ? [{ // Source of funding (aim 2)
+            LearnDelFAMType: 'SOF',
             LearnDelFAMCode: dataArray[i][83]
           }] : []),
-          ...(dataArray[i][84] ? [{ // Source of funding (aim 2)
-            LearnDelFAMType: 'SOF',
-            LearnDelFAMCode: dataArray[i][84]
-          }] : []),
-          ...(dataArray[i][79] ? [{ // Contract type (aim 2)
-            LearnDelFAMType: dataArray[i][79],
-            LearnDelFAMCode: dataArray[i][80],
-            LearnDelFAMDateFrom: dataArray[i][81] || undefined, // Date applies from (aim 2)
-            LearnDelFAMDateTo: dataArray[i][82] || undefined // Date applies to (aim 2)
+          ...(dataArray[i][78] ? [{ // Contract type (aim 2)
+            LearnDelFAMType: dataArray[i][78],
+            LearnDelFAMCode: dataArray[i][79],
+            LearnDelFAMDateFrom: dataArray[i][80] || undefined, // Date applies from (aim 2)
+            LearnDelFAMDateTo: dataArray[i][81] || undefined // Date applies to (aim 2)
           }] : [])
         ],
         AppFinRecord: [
-          ...(dataArray[i][85] ? [{ // Financial type 1 (aim 2)
-            AFinType: dataArray[i][85],
-            AFinCode: dataArray[i][86] || undefined, // Financial code 1 (aim 2)
-            AFinDate: dataArray[i][87] || undefined, // Financial start date 1 (aim 2)
-            AFinAmount: dataArray[i][88] || undefined // Training price (aim 2)
+          ...(dataArray[i][84] ? [{ // Financial type 1 (aim 2)
+            AFinType: dataArray[i][84],
+            AFinCode: dataArray[i][85] || undefined, // Financial code 1 (aim 2)
+            AFinDate: dataArray[i][86] || undefined, // Financial start date 1 (aim 2)
+            AFinAmount: dataArray[i][87] || undefined // Training price (aim 2)
           }] : []),
-          ...(dataArray[i][89] ? [{ // Financial type 2 (aim 2)
-            AFinType: dataArray[i][89],
-            AFinCode: dataArray[i][90] || undefined, // Financial code 2 (aim 2)
-            AFinDate: dataArray[i][91] || undefined, // Financial start date 2 (aim 2)
-            AFinAmount: dataArray[i][92] || undefined // Total assessment price (aim 2)
+          ...(dataArray[i][88] ? [{ // Financial type 2 (aim 2)
+            AFinType: dataArray[i][88],
+            AFinCode: dataArray[i][89] || undefined, // Financial code 2 (aim 2)
+            AFinDate: dataArray[i][90] || undefined, // Financial start date 2 (aim 2)
+            AFinAmount: dataArray[i][91] || undefined // Total assessment price (aim 2)
           }] : [])
         ]
       }] : []),
 
       // Third aim - only include if required fields are present
-      ...(dataArray[i][99] ? [{ // Aim type (programme aim 3)
-        LearnAimRef: dataArray[i][100], // Programme aim 3 Learning ref
-        AimType: dataArray[i][99], // Aim type (programme aim 3)
+      ...(dataArray[i][98] ? [{ // Aim type (programme aim 3)
+        LearnAimRef: dataArray[i][99], // Programme aim 3 Learning ref
+        AimType: dataArray[i][98], // Aim type (programme aim 3)
         AimSeqNumber: '3',
-        LearnStartDate: dataArray[i][101], // Start date (aim 3)
-        LearnPlanEndDate: dataArray[i][102], // Planned end date (aim 3)
-        FundModel: dataArray[i][103], // Funding module (aim 3)
-        ProgType: dataArray[i][104], // Programme type (aim 3)
-        StdCode: dataArray[i][105], // Apprentice standard (aim 3)
-        DelLocPostCode: dataArray[i][106], // Delivery postcode (aim 3)
-        PHours: dataArray[i][107] || undefined, // Planned hours (aim 3)
-        OTJActHours: dataArray[i][108] || undefined, // Actual hours (aim 3)
-        EPAOrgID: dataArray[i][109] || undefined, // EPAO ID (aim 3)
-        ConRefNumber: dataArray[i][110] || undefined, // Contract Ref (aim 3)
-        CompStatus: dataArray[i][125] || undefined, // Completion status (aim 3)
-        LearnActEndDate: dataArray[i][126] || undefined, // Actual end date (aim 3)
-        WithdrawReason: dataArray[i][128] || undefined, // Withdrawal reason (aim 3)
-        Outcome: dataArray[i][129] || undefined, // Outcome (aim 3)
-        AchDate: dataArray[i][127] || undefined, // Achievement date (aim 3)
-        OutGrade: dataArray[i][130] || undefined, // Outcome grade (aim 3)
+        LearnStartDate: dataArray[i][100], // Start date (aim 3)
+        LearnPlanEndDate: dataArray[i][101], // Planned end date (aim 3)
+        FundModel: dataArray[i][102], // Funding module (aim 3)
+        ProgType: dataArray[i][103], // Programme type (aim 3)
+        StdCode: dataArray[i][104], // Apprentice standard (aim 3)
+        DelLocPostCode: dataArray[i][105], // Delivery postcode (aim 3)
+        PHours: dataArray[i][106] || undefined, // Planned hours (aim 3)
+        OTJActHours: dataArray[i][107] || undefined, // Actual hours (aim 3)
+        EPAOrgID: dataArray[i][108] || undefined, // EPAO ID (aim 3)
+        ConRefNumber: dataArray[i][109] || undefined, // Contract Ref (aim 3)
+        CompStatus: dataArray[i][124] || undefined, // Completion status (aim 3)
+        LearnActEndDate: dataArray[i][125] || undefined, // Actual end date (aim 3)
+        WithdrawReason: dataArray[i][127] || undefined, // Withdrawal reason (aim 3)
+        Outcome: dataArray[i][128] || undefined, // Outcome (aim 3)
+        AchDate: dataArray[i][126] || undefined, // Achievement date (aim 3)
+        OutGrade: dataArray[i][129] || undefined, // Outcome grade (aim 3)
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
-          ...(dataArray[i][115] ? [{ // Funding indicator (aim 3)
+          ...(dataArray[i][114] ? [{ // Funding indicator (aim 3)
             LearnDelFAMType: 'FFI',
+            LearnDelFAMCode: dataArray[i][114]
+          }] : []),
+          ...(dataArray[i][115] ? [{ // Source of funding (aim 3)
+            LearnDelFAMType: 'SOF',
             LearnDelFAMCode: dataArray[i][115]
           }] : []),
-          ...(dataArray[i][116] ? [{ // Source of funding (aim 3)
-            LearnDelFAMType: 'SOF',
-            LearnDelFAMCode: dataArray[i][116]
-          }] : []),
-          ...(dataArray[i][111] ? [{ // Contract type (aim 3)
-            LearnDelFAMType: dataArray[i][111],
-            LearnDelFAMCode: dataArray[i][112],
-            LearnDelFAMDateFrom: dataArray[i][113] || undefined, // Date applies from (aim 3)
-            LearnDelFAMDateTo: dataArray[i][114] || undefined // Date applies to (aim 3)
+          ...(dataArray[i][110] ? [{ // Contract type (aim 3)
+            LearnDelFAMType: dataArray[i][110],
+            LearnDelFAMCode: dataArray[i][111],
+            LearnDelFAMDateFrom: dataArray[i][112] || undefined, // Date applies from (aim 3)
+            LearnDelFAMDateTo: dataArray[i][113] || undefined // Date applies to (aim 3)
           }] : [])
         ],
         AppFinRecord: [
-          ...(dataArray[i][117] ? [{ // Financial type 1 (aim 3)
-            AFinType: dataArray[i][117],
-            AFinCode: dataArray[i][118] || undefined, // Financial code 1 (aim 3)
-            AFinDate: dataArray[i][119] || undefined, // Financial start date 1 (aim 3)
-            AFinAmount: dataArray[i][120] || undefined // Training price (aim 3)
+          ...(dataArray[i][116] ? [{ // Financial type 1 (aim 3)
+            AFinType: dataArray[i][116],
+            AFinCode: dataArray[i][117] || undefined, // Financial code 1 (aim 3)
+            AFinDate: dataArray[i][118] || undefined, // Financial start date 1 (aim 3)
+            AFinAmount: dataArray[i][119] || undefined // Training price (aim 3)
           }] : []),
-          ...(dataArray[i][121] ? [{ // Financial type 2 (aim 3)
-            AFinType: dataArray[i][121],
-            AFinCode: dataArray[i][122] || undefined, // Financial code 2 (aim 3)
-            AFinDate: dataArray[i][123] || undefined, // Financial start date 2 (aim 3)
-            AFinAmount: dataArray[i][124] || undefined // Total assessment price (aim 3)
+          ...(dataArray[i][120] ? [{ // Financial type 2 (aim 3)
+            AFinType: dataArray[i][120],
+            AFinCode: dataArray[i][121] || undefined, // Financial code 2 (aim 3)
+            AFinDate: dataArray[i][122] || undefined, // Financial start date 2 (aim 3)
+            AFinAmount: dataArray[i][123] || undefined // Total assessment price (aim 3)
           }] : [])
         ]
       }] : []),
 
       // Fourth aim - only include if required fields are present
-      ...(dataArray[i][131] ? [{ // Aim type (programme aim 4)
-        LearnAimRef: dataArray[i][132], // Programme aim 4 Learning ref
-        AimType: dataArray[i][131], // Aim type (programme aim 4)
+      ...(dataArray[i][130] ? [{ // Aim type (programme aim 4)
+        LearnAimRef: dataArray[i][131], // Programme aim 4 Learning ref
+        AimType: dataArray[i][130], // Aim type (programme aim 4)
         AimSeqNumber: '4',
-        LearnStartDate: dataArray[i][133], // Start date (aim 4)
-        LearnPlanEndDate: dataArray[i][134], // Planned end date (aim 4)
-        FundModel: dataArray[i][135], // Funding module (aim 4)
-        ProgType: dataArray[i][136], // Programme type (aim 4)
-        StdCode: dataArray[i][137], // Apprentice standard (aim 4)
-        DelLocPostCode: dataArray[i][138], // Delivery postcode (aim 4)
-        PHours: dataArray[i][139] || undefined, // Planned hours (aim 4)
-        OTJActHours: dataArray[i][140] || undefined, // Actual hours (aim 4)
-        EPAOrgID: dataArray[i][142] || undefined, // EPAO ID (aim 4)
-        ConRefNumber: dataArray[i][141] || undefined, // Contract Ref (aim 4)
-        CompStatus: dataArray[i][157] || undefined, // Completion status (aim 4)
-        LearnActEndDate: dataArray[i][158] || undefined, // Actual end date (aim 4)
-        WithdrawReason: dataArray[i][160] || undefined, // Withdrawal reason (aim 4)
-        Outcome: dataArray[i][161] || undefined, // Outcome (aim 4)
-        AchDate: dataArray[i][159] || undefined, // Achievement date (aim 4)
-        OutGrade: dataArray[i][162] || undefined, // Outcome grade (aim 4)
+        LearnStartDate: dataArray[i][132], // Start date (aim 4)
+        LearnPlanEndDate: dataArray[i][133], // Planned end date (aim 4)
+        FundModel: dataArray[i][134], // Funding module (aim 4)
+        ProgType: dataArray[i][135], // Programme type (aim 4)
+        StdCode: dataArray[i][136], // Apprentice standard (aim 4)
+        DelLocPostCode: dataArray[i][137], // Delivery postcode (aim 4)
+        PHours: dataArray[i][138] || undefined, // Planned hours (aim 4)
+        OTJActHours: dataArray[i][139] || undefined, // Actual hours (aim 4)
+        EPAOrgID: dataArray[i][141] || undefined, // EPAO ID (aim 4)
+        ConRefNumber: dataArray[i][140] || undefined, // Contract Ref (aim 4)
+        CompStatus: dataArray[i][156] || undefined, // Completion status (aim 4)
+        LearnActEndDate: dataArray[i][157] || undefined, // Actual end date (aim 4)
+        WithdrawReason: dataArray[i][159] || undefined, // Withdrawal reason (aim 4)
+        Outcome: dataArray[i][160] || undefined, // Outcome (aim 4)
+        AchDate: dataArray[i][158] || undefined, // Achievement date (aim 4)
+        OutGrade: dataArray[i][161] || undefined, // Outcome grade (aim 4)
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
-          ...(dataArray[i][147] ? [{ // Funding indicator (aim 4)
+          ...(dataArray[i][146] ? [{ // Funding indicator (aim 4)
             LearnDelFAMType: 'FFI',
-            LearnDelFAMCode: dataArray[i][147]
+            LearnDelFAMCode: dataArray[i][146]
           }] : []),
-          ...(dataArray[i][148] ? [{ // Source of funding (aim 4)
+          ...(dataArray[i][147] ? [{ // Source of funding (aim 4)
             LearnDelFAMType: 'SOF',
-            LearnDelFAMCode: dataArray[i][164]
+            LearnDelFAMCode: dataArray[i][163]
           }] : []),
-          ...(dataArray[i][143] ? [{ // Contract type (aim 4)
-            LearnDelFAMType: dataArray[i][143],
-            LearnDelFAMCode: dataArray[i][144],
-            LearnDelFAMDateFrom: dataArray[i][145] || undefined, // Date applies from (aim 4)
-            LearnDelFAMDateTo: dataArray[i][146] || undefined // Date applies to (aim 4)
+          ...(dataArray[i][142] ? [{ // Contract type (aim 4)
+            LearnDelFAMType: dataArray[i][142],
+            LearnDelFAMCode: dataArray[i][143],
+            LearnDelFAMDateFrom: dataArray[i][144] || undefined, // Date applies from (aim 4)
+            LearnDelFAMDateTo: dataArray[i][145] || undefined // Date applies to (aim 4)
           }] : [])
         ],
         AppFinRecord: [
-          ...(dataArray[i][149] ? [{ // Financial type 1 (aim 4)
-            AFinType: dataArray[i][149],
-            AFinCode: dataArray[i][150] || undefined, // Financial code 1 (aim 4)
-            AFinDate: dataArray[i][151] || undefined, // Financial start date 1 (aim 4)
-            AFinAmount: dataArray[i][152] || undefined // Training price (aim 4)
+          ...(dataArray[i][148] ? [{ // Financial type 1 (aim 4)
+            AFinType: dataArray[i][148],
+            AFinCode: dataArray[i][149] || undefined, // Financial code 1 (aim 4)
+            AFinDate: dataArray[i][150] || undefined, // Financial start date 1 (aim 4)
+            AFinAmount: dataArray[i][151] || undefined // Training price (aim 4)
           }] : []),
-          ...(dataArray[i][153] ? [{ // Financial type 2 (aim 4)
-            AFinType: dataArray[i][153],
-            AFinCode: dataArray[i][154] || undefined, // Financial code 2 (aim 4)
-            AFinDate: dataArray[i][155] || undefined, // Financial start date 2 (aim 4)
-            AFinAmount: dataArray[i][156] || undefined // Total assessment price (aim 4)
+          ...(dataArray[i][152] ? [{ // Financial type 2 (aim 4)
+            AFinType: dataArray[i][152],
+            AFinCode: dataArray[i][153] || undefined, // Financial code 2 (aim 4)
+            AFinDate: dataArray[i][154] || undefined, // Financial start date 2 (aim 4)
+            AFinAmount: dataArray[i][155] || undefined // Total assessment price (aim 4)
           }] : [])
         ]
       }] : []),
