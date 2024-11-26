@@ -71,7 +71,7 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
       // const exceptionIndices = [0,11,16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 35, 36, 37, 38, 
       //   39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 
       //   60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76];
-let exceptionIndices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192];
+let exceptionIndices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192,193];
     if (item === "" && !exceptionIndices.includes(index)) {
         const missingField = dataArray[0][index] || `Field at index ${index}`;
         event.reply('show-alert', `Data missing: ${missingField} for learner ${learnerIndex}`);
@@ -87,6 +87,13 @@ else{
   xmlBase.Header.Source.Release = version
   xmlBase.Header.CollectionDetails.Year = version.split('.')[0];
   let refNumber = 0
+  let tooLong = [];
+  for (let i = 1; i < dataArray.length; i++) {
+    if(dataArray[i][7].replace(/\s+/g, '').trim().length >9)
+   tooLong.push(dataArray[i][7].replace(/\s+/g, '').trim())
+
+  }
+  console.log('too long',tooLong)
 for (let i = 1; i < dataArray.length; i++) {
   refNumber = i.toString().padStart(4, '0');
   xmlBase.Learner.push({
@@ -98,8 +105,8 @@ for (let i = 1; i < dataArray.length; i++) {
     Ethnicity: dataArray[i][8],
     Sex: dataArray[i][5],
     LLDDHealthProb: dataArray[i][12],
-    NINumber: dataArray[i][7],
-    PlanLearnHours: dataArray[i][32] || undefined,
+    NINumber: dataArray[i][7].replace(/\s+/g, '').trim(),
+    PlanLearnHours: dataArray[i][31] || undefined,
     PostcodePrior: dataArray[i][9],
     Postcode: dataArray[i][10],
     AddLine1: dataArray[i][11],
@@ -179,7 +186,7 @@ for (let i = 1; i < dataArray.length; i++) {
     LearningDelivery: [
       // First aim - only include if required fields are present
       ...(dataArray[i][34] ? [{ // Aim type (programme aim 1)
-        LearnAimRef: dataArray[i][35], // Programme aim 1 Learning ref
+        LearnAimRef: dataArray[i][35].trim(), // Programme aim 1 Learning ref
         AimType: dataArray[i][34], // Aim type (programme aim 1)
         AimSeqNumber: '1',
         LearnStartDate: dataArray[i][36], // Start date (aim 1)
@@ -233,7 +240,7 @@ for (let i = 1; i < dataArray.length; i++) {
       
       // Second aim - only include if required fields are present
       ...(dataArray[i][66] ? [{
-        LearnAimRef: dataArray[i][67], // Programme aim 2 Learning ref
+        LearnAimRef: dataArray[i][67].trim(), // Programme aim 2 Learning ref
         AimType: dataArray[i][66], // Aim type (programme aim 2)
         AimSeqNumber: '2',
         LearnStartDate: dataArray[i][68], // Start date (aim 2)
@@ -287,7 +294,7 @@ for (let i = 1; i < dataArray.length; i++) {
 
       // Third aim - only include if required fields are present
       ...(dataArray[i][98] ? [{ // Aim type (programme aim 3)
-        LearnAimRef: dataArray[i][99], // Programme aim 3 Learning ref
+        LearnAimRef: dataArray[i][99].trim(), // Programme aim 3 Learning ref
         AimType: dataArray[i][98], // Aim type (programme aim 3)
         AimSeqNumber: '3',
         LearnStartDate: dataArray[i][100], // Start date (aim 3)
@@ -341,7 +348,7 @@ for (let i = 1; i < dataArray.length; i++) {
 
       // Fourth aim - only include if required fields are present
       ...(dataArray[i][130] ? [{ // Aim type (programme aim 4)
-        LearnAimRef: dataArray[i][131], // Programme aim 4 Learning ref
+        LearnAimRef: dataArray[i][131].trim(), // Programme aim 4 Learning ref
         AimType: dataArray[i][130], // Aim type (programme aim 4)
         AimSeqNumber: '4',
         LearnStartDate: dataArray[i][132], // Start date (aim 4)
@@ -394,59 +401,55 @@ for (let i = 1; i < dataArray.length; i++) {
       }] : []),
 
       // Fifth aim - only include if required fields are present
-      ...(dataArray[i][163] ? [{ // Aim type (programme aim 5)
-        LearnAimRef: dataArray[i][164], // Programme aim 5 Learning ref
-        AimType: dataArray[i][163], // Aim type (programme aim 5)
+      ...(dataArray[i][162] ? [{ // Aim type (programme aim 5)
+        LearnAimRef: dataArray[i][163].trim(), // Programme aim 5 Learning ref
+        AimType: dataArray[i][162], // Aim type (programme aim 5)
         AimSeqNumber: '5',
-        LearnStartDate: dataArray[i][165], // Start date (aim 5)
-        LearnPlanEndDate: dataArray[i][166], // Planned end date (aim 5)
-        FundModel: dataArray[i][167], // Funding module (aim 5)
-        ProgType: dataArray[i][168], // Programme type (aim 5)
-        StdCode: dataArray[i][169], // Apprentice standard (aim 5)
-        DelLocPostCode: dataArray[i][170], // Delivery postcode (aim 5)
-        PHours: dataArray[i][171] || undefined, // Planned hours (aim 5)
-        OTJActHours: dataArray[i][172] || undefined, // Actual hours (aim 5)
-
-//no EPAO ID for thi aim using pervious one
-
-        EPAOrgID: dataArray[i][142] || undefined, // EPAO ID (aim 5)
-        ConRefNumber: dataArray[i][173] || undefined, // Contract Ref (aim 5)
-        CompStatus: dataArray[i][187] || undefined, // Completion status (aim 5)
-        LearnActEndDate: dataArray[i][188] || undefined, // Actual end date (aim 5)
-        WithdrawReason: dataArray[i][191] || undefined, // Withdrawal reason (aim 5)
-        Outcome: dataArray[i][190] || undefined, // Outcome (aim 5)
-        AchDate: dataArray[i][189] || undefined, // Achievement date (aim 5)
-        OutGrade: dataArray[i][192] || undefined, // Outcome grade (aim 5)
+        LearnStartDate: dataArray[i][164], // Start date (aim 5)
+        LearnPlanEndDate: dataArray[i][165], // Planned end date (aim 5)
+        FundModel: dataArray[i][166], // Funding module (aim 5)
+        ProgType: dataArray[i][167], // Programme type (aim 5)
+        StdCode: dataArray[i][168], // Apprentice standard (aim 5)
+        DelLocPostCode: dataArray[i][169], // Delivery postcode (aim 5)
+        PHours: dataArray[i][170] || undefined, // Planned hours (aim 5)
+        OTJActHours: dataArray[i][171] || undefined, // Actual hours (aim 5)
+        EPAOrgID: dataArray[i][173] || undefined, // EPAO ID (aim 5)
+        ConRefNumber: dataArray[i][172] || undefined, // Contract Ref (aim 5)
+        CompStatus: dataArray[i][188] || undefined, // Completion status (aim 5)
+        LearnActEndDate: dataArray[i][189] || undefined, // Actual end date (aim 5)
+        WithdrawReason: dataArray[i][192] || undefined, // Withdrawal reason (aim 5)
+        Outcome: dataArray[i][191] || undefined, // Outcome (aim 5)
+        AchDate: dataArray[i][190] || undefined, // Achievement date (aim 5)
+        OutGrade: dataArray[i][193] || undefined, // Outcome grade (aim 5)
         SWSupAimId: crypto.randomUUID(),
         LearningDeliveryFAM: [
-          ...(dataArray[i][177] ? [{ // Funding indicator (aim 5)
+          ...(dataArray[i][178] ? [{ // Funding indicator (aim 5)
             LearnDelFAMType: 'FFI',
-            LearnDelFAMCode: dataArray[i][177]
-          }] : []),
-          ...(dataArray[i][178] ? [{ // Source of funding (aim 5)
-            LearnDelFAMType: 'SOF',
             LearnDelFAMCode: dataArray[i][178]
           }] : []),
-          //no contract type but there is code not sure if this should exist
-          // ...(dataArray[i][174] ? [{ // Contract type (aim 5)
-          //   LearnDelFAMType: dataArray[i][174],
-          //   LearnDelFAMCode: dataArray[i][174],
-          //   LearnDelFAMDateFrom: dataArray[i][199] || undefined, // Date applies from (aim 5)
-          //   LearnDelFAMDateTo: dataArray[i][200] || undefined // Date applies to (aim 5)
-          // }] : [])
+          ...(dataArray[i][179] ? [{ // Source of funding (aim 5)
+            LearnDelFAMType: 'SOF',
+            LearnDelFAMCode: dataArray[i][179]
+          }] : []),
+          ...(dataArray[i][174] ? [{ // Contract type (aim 5)
+            LearnDelFAMType: dataArray[i][174],
+            LearnDelFAMCode: dataArray[i][175],
+            LearnDelFAMDateFrom: dataArray[i][176] || undefined, // Date applies from (aim 5)
+            LearnDelFAMDateTo: dataArray[i][177] || undefined // Date applies to (aim 5)
+          }] : [])
         ],
         AppFinRecord: [
-          ...(dataArray[i][179] ? [{ // Financial type 1 (aim 5)
-            AFinType: dataArray[i][179],
-            AFinCode: dataArray[i][180] || undefined, // Financial code 1 (aim 5)
-            AFinDate: dataArray[i][181] || undefined, // Financial start date 1 (aim 5)
-            AFinAmount: dataArray[i][182] || undefined // Training price (aim 5)
+          ...(dataArray[i][180] ? [{ // Financial type 1 (aim 5)
+            AFinType: dataArray[i][180],
+            AFinCode: dataArray[i][181] || undefined, // Financial code 1 (aim 5)
+            AFinDate: dataArray[i][182] || undefined, // Financial start date 1 (aim 5)
+            AFinAmount: dataArray[i][183] || undefined // Training price (aim 5)
           }] : []),
-          ...(dataArray[i][183] ? [{ // Financial type 2 (aim 5)
-            AFinType: dataArray[i][183],
-            AFinCode: dataArray[i][184] || undefined, // Financial code 2 (aim 5)
-            AFinDate: dataArray[i][185] || undefined, // Financial start date 2 (aim 5)
-            AFinAmount: dataArray[i][186] || undefined // Training price (aim 5)
+          ...(dataArray[i][184] ? [{ // Financial type 2 (aim 5)
+            AFinType: dataArray[i][184],
+            AFinCode: dataArray[i][185] || undefined, // Financial code 2 (aim 5)
+            AFinDate: dataArray[i][186] || undefined, // Financial start date 2 (aim 5)
+            AFinAmount: dataArray[i][187] || undefined // Training price (aim 5)
           }] : [])
         ]
       }] : [])
