@@ -1,5 +1,5 @@
-const {xsd} = require("./schema-for-validate")
-const libxmljs = require('libxmljs2');
+// const {xsd} = require("./schema-for-validate")
+const xmllint = require('xmllint');
 const { app, BrowserWindow, ipcMain, globalShortcut } = require("electron");
 const path = require("node:path");
 const fs = require("fs");
@@ -7,6 +7,8 @@ const xmlbuilder = require("xmlbuilder");
 const currentDate = new Date(Date());
 const isoWithoutMsOrZ = currentDate.toISOString().split('.')[0];
 const dateOnlyString = isoWithoutMsOrZ.replace(/T.*/, '');
+
+
 
 let xmlBase = {
   
@@ -55,7 +57,9 @@ function createWindow() {
     win.webContents.toggleDevTools();
   });
 }
-
+ipcMain.on('log-message', (event, message) => {
+  console.log('Renderer:', message); // Log to terminal
+});
 app.whenReady().then(() => {
   createWindow();
 
@@ -64,9 +68,9 @@ app.whenReady().then(() => {
   });
 });
 
+
 ipcMain.on("upload-csv", (event, dataArray, version) => {
-  console.log(dataArray);
-  console.log("Funding Indicator (Index 51):", dataArray[0][51]);
+  try {
     if (dataArray.some((learner, learnerIndex) => 
     learner.some((item, index) => {
       let exceptionIndices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192,193];
@@ -85,13 +89,7 @@ else{
   xmlBase.Header.Source.Release = version
   xmlBase.Header.CollectionDetails.Year = version.split('.')[0];
   let refNumber = 0
-  let tooLong = [];
-  for (let i = 1; i < dataArray.length; i++) {
-    if(dataArray[i][7].replace(/\s+/g, '').trim().length >8)
-   tooLong.push([dataArray[i][7].replace(/\s+/g, '').trim(),dataArray[i][7].replace(/\s+/g, '').trim().length])
 
-  }
-  console.log('too long',tooLong)
   const CheckBoxPattern = /0 checked out/; 
   for (let I = 1; I < dataArray.length; I++){
   
@@ -484,6 +482,9 @@ console.log(result); // Outputs: "ab-cd"*/
     return `${yyyymmdd}-${hhmmss}`;
   };
 
+
+ 
+  
   fs.writeFile(`ILR-10085696-${version.split('.')[0]}-${formatDateTime(currentDate)}-01.xml`, xml, (err) => {
     if (err) {
       console.error(err);
@@ -492,30 +493,28 @@ console.log(result); // Outputs: "ab-cd"*/
       console.log("The XML file was saved successfully.");
       event.reply('xml-created', `ILR-10085696-${version.split('.')[0]}-${formatDateTime(currentDate)}-01.xml`);
     }
-    try {
-      // Parse the XML content
-      const xmlDoc = libxmljs.parseXml(xml);
-  
-      // Parse the XSD schema
-      const xmlSchema = libxmljs.parseXml(xsd);
-  
-      // Validate XML against the schema
-      const isValid = xmlDoc.validate(xmlSchema);
-  
-      if (isValid) {
-        console.log("The XML file is valid!");
-        // event.reply('xml-validation-success', fileName);
-      } else {
-        console.error("The XML file is invalid.");
-        console.error(xmlDoc.validationErrors); // Output validation errors
-        // event.reply('xml-validation-failed', xmlDoc.validationErrors.map(e => e.message).join("\n"));
-      }
-    } catch (validationError) {
-      console.error("Error during XML validation:", validationError.message);
-      // event.reply('xml-validation-error', validationError.message);
-    }
+ 
   });
+  const xsd = fs.readFileSync("ILR-2024-25-schemafile-January.xsd", 'utf-8');
 
+
+   try {
+    const result = xmllint.validateXML({ xml, schema: xsd });
+
+    if (result.errors === null) {
+      console.log("The XML is valid!");
+    } else {
+      event.reply('xml-validation-errors', result.errors);
+    }
+  } catch (error) {
+    console.error("An error occurred during XML validation:", error);
+    // event.reply('xml-validation-errors', [error.message]);
+  }
+
+}
+} catch (error) {
+  log.error("Error in upload-csv:", error);
+  event.reply('show-alert', 'An error occurred while processing the CSV.');
 }
 });
 
