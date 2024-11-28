@@ -7,6 +7,7 @@ const xmlbuilder = require("xmlbuilder");
 const currentDate = new Date(Date());
 const isoWithoutMsOrZ = currentDate.toISOString().split('.')[0];
 const dateOnlyString = isoWithoutMsOrZ.replace(/T.*/, '');
+const { Worker } = require('worker_threads');
 
 
 
@@ -57,6 +58,9 @@ function createWindow() {
     win.webContents.toggleDevTools();
   });
 }
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
 ipcMain.on('log-message', (event, message) => {
   console.log('Renderer:', message); // Log to terminal
 });
@@ -462,7 +466,7 @@ for (let i = 1; i < dataArray.length; i++) {
     ],
   });
 }
-  const xml = xmlbuilder.create({
+  let xml = xmlbuilder.create({
     Message: xmlBase
   }, {
     encoding: 'utf-8',
@@ -495,27 +499,74 @@ console.log(result); // Outputs: "ab-cd"*/
     }
  
   });
-  const xsd = fs.readFileSync("ILR-2024-25-schemafile-January.xsd", 'utf-8');
+  let xsd = fs.readFileSync("ILR-2024-25-schemafile-January.xsd", 'utf-8');
 
+//   const initialExternalMemory = process.memoryUsage().external;
 
-   try {
-    const result = xmllint.validateXML({ xml, schema: xsd });
+//    try {
+//     let result = xmllint.validateXML({ xml, schema: xsd });
+//     const finalExternalMemory = process.memoryUsage().external;
+  
+// console.log('External Memory Change:', 
+//   finalExternalMemory - initialExternalMemory, 'bytes');
+ 
+//     if (!result.errors || result.errors.length === 0) {
+//       console.log("The XML is valid!");
+//     } else {
+//       event.reply('xml-validation-errors', result);
+//     }
+//   } catch (error) {
+//     console.error("An error occurred during XML validation:", error);
+//     // event.reply('xml-validation-errors', [error.message]);
+//   }
 
-    if (result.errors === null) {
+const worker = new Worker('./xmlValidator.js', {
+  workerData: { xml, xsd }
+});
+
+worker.on('message', (result) => {
+  if (result.valid) {
       console.log("The XML is valid!");
-    } else {
-      event.reply('xml-validation-errors', result.errors);
-    }
-  } catch (error) {
-    console.error("An error occurred during XML validation:", error);
-    // event.reply('xml-validation-errors', [error.message]);
+      // event.reply('xml-validation-success', result);
+  } else {
+      console.error("XML validation errors:", result.errors);
+      // event.reply('xml-validation-errors', result.errors);
   }
+});
+
+worker.on('error', (error) => {
+  console.error("Worker error:", error);
+  event.reply('xml-validation-errors', [error.message]);
+});
+
+worker.on('exit', (code) => {
+  if (code !== 0) {
+      console.error(`Worker stopped with exit code ${code}`);
+  }
+});
+
+
+
+
+
+
+
+
+
+  xml = null;
+  xsd = null;
+  
 
 }
 } catch (error) {
-  log.error("Error in upload-csv:", error);
-  event.reply('show-alert', 'An error occurred while processing the CSV.');
+  console.error("An error occurred during XML validation:", error);
+  // event.reply('show-alert', 'An error occurred while processing the CSV.');
 }
+});
+
+app.on('before-quit', () => {
+  // Perform aggressive cleanup
+  global.gc?.();
 });
 
 app.on("window-all-closed", () => {

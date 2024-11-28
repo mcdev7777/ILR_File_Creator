@@ -1,7 +1,9 @@
 const { ipcRenderer } = require('electron');
 const Papa = require('papaparse'); 
 
-
+function logToMain(message) {
+  ipcRenderer.send('log-message', message);
+}
 
  const form = document.getElementById('uploadForm');
  const output = document.getElementById('output');
@@ -22,19 +24,32 @@ form.addEventListener('submit', (e) => {
         }
       });
    
-    
+    logToMain('submit completed')
 });
 
 ipcRenderer.on('xml-created', (event, filename) => {
+  
   const outputDiv = document.getElementById('output');
   const downloadLink = document.createElement('a');
   downloadLink.href = `${filename}`;
   downloadLink.download = filename;
   downloadLink.textContent = 'Download XML File';
   outputDiv.appendChild(downloadLink);
+  logToMain('xml creation completed')
+
 });
 
 ipcRenderer.on('xml-creation-failed', (event, errorMessage) => {
   const outputDiv = document.getElementById('output');
   outputDiv.textContent = `Error creating XML: ${errorMessage}`;
+});
+
+ipcRenderer.on('xml-validation-errors',(event,results) => {
+  const errorDisplay = document.getElementById("formatErrors");
+  let displayText = results.errors.toString();
+  errorDisplay.textContent = `Errors and warnings during XML validation: ${displayText}`;
+  logToMain('sxml validation completed')
+
+
+
 });
