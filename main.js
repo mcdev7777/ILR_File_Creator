@@ -501,24 +501,7 @@ console.log(result); // Outputs: "ab-cd"*/
   });
   let xsd = fs.readFileSync("ILR-2024-25-schemafile-January.xsd", 'utf-8');
 
-//   const initialExternalMemory = process.memoryUsage().external;
 
-//    try {
-//     let result = xmllint.validateXML({ xml, schema: xsd });
-//     const finalExternalMemory = process.memoryUsage().external;
-  
-// console.log('External Memory Change:', 
-//   finalExternalMemory - initialExternalMemory, 'bytes');
- 
-//     if (!result.errors || result.errors.length === 0) {
-//       console.log("The XML is valid!");
-//     } else {
-//       event.reply('xml-validation-errors', result);
-//     }
-//   } catch (error) {
-//     console.error("An error occurred during XML validation:", error);
-//     // event.reply('xml-validation-errors', [error.message]);
-//   }
 
 const worker = new Worker('./xmlValidator.js', {
   workerData: { xml, xsd }
@@ -529,8 +512,7 @@ worker.on('message', (result) => {
       console.log("The XML is valid!");
       // event.reply('xml-validation-success', result);
   } else {
-      console.error("XML validation errors:", result.errors);
-      // event.reply('xml-validation-errors', result.errors);
+      event.reply('xml-validation-errors', result);
   }
 });
 
@@ -550,9 +532,6 @@ worker.on('exit', (code) => {
 
 
 
-
-
-
   xml = null;
   xsd = null;
   
@@ -560,14 +539,10 @@ worker.on('exit', (code) => {
 }
 } catch (error) {
   console.error("An error occurred during XML validation:", error);
-  // event.reply('show-alert', 'An error occurred while processing the CSV.');
 }
 });
 
-app.on('before-quit', () => {
-  // Perform aggressive cleanup
-  global.gc?.();
-});
+
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();

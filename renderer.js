@@ -46,10 +46,17 @@ ipcRenderer.on('xml-creation-failed', (event, errorMessage) => {
 
 ipcRenderer.on('xml-validation-errors',(event,results) => {
   const errorDisplay = document.getElementById("formatErrors");
-  let displayText = results.errors.toString();
-  errorDisplay.textContent = `Errors and warnings during XML validation: ${displayText}`;
-  logToMain('sxml validation completed')
-
-
-
+  errorDisplay.innerHTML = '';
+  const h2 = document.createElement('h2')
+  h2.textContent = "Errors and Warnings"
+  errorDisplay.appendChild(h2);
+    errorDisplay.appendChild(document.createElement('br'));
+  h2.textContent = "Errors and Warnings"
+  results.errors.forEach(error => {
+    const p = document.createElement('p');
+    p.textContent = error;
+    errorDisplay.appendChild(p);
+    errorDisplay.appendChild(document.createElement('br'));
+  });
+  logToMain('xml validation completed');
 });
