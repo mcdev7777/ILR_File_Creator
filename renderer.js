@@ -11,6 +11,28 @@ function logToMain(message) {
 ipcRenderer.on('show-alert', (event, message) => {
   alert(message);
 });
+const saveButton = document.createElement('button');
+saveButton.textContent = 'Save XML File';
+saveButton.onclick = async (filename) => {
+    const { dialog } = require('electron').remote; // Ensure you have access to the dialog
+    const result = await dialog.showSaveDialog({
+        title: 'Export XML File',
+        defaultPath: path.join(app.getPath('documents'), `${filename}`),
+      
+    });
+
+    if (!result.canceled && result.filePath) {
+        // Here you would write the XML content to the file
+        fs.writeFile(result.filePath, xmlContent, (err) => {
+            if (err) {
+                console.error('Error saving file:', err);
+            } else {
+                logToMain('XML file saved successfully');
+            }
+        });
+    }
+};
+
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -31,12 +53,8 @@ ipcRenderer.on('xml-created', (event, filename) => {
   
   const outputDiv = document.getElementById('output');
   const downloadLink = document.createElement('a');
-  downloadLink.href = `${filename}`;
-  downloadLink.download = filename;
-  downloadLink.textContent = 'Download XML File';
-  outputDiv.appendChild(downloadLink);
-  logToMain('xml creation completed')
-
+  outputDiv.appendChild(saveButton);
+logToMain('xml creation completed');
 });
 
 ipcRenderer.on('xml-creation-failed', (event, errorMessage) => {

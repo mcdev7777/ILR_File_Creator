@@ -485,9 +485,9 @@ console.log(result); // Outputs: "ab-cd"*/
   };
 
 
- 
+ const filePath = path.join(tempDir, `ILR-10085696-${version.split('.')[0]}-${formatDateTime(currentDate)}-01.xml`)
   
-  fs.writeFile(`ILR-10085696-${version.split('.')[0]}-${formatDateTime(currentDate)}-01.xml`, xml, (err) => {
+  fs.writeFile(filePath, xml, (err) => {
     if (err) {
       console.error(err);
       event.reply('xml-creation-failed', err.message);
