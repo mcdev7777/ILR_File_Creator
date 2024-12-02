@@ -1,6 +1,6 @@
 // const {xsd} = require("./schema-for-validate")
 const xmllint = require('xmllint');
-const { app, BrowserWindow, ipcMain, globalShortcut } = require("electron");
+const { app, BrowserWindow, ipcMain, globalShortcut, dialog, shell  } = require("electron");
 const path = require("node:path");
 const fs = require("fs");
 const xmlbuilder = require("xmlbuilder");
@@ -8,7 +8,8 @@ const currentDate = new Date(Date());
 const isoWithoutMsOrZ = currentDate.toISOString().split('.')[0];
 const dateOnlyString = isoWithoutMsOrZ.replace(/T.*/, '');
 const { Worker } = require('worker_threads');
-
+const os = require('os');
+const tempDir = path.join(os.tmpdir(), `electron-${app.name}-xmls`);
 
 
 let xmlBase = {
@@ -58,9 +59,7 @@ function createWindow() {
     win.webContents.toggleDevTools();
   });
 }
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-});
+
 ipcMain.on('log-message', (event, message) => {
   console.log('Renderer:', message); // Log to terminal
 });
@@ -150,7 +149,6 @@ for (let i = 1; i < dataArray.length; i++) {
             ESMCode: dataArray[i][25]
           }] : []),
           ...(dataArray[i][21] ? [{
-            //showing up as 0 of 1 marked
             ESMType: "SEI",
             ESMCode: "1"
           }] : []),
@@ -254,11 +252,11 @@ for (let i = 1; i < dataArray.length; i++) {
         AimSeqNumber: '2',
         LearnStartDate: dataArray[i][68], // Start date (aim 2)
         LearnPlanEndDate: dataArray[i][69], // Planned end date (aim 2)
-        FundModel: dataArray[i][70], // Funding module (aim 2)
+        FundModel: dataArray[i][70], // Funding module (aim 2) 
+        PHours: dataArray[i][74] || undefined, // Planned hours (aim 2)
         ProgType: dataArray[i][71], // Programme type (aim 2)
         StdCode: dataArray[i][72] || undefined, // Apprentice standard (aim 2)
         DelLocPostCode: dataArray[i][73], // Delivery postcode (aim 2)
-        PHours: dataArray[i][74] || undefined, // Planned hours (aim 2)
         OTJActHours: dataArray[i][75] || undefined, // Actual hours (aim 2)
         EPAOrgID: dataArray[i][77] || undefined, // EPAO ID (aim 2)
         ConRefNumber: dataArray[i][76] || undefined, // Contract Ref (aim 2)
@@ -363,10 +361,10 @@ for (let i = 1; i < dataArray.length; i++) {
         LearnStartDate: dataArray[i][132], // Start date (aim 4)
         LearnPlanEndDate: dataArray[i][133], // Planned end date (aim 4)
         FundModel: dataArray[i][134], // Funding module (aim 4)
+        PHours: dataArray[i][138] || undefined, // Planned hours (aim 4)
         ProgType: dataArray[i][135], // Programme type (aim 4)
         StdCode: dataArray[i][136] || undefined, // Apprentice standard (aim 4)
         DelLocPostCode: dataArray[i][137], // Delivery postcode (aim 4)
-        PHours: dataArray[i][138] || undefined, // Planned hours (aim 4)
         OTJActHours: dataArray[i][139] || undefined, // Actual hours (aim 4)
         EPAOrgID: dataArray[i][141] || undefined, // EPAO ID (aim 4)
         ConRefNumber: dataArray[i][140] || undefined, // Contract Ref (aim 4)
@@ -384,7 +382,7 @@ for (let i = 1; i < dataArray.length; i++) {
           }] : []),
           ...(dataArray[i][147] ? [{ // Source of funding (aim 4)
             LearnDelFAMType: 'SOF',
-            LearnDelFAMCode: dataArray[i][163]
+            LearnDelFAMCode: dataArray[i][147]
           }] : []),
           ...(dataArray[i][142] ? [{ // Contract type (aim 4)
             LearnDelFAMType: dataArray[i][142],
