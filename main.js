@@ -112,7 +112,7 @@ for (let i = 1; i < dataArray.length; i++) {
     Sex: dataArray[i][5],
     LLDDHealthProb: dataArray[i][12],
     NINumber: dataArray[i][7].replace(/\s+/g, '').trim(),
-    PlanLearnHours: dataArray[i][31] || undefined,
+    PlanLearnHours: dataArray[i][16] || undefined,
     PostcodePrior: dataArray[i][9],
     Postcode: dataArray[i][10],
     AddLine1: dataArray[i][11],
@@ -129,33 +129,7 @@ for (let i = 1; i < dataArray.length; i++) {
     },
  ]: undefined),
     LearnerEmploymentStatus: [
-      ...(dataArray[i][27] ? [{
-        EmpStat: dataArray[i][27],
-        DateEmpStatApp: dataArray[i][26],
-        EmpId: dataArray[i][28]|| undefined,
-        EmploymentStatusMonitoring: [
-          ...(dataArray[i][29] ? [{
-            ESMType: "EII",
-            ESMCode: dataArray[i][29]
-          }] : []),
-          ...(dataArray[i][33] ? [{
-            ESMType: "LOE",
-            ESMCode: dataArray[i][33]
-          }] : []),
-          ...(dataArray[i][31] ? [{
-            ESMType: "SEI",
-            ESMCode: "1"
-          }] : []),
-          ...(dataArray[i][32] ? [{
-            ESMType: "SEM",
-            ESMCode: "1"
-          }] : []),
-          ...(dataArray[i][30] ? [{
-            ESMType: "OET",
-            ESMCode: "1"
-          }] : [])
-        ]
-      }] : []),
+      
       ...(dataArray[i][18] ? [{
         EmpStat: dataArray[i][18],
         DateEmpStatApp: dataArray[i][17],
@@ -182,6 +156,33 @@ for (let i = 1; i < dataArray.length; i++) {
             ESMCode: "1"
           }] : []),
           ...(dataArray[i][22] ? [{
+            ESMType: "OET",
+            ESMCode: "1"
+          }] : [])
+        ]
+      }] : []),
+      ...(dataArray[i][27] ? [{
+        EmpStat: dataArray[i][27],
+        DateEmpStatApp: dataArray[i][26],
+        EmpId: dataArray[i][28]|| undefined,
+        EmploymentStatusMonitoring: [
+          ...(dataArray[i][29] ? [{
+            ESMType: "EII",
+            ESMCode: dataArray[i][29]
+          }] : []),
+          ...(dataArray[i][33] ? [{
+            ESMType: "LOE",
+            ESMCode: dataArray[i][33]
+          }] : []),
+          ...(dataArray[i][31] ? [{
+            ESMType: "SEI",
+            ESMCode: "1"
+          }] : []),
+          ...(dataArray[i][32] ? [{
+            ESMType: "SEM",
+            ESMCode: "1"
+          }] : []),
+          ...(dataArray[i][30] ? [{
             ESMType: "OET",
             ESMCode: "1"
           }] : [])
