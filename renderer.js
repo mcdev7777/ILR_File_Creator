@@ -1,5 +1,6 @@
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, ipcMain } = require('electron');
 const Papa = require('papaparse'); 
+
 
 function logToMain(message) {
   ipcRenderer.send('log-message', message);
@@ -13,24 +14,8 @@ ipcRenderer.on('show-alert', (event, message) => {
 });
 const saveButton = document.createElement('button');
 saveButton.textContent = 'Save XML File';
-saveButton.onclick = async (filename) => {
-    const { dialog } = require('electron').remote; // Ensure you have access to the dialog
-    const result = await dialog.showSaveDialog({
-        title: 'Export XML File',
-        defaultPath: path.join(app.getPath('documents'), `${filename}`),
-      
-    });
-
-    if (!result.canceled && result.filePath) {
-        // Here you would write the XML content to the file
-        fs.writeFile(result.filePath, xmlContent, (err) => {
-            if (err) {
-                console.error('Error saving file:', err);
-            } else {
-                logToMain('XML file saved successfully');
-            }
-        });
-    }
+saveButton.onclick = async () => {
+  ipcRenderer.send("openSave")
 };
 
 
