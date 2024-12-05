@@ -1,5 +1,6 @@
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, ipcMain } = require('electron');
 const Papa = require('papaparse'); 
+
 
 function logToMain(message) {
   ipcRenderer.send('log-message', message);
@@ -11,6 +12,12 @@ function logToMain(message) {
 ipcRenderer.on('show-alert', (event, message) => {
   alert(message);
 });
+const saveButton = document.createElement('button');
+saveButton.textContent = 'Save XML File';
+saveButton.onclick = async () => {
+  ipcRenderer.send("openSave")
+};
+
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -31,12 +38,8 @@ ipcRenderer.on('xml-created', (event, filename) => {
   
   const outputDiv = document.getElementById('output');
   const downloadLink = document.createElement('a');
-  downloadLink.href = `${filename}`;
-  downloadLink.download = filename;
-  downloadLink.textContent = 'Download XML File';
-  outputDiv.appendChild(downloadLink);
-  logToMain('xml creation completed')
-
+  outputDiv.appendChild(saveButton);
+logToMain('xml creation completed');
 });
 
 ipcRenderer.on('xml-creation-failed', (event, errorMessage) => {
