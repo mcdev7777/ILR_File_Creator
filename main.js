@@ -11,6 +11,7 @@ const { Worker } = require('worker_threads');
 const os = require('os');
 
 const log = require('electron-log');
+const { error } = require('node:console');
 
 log.info('Application starting...');
 
@@ -505,26 +506,36 @@ console.log(result); // Outputs: "ab-cd"*/
     } else {
       console.log("The XML file was saved successfully.");
       event.reply('xml-created', `ILR-10085696-${version.split('.')[0]}-${formatDateTime(currentDate)}-01.xml`);
+      log.info('xml file created'); 
+
     }
  
   });
-  let xsd = fs.readFileSync("ILR-2024-25-schemafile-January.xsd", 'utf-8');
+  let xsd = fs.readFileSync(path.join(__dirname, "ILR-2024-25-schemafile-January.xsd"), 'utf-8');
+  log.info('schema declared'); 
 
 
 
-const worker = new Worker(path.join(__dirname, 'xmlValidator.js'), {
-  workerData: { xml, xsd }
-  
-});
+    log.info('Attempting to create worker...');
+    // log.info('xml before worker creation ', xml, ' xsd before worker creation ', xsd)
+    const worker = new Worker(path.join(__dirname, 'xmlValidator.js'), {
+      workerData: { xml, xsd }
+    });
+    log.info('Worker created successfully'); 
+
+
 log.info('worker created')
 worker.on('message', (result) => {
   log.info('information received')
 
   if (result.valid) {
       console.log("The XML is valid!");
+      
       // event.reply('xml-validation-success', result);
   } else {
+    log.info("results being sent ", result)
       event.reply('xml-validation-errors', result);
+
   }
 });
 
@@ -548,6 +559,7 @@ worker.on('exit', (code) => {
 } catch (error) {
   console.error("An error occurred during XML validation:", error);
 }
+log.info('end of csv upload')
 });
 
 ipcMain.on("openSave",event => {
