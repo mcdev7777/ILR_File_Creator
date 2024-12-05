@@ -130,7 +130,7 @@ for (let i = 1; i < dataArray.length; i++) {
     Sex: dataArray[i][5],
     LLDDHealthProb: dataArray[i][12],
     NINumber: dataArray[i][7].replace(/\s+/g, '').trim(),
-    PlanLearnHours: dataArray[i][31] || undefined,
+    PlanLearnHours: dataArray[i][16] || undefined,
     PostcodePrior: dataArray[i][9],
     Postcode: dataArray[i][10],
     AddLine1: dataArray[i][11],
@@ -147,6 +147,7 @@ for (let i = 1; i < dataArray.length; i++) {
     },
  ]: undefined),
     LearnerEmploymentStatus: [
+      
       ...(dataArray[i][18] ? [{
         EmpStat: dataArray[i][18],
         DateEmpStatApp: dataArray[i][17],
@@ -205,6 +206,7 @@ for (let i = 1; i < dataArray.length; i++) {
           }] : [])
         ]
       }] : [])
+      
     ],
     LearningDelivery: [
       // First aim - only include if required fields are present
