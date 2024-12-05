@@ -9,6 +9,15 @@ const isoWithoutMsOrZ = currentDate.toISOString().split('.')[0];
 const dateOnlyString = isoWithoutMsOrZ.replace(/T.*/, '');
 const { Worker } = require('worker_threads');
 const os = require('os');
+
+const log = require('electron-log');
+
+log.info('Application starting...');
+
+process.on('uncaughtException', (error) => {
+    log.error('Uncaught Exception:', error);
+});
+
 const tempDir = path.join(os.tmpdir(), `electron-${app.name}-xmls`);
 let XMLfilePath = ""
 let versionForExport = ""
@@ -503,11 +512,14 @@ console.log(result); // Outputs: "ab-cd"*/
 
 
 
-const worker = new Worker('./xmlValidator.js', {
+const worker = new Worker(path.join(__dirname, 'xmlValidator.js'), {
   workerData: { xml, xsd }
+  
 });
-
+log.info('worker created')
 worker.on('message', (result) => {
+  log.info('information received')
+
   if (result.valid) {
       console.log("The XML is valid!");
       // event.reply('xml-validation-success', result);
@@ -518,12 +530,15 @@ worker.on('message', (result) => {
 
 worker.on('error', (error) => {
   console.error("Worker error:", error);
+  log.error('Worker error:', error);
   event.reply('xml-validation-errors', [error.message]);
 });
 
 worker.on('exit', (code) => {
   if (code !== 0) {
       console.error(`Worker stopped with exit code ${code}`);
+      log.error(`Worker stopped with exit code ${code}`)
+
   }
 });
 
