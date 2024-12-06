@@ -554,7 +554,6 @@ async function saveDialouge() {
  try {
 
     
-    // Show save dialog
     const result =  await dialog.showSaveDialog({
         title: 'Export XML File',
         defaultPath: path.join(app.getPath('documents'), `ILR-10085696-${versionForExport.split('.')[0]}-${formatDateTime(currentDate)}-01.xml`),
@@ -563,9 +562,7 @@ async function saveDialouge() {
         ]
     });
 console.log('result.cancled', result.canceled, " result filepath " , result.filePath)
-    // If user didn't cancel
     if (!result.canceled && result.filePath) {
-        // Copy from temp to chosen location
         console.log('copy file from ',XMLfilePath, ' to ', result.filePath)
         await fs.promises.copyFile(XMLfilePath, result.filePath);  
         }
