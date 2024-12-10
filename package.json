@@ -23,6 +23,8 @@
     "electron": "^33.0.0"
   },
   "dependencies": {
+    "@electron-forge/maker-dmg": "^7.6.0",
+    "@electron-forge/maker-pkg": "^7.6.0",
     "csv-parse": "^5.5.6",
     "electron-log": "^5.2.3",
     "electron-squirrel-startup": "^1.0.1",

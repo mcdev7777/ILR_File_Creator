@@ -9,14 +9,10 @@ const dateOnlyString = isoWithoutMsOrZ.replace(/T.*/, '');
 const { Worker } = require('worker_threads');
 const os = require('os');
 
-const log = require('electron-log');
-const { error } = require('node:console');
 
-log.info('Application starting...');
 
-process.on('uncaughtException', (error) => {
-    log.error('Uncaught Exception:', error);
-});
+
+
 
 const tempDir = path.join(os.tmpdir(), `electron-ilr_file_creator-xmls`);
 let XMLfilePath = ""
@@ -26,6 +22,19 @@ const formatDateTime = (date) => {
   const hhmmss = date.toTimeString().split(' ')[0].replace(/:/g, '');
   return `${yyyymmdd}-${hhmmss}`;
 };
+function convertAcademicYear(yearString) {
+  // Validate input
+  if (!/^\d{4}$/.test(yearString)) {
+    throw new Error('Invalid input. Please provide a 4-digit year string.');
+  }
+  
+  // Extract first two and last two digits
+  const firstTwoDigits = yearString.slice(0, 2);
+  const lastTwoDigits = yearString.slice(2);
+  
+  // Convert to formatted academic year
+  return `20${firstTwoDigits}-${lastTwoDigits}`;
+}
 let xmlBase = {
   
   Header: {
@@ -75,7 +84,7 @@ function createWindow() {
 }
 
 ipcMain.on('log-message', (event, message) => {
-  console.log('Renderer:', message); // Log to terminal
+  console.log('Renderer:', message); 
 });
 app.whenReady().then(() => {
   createWindow();
@@ -471,12 +480,8 @@ for (let i = 1; i < dataArray.length; i++) {
   }, {
     encoding: 'utf-8',
   })
-  //make version specific
-  /*something like this 
-  let str = "abcd";
-let result = str.replace(/^(.)(.)(.)(.?)$/, "$1$2-$3$4");
-console.log(result); // Outputs: "ab-cd"*/ 
-  .att('xmlns', 'ESFA/ILR/2024-25')
+
+  .att('xmlns', `ESFA/ILR/${convertAcademicYear(version.split('.')[0])}`)
   .att('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance')
   .end({ pretty: true });
 
@@ -487,39 +492,33 @@ console.log(result); // Outputs: "ab-cd"*/
   
   fs.writeFile(XMLfilePath, xml, (err) => {
     if (err) {
-      console.error(err);
       event.reply('xml-creation-failed', err.message);
     } else {
-      console.log("The XML file was saved successfully.");
       event.reply('xml-created', `ILR-10085696-${version.split('.')[0]}-${formatDateTime(currentDate)}-01.xml`);
-      log.info('xml file created'); 
 
     }
  
   });
   let xsd = fs.readFileSync(path.join(__dirname, "ILR-2024-25-schemafile-January.xsd"), 'utf-8');
-  log.info('schema declared'); 
 
 
-
-    log.info('Attempting to create worker...');
-    // log.info('xml before worker creation ', xml, ' xsd before worker creation ', xsd)
+// This worker is required because the library used is old and busted and causes a memory leak. 
+//The worker can validate the xml before the memory leak causes it to crash but if we 
+// used the library in the main process the crash would shut down the app
+// We can check if there is a better library for validating xmls against schemas created in the future
+// but at the time of creation there was not (seems to work better outside the developer environment anyway)
     const worker = new Worker(path.join(__dirname, 'xmlValidator.js'), {
       workerData: { xml, xsd }
     });
-    log.info('Worker created successfully'); 
 
 
-log.info('worker created')
 worker.on('message', (result) => {
-  log.info('information received')
-
+// this currently never happens because the way the DFE formated their XMLs always generates two warnings but if they 
+// fix that in future versions its worth thinking about.
   if (result.valid) {
-      console.log("The XML is valid!");
       
       // event.reply('xml-validation-success', result);
   } else {
-    log.info("results being sent ", result)
       event.reply('xml-validation-errors', result);
 
   }
@@ -527,14 +526,12 @@ worker.on('message', (result) => {
 
 worker.on('error', (error) => {
   console.error("Worker error:", error);
-  log.error('Worker error:', error);
   event.reply('xml-validation-errors', [error.message]);
 });
 
 worker.on('exit', (code) => {
   if (code !== 0) {
       console.error(`Worker stopped with exit code ${code}`);
-      log.error(`Worker stopped with exit code ${code}`)
 
   }
 });
@@ -545,7 +542,6 @@ worker.on('exit', (code) => {
 } catch (error) {
   console.error("An error occurred during XML validation:", error);
 }
-log.info('end of csv upload')
 });
 
 ipcMain.on("openSave",event => {

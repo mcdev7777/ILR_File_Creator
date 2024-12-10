@@ -14,7 +14,11 @@ module.exports = {
     {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
+      config: {
+        arch: 'universal'
+      }
     },
+    
     {
       name: '@electron-forge/maker-deb',
       config: {},
@@ -22,6 +26,15 @@ module.exports = {
     {
       name: '@electron-forge/maker-rpm',
       config: {},
+    },
+    {
+      name: '@electron-forge/maker-dmg',
+      platforms: ['darwin'], 
+      config: {
+        title: 'ilr_file_creator', 
+        arch: 'universal',
+        overwrite: true 
+      }
     },
   ],
   plugins: [
