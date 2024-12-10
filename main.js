@@ -15,6 +15,9 @@ const os = require('os');
 
 
 const tempDir = path.join(os.tmpdir(), `electron-ilr_file_creator-xmls`);
+if (!fs.existsSync(tempDir)) {
+  fs.mkdirSync(tempDir, { recursive: true });
+}
 let XMLfilePath = ""
 let versionForExport = ""
 const formatDateTime = (date) => {
@@ -499,7 +502,7 @@ for (let i = 1; i < dataArray.length; i++) {
     }
  
   });
-  let xsd = fs.readFileSync(path.join(__dirname, "ILR-2024-25-schemafile-January.xsd"), 'utf-8');
+  let xsd = fs.readFileSync(path.join(__dirname, "schemafile.xsd"), 'utf-8');
 
 
 // This worker is required because the library used is old and busted and causes a memory leak. 
