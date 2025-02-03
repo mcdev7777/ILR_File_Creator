@@ -129,7 +129,7 @@ for (let i = 1; i < dataArray.length; i++) {
     PlanLearnHours: dataArray[i][16] || undefined,
     PostcodePrior: dataArray[i][9],
     Postcode: dataArray[i][10],
-    AddLine1: dataArray[i][11],
+    AddLine1: dataArray[i][11].replace(/[^a-zA-Z0-9\s]/g, '').substring(0, 50),
     TelNo: dataArray[i][12] || undefined,
     LLDDHealthProb: (dataArray[i][13] != "99"? 1 : 9),
     PriorAttain: {
