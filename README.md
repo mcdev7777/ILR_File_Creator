@@ -1,13 +1,24 @@
 ﻿# ILR_File_Creator
 
 ## Overview:
-The DFE tool for creating XML files that can be uploaded to their website is slow and limited in its function. My organization an Airtable that contains all the information it asks for but its hard to move all that information into the DFE tool. To fix this we built a new ILR tool that takes the CSV values generated from our Airtable and processes them to a XML file automatically. If you want to create a similar Airtable or Excell document that can be fed into this tool a guide is at the bottom fo this document.
+The DFE tool for creating XML files that can be uploaded to their website is slow and limited in its function. My organization an Airtable that contains all the information it asks for but its hard to move all that information into the DFE tool. To fix this we built a new ILR tool that takes the CSV values generated from our Airtable and processes them to a XML file automatically. If you want to create a similar Airtable or Excell document that can be fed into this tool a CSV for creating one is at the bottom of the readme. This project is an electron application and following the set up instruction will create an app for whatever operating system you build it on. If you want to make aplications for other operating systems more information about distributing electron apps with electron forge can be found [here]([url](https://www.electronforge.io/)).
 
 ## User Stories
 
 * User can upload a cvs file to application
 * App will tell user if there are any empty or missing fields in the CSV list
 * App will return a XML file to the user thats structure matches that required by the DFE
+
+* ## Libraires Used
+
+* electron
+
+* electron forge
+
+* xmllint
+
+* papaparse
+
 
 
 ## Usage
