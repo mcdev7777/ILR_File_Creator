@@ -1,24 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>ILR File Creator</title>
+
+        <link rel="stylesheet" href="styles/normalise.css" />
+        <link rel="stylesheet" href="styles/vanilla.css" />
+        <link rel="stylesheet" href="styles/style.css" />
+
+        <script src="renderer.js" defer></script>
     </head>
+
     <body>
-        <h1>ILR File Creator</h1>
-    
-        <form id="uploadForm">
-            <label>releaseVersion</label>
-            <input type="text" id =releaseVersion required> 
-            <br>
-            <label>CSV File</label>
-            <input type="file" id="csvFile" accept=".csv" required>
-            <button type="submit">Upload CSV</button>
-        </form>
-        <div id="output"></div>
-        <div id="formatErrors"></div>
-        <script src="renderer.js"></script>
+        <header>
+            <h1>ILR File Creator</h1>
+        </header>
+
+        <main>
+            <section id="input">
+                <h2>Input</h2>
+
+                <form id="uploadForm">
+                    <div>
+                        <label for="releaseVersion">Release Version</label>
+                        <input type="text" id="releaseVersion" required />
+                    </div>
+
+                    <div>
+                        <label for="csvFile">CSV File</label>
+                        <input
+                            type="file"
+                            id="csvFile"
+                            accept=".csv"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <button type="submit">Upload CSV</button>
+                    </div>
+                </form>
+            </section>
+
+            <section id="output">
+                <h2>Output</h2>
+            </section>
+
+            <section id="formatErrors">
+                <h2>Error Log</h2>
+            </section>
+        </main>
+
+        <hr />
+
+        <footer>
+            <details>
+                <summary>Version History</summary>
+                <ul>
+                    <li>Initial Build: <a href="">Shaughn Anderson</a></li>
+                    <li>2025 Update: <a href="">Jason Warren</a></li>
+                </ul>
+            </details>
+        </footer>
     </body>
-    </html>
-    
+</html>
