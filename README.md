@@ -1,4 +1,4 @@
-﻿# ILR_File_Creator
+# ILR_File_Creator
 
 ## Overview
 
@@ -51,7 +51,7 @@ npm run make
 ```
 
 After running these commands you should see something like in your code editor
-![a picture of file structures](image.png)
+![a picture of file structures](images/image.png)
 
 The app will appear within the make folder which is inside the out folder. In this photo I am making a mac os version so we have a Darwin zip file and a .dmg file but the exact outputs will vary depending on your computer. You can left click to open these in your finder and then copy them to wherever you want to use them from.
 
