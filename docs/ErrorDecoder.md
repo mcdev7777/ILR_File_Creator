@@ -1,9 +1,8 @@
-# Intro
-When data is stored in the XML or errors are output by the tool they use different names than the aritable. To help clarify bellow are two lists. One of all the rows in the aritable and their numbers. The other has all the data as it is entered into the system or output as errors as well as the row number from which it is fed. By looking at these two lists you should be able to interpret errors. You can figure out what row is being referred to by looking for the airtable row name with the same number (for example PHours has number 42 the same as Planned hours (aim 1) so you can tell that is what it means). It will also help if in the future there seems to be some sort of mix up to double check things are going to the right place. 
+# Error Decoder
 
-# Data as it goes into XML
+When data is stored in the XML or errors are output by the tool they use different names than the aritable. To help clarify bellow are two lists. One of all the rows in the aritable and their numbers. The other has all the data as it is entered into the system or output as errors as well as the row number from which it is fed. By looking at these two lists you should be able to interpret errors. You can figure out what row is being referred to by looking for the airtable row name with the same number (for example PHours has number 42 the same as Planned hours (aim 1) so you can tell that is what it means). It will also help if in the future there seems to be some sort of mix up to double check things are going to the right place.
 
-
+## Data as it goes into XML
 
 2. ULN: index 2
 3. FamilyName: index 4
@@ -19,78 +18,72 @@ When data is stored in the XML or errors are output by the tool they use differe
 13. TelNo: index 12 (optional)
 14. LLDDHealthProb: index 13 (converted to 1 or 9)
 15. PriorAttain:
-    - PriorLevel: index 15
-    - DateLevelApp: index 14
-
+  - PriorLevel: index 15
+  - DateLevelApp: index 14
 16. LLDDandHealthProblem:
-    - LLDDCat: index 13
-    - PrimaryLLDD: hardcoded as 1
-
+  - LLDDCat: index 13
+  - PrimaryLLDD: hardcoded as 1
 17. LearnerEmploymentStatus (First Employment Entry):
-    - EmpStat: index 18
-    - DateEmpStatApp: index 17
-    - EmpId: index 19 (optional)
-    - EmploymentStatusMonitoring:
-      - LOE (ESMType): index 23
-      - EII (ESMType): index 24
-      - LOU (ESMType): index 25
-      - SEI (ESMType): index 21
-      - SEM (ESMType): index 20
-      - OET (ESMType): index 22
-
+  - EmpStat: index 18
+  - DateEmpStatApp: index 17
+  - EmpId: index 19 (optional)
+  - EmploymentStatusMonitoring:
+    - LOE (ESMType): index 23
+    - EII (ESMType): index 24
+    - LOU (ESMType): index 25
+    - SEI (ESMType): index 21
+    - SEM (ESMType): index 20
+    - OET (ESMType): index 22
 18. LearnerEmploymentStatus (Second Employment Entry):
-    - EmpStat: index 27
-    - DateEmpStatApp: index 26
-    - EmpId: index 28 (optional)
-    - EmploymentStatusMonitoring:
-      - EII (ESMType): index 29
-      - LOE (ESMType): index 33
-      - SEI (ESMType): index 31
-      - SEM (ESMType): index 32
-      - OET (ESMType): index 30
-
+  - EmpStat: index 27
+  - DateEmpStatApp: index 26
+  - EmpId: index 28 (optional)
+  - EmploymentStatusMonitoring:
+    - EII (ESMType): index 29
+    - LOE (ESMType): index 33
+    - SEI (ESMType): index 31
+    - SEM (ESMType): index 32
+    - OET (ESMType): index 30
 19. LearningDelivery:
-    - LearnAimRef: index 35
-    - AimType: index 34
-    - LearnStartDate: index 36
-    - LearnPlanEndDate: index 37
-    - FundModel: index 38
-    - PHours: index 42 (optional)
-    - OTJActHours: index 43 (optional)
-    - ProgType: index 39
-    - StdCode: index 40 (optional)
-    - DelLocPostCode: index 41
-    - EPAOrgID: index 45 (optional)
-    - ConRefNumber: index 44 (optional)
-    - CompStatus: index 60 (optional)
-    - LearnActEndDate: index 61 (optional)
-    - WithdrawReason: index 64 (optional)
-    - Outcome: index 63 (optional)
-    - AchDate: index 62 (optional)
-    - OutGrade: index 65 (optional)
-
+  - LearnAimRef: index 35
+  - AimType: index 34
+  - LearnStartDate: index 36
+  - LearnPlanEndDate: index 37
+  - FundModel: index 38
+  - PHours: index 42 (optional)
+  - OTJActHours: index 43 (optional)
+  - ProgType: index 39
+  - StdCode: index 40 (optional)
+  - DelLocPostCode: index 41
+  - EPAOrgID: index 45 (optional)
+  - ConRefNumber: index 44 (optional)
+  - CompStatus: index 60 (optional)
+  - LearnActEndDate: index 61 (optional)
+  - WithdrawReason: index 64 (optional)
+  - Outcome: index 63 (optional)
+  - AchDate: index 62 (optional)
+  - OutGrade: index 65 (optional)
 20. LearningDeliveryFAM:
-    - FFI (LearnDelFAMType): index 50
-    - SOF (LearnDelFAMType): index 51
-    - Contract Type: 
-      - LearnDelFAMType: index 46
-      - LearnDelFAMCode: index 47
-      - LearnDelFAMDateFrom: index 48 (optional)
-      - LearnDelFAMDateTo: index 49 (optional)
-
+  - FFI (LearnDelFAMType): index 50
+  - SOF (LearnDelFAMType): index 51
+  - Contract Type:
+    - LearnDelFAMType: index 46
+    - LearnDelFAMCode: index 47
+    - LearnDelFAMDateFrom: index 48 (optional)
+    - LearnDelFAMDateTo: index 49 (optional)
 21. AppFinRecord:
-    - First Financial Record:
-      - AFinType: index 52
-      - AFinCode: index 53 (optional)
-      - AFinDate: index 54 (optional)
-      - AFinAmount: index 55 (optional)
-    - Second Financial Record:
-      - AFinType: index 56
-      - AFinCode: index 57 (optional)
-      - AFinDate: index 58 (optional)
-      - AFinAmount: index 59 (optional)
+  - First Financial Record:
+    - AFinType: index 52
+    - AFinCode: index 53 (optional)
+    - AFinDate: index 54 (optional)
+    - AFinAmount: index 55 (optional)
+  - Second Financial Record:
+    - AFinType: index 56
+    - AFinCode: index 57 (optional)
+    - AFinDate: index 58 (optional)
+    - AFinAmount: index 59 (optional)
 
-# Data as it is displayed in the airTable
+## Data as it is displayed in the airTable
 
 0. Record
 1. Previous UKPRN
@@ -286,4 +279,3 @@ When data is stored in the XML or errors are output by the tool they use differe
 191. Withdrawal reason (aim 5)
 192. Outcome (aim 5)
 193. Outcome grade (aim 5)
-
