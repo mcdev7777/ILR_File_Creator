@@ -113,6 +113,7 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
     xmlBase.Header.CollectionDetails.Year = version.split(".")[0];
     let refNumber = 0;
 
+    // Test for Empty Values
     const CheckBoxPattern = /0 checked out/;
     for (let I = 1; I < dataArray.length; I++) {
       for (let i = 0; i < dataArray[I].length; i++) {
@@ -121,13 +122,15 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
         }
       }
     }
+
+    // Map CSV values to XML structure
     for (let i = 1; i < dataArray.length; i++) {
       refNumber = i.toString().padStart(4, "0");
       xmlBase.Learner.push({
         LearnRefNumber: refNumber,
         ULN: dataArray[i][2],
-        FamilyName: dataArray[i][4],
-        GivenNames: dataArray[i][3],
+        FamilyName: dataArray[i][4].trim(),
+        GivenNames: dataArray[i][3].trim(),
         DateOfBirth: dataArray[i][6],
         Ethnicity: dataArray[i][8],
         Sex: dataArray[i][5],
@@ -138,6 +141,7 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
         Postcode: dataArray[i][10].trim(),
         AddLine1: dataArray[i][11]
           .replace(/[^a-zA-Z0-9\s]/g, "")
+          .trim()
           .substring(0, 50),
         TelNo: dataArray[i][12] || undefined,
         LLDDHealthProb: dataArray[i][13] != "99" ? 1 : 9,
@@ -268,7 +272,7 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
                 {
                   // Aim type (programme aim 1)
                   LearnAimRef: dataArray[i][35].trim(), // Programme aim 1 Learning ref
-                  AimType: dataArray[i][34], // Aim type (programme aim 1)
+                  AimType: dataArray[i][34].trim(), // Aim type (programme aim 1)
                   AimSeqNumber: "1",
                   LearnStartDate: dataArray[i][36], // Start date (aim 1)
                   LearnPlanEndDate: dataArray[i][37], // Planned end date (aim 1)
@@ -277,9 +281,9 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
                   OTJActHours: dataArray[i][43] || undefined, // Actual hours (aim 1)
                   ProgType: dataArray[i][39], // Programme type (aim 1)
                   StdCode: dataArray[i][40] || undefined, // Apprentice standard (aim 1)
-                  DelLocPostCode: dataArray[i][41], // Delivery postcode (aim 1)
-                  EPAOrgID: dataArray[i][45] || undefined, // EPAO ID (aim 1)
-                  ConRefNumber: dataArray[i][44] || undefined, // Contract Ref (aim 1)
+                  DelLocPostCode: dataArray[i][41].trim(), // Delivery postcode (aim 1)
+                  EPAOrgID: dataArray[i][45].trim() || undefined, // EPAO ID (aim 1)
+                  ConRefNumber: dataArray[i][44].trim() || undefined, // Contract Ref (aim 1)
                   CompStatus: dataArray[i][60] || undefined, // Completion status (aim 1)
                   LearnActEndDate: dataArray[i][61] || undefined, // Actual end date (aim 1)
                   WithdrawReason: dataArray[i][64] || undefined, // Withdrawal reason (aim 1)
@@ -351,7 +355,7 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
             ? [
                 {
                   LearnAimRef: dataArray[i][67].trim(), // Programme aim 2 Learning ref
-                  AimType: dataArray[i][66], // Aim type (programme aim 2)
+                  AimType: dataArray[i][66].trim(), // Aim type (programme aim 2)
                   AimSeqNumber: "2",
                   LearnStartDate: dataArray[i][68], // Start date (aim 2)
                   LearnPlanEndDate: dataArray[i][69], // Planned end date (aim 2)
@@ -359,10 +363,10 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
                   PHours: dataArray[i][74] || undefined, // Planned hours (aim 2)
                   ProgType: dataArray[i][71], // Programme type (aim 2)
                   StdCode: dataArray[i][72] || undefined, // Apprentice standard (aim 2)
-                  DelLocPostCode: dataArray[i][73], // Delivery postcode (aim 2)
+                  DelLocPostCode: dataArray[i][73].trim(), // Delivery postcode (aim 2)
                   OTJActHours: dataArray[i][75] || undefined, // Actual hours (aim 2)
-                  EPAOrgID: dataArray[i][77] || undefined, // EPAO ID (aim 2)
-                  ConRefNumber: dataArray[i][76] || undefined, // Contract Ref (aim 2)
+                  EPAOrgID: dataArray[i][77].trim() || undefined, // EPAO ID (aim 2)
+                  ConRefNumber: dataArray[i][76].trim() || undefined, // Contract Ref (aim 2)
                   CompStatus: dataArray[i][92] || undefined, // Completion status (aim 2)
                   LearnActEndDate: dataArray[i][93] || undefined, // Actual end date (aim 2)
                   WithdrawReason: dataArray[i][96] || undefined, // Withdrawal reason (aim 2)
@@ -435,18 +439,18 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
                 {
                   // Aim type (programme aim 3)
                   LearnAimRef: dataArray[i][99].trim(), // Programme aim 3 Learning ref
-                  AimType: dataArray[i][98], // Aim type (programme aim 3)
+                  AimType: dataArray[i][98].trim(), // Aim type (programme aim 3)
                   AimSeqNumber: "3",
                   LearnStartDate: dataArray[i][100], // Start date (aim 3)
                   LearnPlanEndDate: dataArray[i][101], // Planned end date (aim 3)
                   FundModel: dataArray[i][102], // Funding module (aim 3)
                   ProgType: dataArray[i][103], // Programme type (aim 3)
                   StdCode: dataArray[i][104] || undefined, // Apprentice standard (aim 3)
-                  DelLocPostCode: dataArray[i][105], // Delivery postcode (aim 3)
+                  DelLocPostCode: dataArray[i][105].trim(), // Delivery postcode (aim 3)
                   PHours: dataArray[i][106] || undefined, // Planned hours (aim 3)
                   OTJActHours: dataArray[i][107] || undefined, // Actual hours (aim 3)
-                  EPAOrgID: dataArray[i][109] || undefined, // EPAO ID (aim 3)
-                  ConRefNumber: dataArray[i][108] || undefined, // Contract Ref (aim 3)
+                  EPAOrgID: dataArray[i][109].trim() || undefined, // EPAO ID (aim 3)
+                  ConRefNumber: dataArray[i][108].trim() || undefined, // Contract Ref (aim 3)
                   CompStatus: dataArray[i][124] || undefined, // Completion status (aim 3)
                   LearnActEndDate: dataArray[i][125] || undefined, // Actual end date (aim 3)
                   WithdrawReason: dataArray[i][127] || undefined, // Withdrawal reason (aim 3)
@@ -519,7 +523,7 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
                 {
                   // Aim type (programme aim 4)
                   LearnAimRef: dataArray[i][131].trim(), // Programme aim 4 Learning ref
-                  AimType: dataArray[i][130], // Aim type (programme aim 4)
+                  AimType: dataArray[i][130].trim(), // Aim type (programme aim 4)
                   AimSeqNumber: "4",
                   LearnStartDate: dataArray[i][132], // Start date (aim 4)
                   LearnPlanEndDate: dataArray[i][133], // Planned end date (aim 4)
@@ -527,10 +531,10 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
                   PHours: dataArray[i][138] || undefined, // Planned hours (aim 4)
                   ProgType: dataArray[i][135], // Programme type (aim 4)
                   StdCode: dataArray[i][136] || undefined, // Apprentice standard (aim 4)
-                  DelLocPostCode: dataArray[i][137], // Delivery postcode (aim 4)
+                  DelLocPostCode: dataArray[i][137].trim(), // Delivery postcode (aim 4)
                   OTJActHours: dataArray[i][139] || undefined, // Actual hours (aim 4)
-                  EPAOrgID: dataArray[i][141] || undefined, // EPAO ID (aim 4)
-                  ConRefNumber: dataArray[i][140] || undefined, // Contract Ref (aim 4)
+                  EPAOrgID: dataArray[i][141].trim() || undefined, // EPAO ID (aim 4)
+                  ConRefNumber: dataArray[i][140].trim() || undefined, // Contract Ref (aim 4)
                   CompStatus: dataArray[i][156] || undefined, // Completion status (aim 4)
                   LearnActEndDate: dataArray[i][157] || undefined, // Actual end date (aim 4)
                   WithdrawReason: dataArray[i][159] || undefined, // Withdrawal reason (aim 4)
@@ -603,18 +607,18 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
                 {
                   // Aim type (programme aim 5)
                   LearnAimRef: dataArray[i][163].trim(), // Programme aim 5 Learning ref
-                  AimType: dataArray[i][162], // Aim type (programme aim 5)
+                  AimType: dataArray[i][162].trim(), // Aim type (programme aim 5)
                   AimSeqNumber: "5",
                   LearnStartDate: dataArray[i][164], // Start date (aim 5)
                   LearnPlanEndDate: dataArray[i][165], // Planned end date (aim 5)
                   FundModel: dataArray[i][166], // Funding module (aim 5)
                   ProgType: dataArray[i][167], // Programme type (aim 5)
                   StdCode: dataArray[i][168] || undefined, // Apprentice standard (aim 5)
-                  DelLocPostCode: dataArray[i][169], // Delivery postcode (aim 5)
+                  DelLocPostCode: dataArray[i][169].trim(), // Delivery postcode (aim 5)
                   PHours: dataArray[i][170] || undefined, // Planned hours (aim 5)
                   OTJActHours: dataArray[i][171] || undefined, // Actual hours (aim 5)
-                  EPAOrgID: dataArray[i][173] || undefined, // EPAO ID (aim 5)
-                  ConRefNumber: dataArray[i][172] || undefined, // Contract Ref (aim 5)
+                  EPAOrgID: dataArray[i][173].trim() || undefined, // EPAO ID (aim 5)
+                  ConRefNumber: dataArray[i][172].trim() || undefined, // Contract Ref (aim 5)
                   CompStatus: dataArray[i][188] || undefined, // Completion status (aim 5)
                   LearnActEndDate: dataArray[i][189] || undefined, // Actual end date (aim 5)
                   WithdrawReason: dataArray[i][192] || undefined, // Withdrawal reason (aim 5)
@@ -684,6 +688,7 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
       });
     }
 
+    // Create the XML file
     let xml = xmlbuilder
       .create(
         {
@@ -699,11 +704,13 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
         pretty: true,
       });
 
+    // Build the XML file path
     XMLfilePath = path.join(
       tempDir,
       `ILR-10085696-${version.split(".")[0]}-${formatDateTime(currentDate)}-01.xml`,
     );
 
+    // Save the XML file
     fs.writeFile(XMLfilePath, xml, (err) => {
       if (err) {
         event.reply("xml-creation-failed", err.message);
