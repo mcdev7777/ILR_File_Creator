@@ -56,10 +56,33 @@ ipcRenderer.on("xml-validation-errors", (event, results) => {
   const list = document.createElement("ul");
   div.appendChild(list);
 
+  // TODO: this is janky af
+  let listCount = 0;
+  let skipNext = false;
+
   results.errors.forEach((error) => {
-    const item = document.createElement("li");
-    item.textContent = error;
-    list.appendChild(item);
+    if (error.trim() != "^") {
+      switch (skipNext) {
+        case true:
+          skipNext = false;
+          listCount = 0;
+          break;
+        case false:
+          listCount++;
+          if (error.includes("is not absolute")) {
+            skipNext = true;
+          } else {
+            const item = document.createElement("li");
+            item.textContent = `${error.type}: ${error}`;
+            if (listCount % 2 === 0) {
+              item.style.fontStyle = "italic";
+              item.style.listStyle = "none";
+            }
+            list.appendChild(item);
+          }
+          break;
+      }
+    }
   });
 
   logToMain("xml validation completed");

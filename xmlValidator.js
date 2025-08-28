@@ -9,13 +9,25 @@ const { xml, xsd } = workerData;
 
 try {
   let result = xmllint.validateXML({ xml, schema: xsd });
-  log.info("result in worker ", result);
+
+  log.info("Validation Results");
+  if (result.errors && result.errors.length > 0) {
+    log.error("Validation errors occurred");
+    log.error(result.errors);
+  } else {
+    log.info("Validation successful");
+    log.info(result);
+  }
 
   parentPort.postMessage({
     valid: !result.errors || result.errors.length === 0,
     errors: result.errors,
   });
+
   log.info("error not occuring in post messages");
 } catch (error) {
-  parentPort.postMessage({ valid: false, errors: [error.message] });
+  parentPort.postMessage({
+    valid: false,
+    errors: [error.message],
+  });
 }
