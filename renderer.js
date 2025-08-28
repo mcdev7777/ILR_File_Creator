@@ -49,18 +49,18 @@ ipcRenderer.on("xml-creation-failed", (event, errorMessage) => {
 });
 
 ipcRenderer.on("xml-validation-errors", (event, results) => {
-  const errorDisplay = document.getElementById("formatErrors");
-  errorDisplay.innerHTML = "";
-  const h2 = document.createElement("h2");
-  h2.textContent = "Errors and Warnings";
-  errorDisplay.appendChild(h2);
-  errorDisplay.appendChild(document.createElement("br"));
-  h2.textContent = "Errors and Warnings";
+  const div = document.getElementById("error-log-list");
+
+  div.innerHTML = "";
+
+  const list = document.createElement("ul");
+  div.appendChild(list);
+
   results.errors.forEach((error) => {
-    const p = document.createElement("p");
-    p.textContent = error;
-    errorDisplay.appendChild(p);
-    errorDisplay.appendChild(document.createElement("br"));
+    const item = document.createElement("li");
+    item.textContent = error;
+    list.appendChild(item);
   });
+
   logToMain("xml validation completed");
 });
