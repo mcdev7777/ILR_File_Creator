@@ -8,6 +8,24 @@ function logToMain(message) {
 const form = document.getElementById("uploadForm");
 const output = document.getElementById("output");
 
+/* Current Schema Version
+  Change this when the government updates its schema.
+  It should then update the UI
+  */
+const schemaVersion = "2526.1.38.0";
+
+function setDefaultReleaseVersion() {
+  const versionElement = document.getElementById("version-number");
+  const releaseVersionInput = document.getElementById("releaseVersion");
+
+  if (versionElement && releaseVersionInput) {
+    versionElement.value = schemaVersion.trim();
+    releaseVersionInput.value = schemaVersion.trim();
+  }
+}
+
+document.addEventListener("DOMContentLoaded", setDefaultReleaseVersion);
+
 ipcRenderer.on("show-alert", (event, message) => {
   alert(message);
 });
