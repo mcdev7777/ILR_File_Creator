@@ -8,3 +8,23 @@ section {
 h2 {
     margin-top: 0px;
 }
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.flex-child-grow {
+    flex: 1 0 auto;
+}
+
+.flex-child-static {
+    flex: 0 0 content;
+}
