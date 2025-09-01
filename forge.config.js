@@ -4,36 +4,17 @@ const { FuseV1Options, FuseVersion } = require("@electron/fuses");
 module.exports = {
   packagerConfig: {
     asar: true,
+    platform: ["darwin", "win32"],
   },
   rebuildConfig: {},
   makers: [
     {
-      name: "@electron-forge/maker-squirrel",
-      config: {},
-    },
-    /* {
-      name: '@electron-forge/maker-zip',
-      platforms: ['darwin'],
-      config: {
-        arch: 'universal'
-      }
-    }, */
-    /* {
-      name: '@electron-forge/maker-deb',
-      config: {},
-    }, */
-    {
-      name: "@electron-forge/maker-rpm",
-      config: {},
-    },
-    {
-      name: "@electron-forge/maker-dmg",
+      name: "@electron-forge/maker-zip",
       platforms: ["darwin"],
-      config: {
-        title: "ilr_file_creator",
-        arch: "universal",
-        overwrite: true,
-      },
+    },
+    {
+      name: "@electron-forge/maker-zip",
+      platforms: ["win32"],
     },
   ],
   plugins: [
