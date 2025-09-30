@@ -199,6 +199,10 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
                             ESMType: "SEM",
                             ESMCode: "1",
                           },
+                          {
+                            ESMType: "OET",
+                            ESMCode: "2",
+                          },
                         ]
                       : []),
                     ...(dataArray[i][22]
@@ -249,6 +253,10 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
                           {
                             ESMType: "SEM",
                             ESMCode: "1",
+                          },
+                          {
+                            ESMType: "OET",
+                            ESMCode: "2",
                           },
                         ]
                       : []),

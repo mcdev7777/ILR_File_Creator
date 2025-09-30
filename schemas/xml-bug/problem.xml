@@ -1,0 +1,41 @@
+<BugReport>
+  <Message1>
+    ```md
+      When we have clicked on Small employer #1 we need to make sure there's an additional block added to the existing <LearnerEmploymentStatus>
+    ```
+  </Message1>
+  
+  <Message2>
+    <!-- This message is the image at ./field-clicked.jpeg -->
+  </Message2>
+  
+  <Message3>
+    ```md
+      This is what need to be added
+      
+      ````xml
+      <EmploymentStatusMonitoring>
+        <ESMType>OET</ESMType>
+        <ESMCode>2</ESMCode>
+      </EmploymentStatusMonitoring>
+      ````
+    ```
+    <!-- The snippet is repeated in ./snippet.xml -->
+  </Message3>
+  
+  <Message4>
+    ```md
+      This is the xml for a single learner with a small employer.
+    ```
+    <!-- The message is referring to ./example-good.xml -->
+  </Message4>
+  
+  <Message5>
+    ```md
+      The xml follows the spec for R13.
+    ```
+    <!-- This is referencing a government specification
+      It can be downloaded [here](https://guidance.submit-learner-data.service.gov.uk/23-24/ilr/appendices)
+    -->
+  </Message5>
+</BugReport>
