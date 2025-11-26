@@ -20,18 +20,22 @@ const dateOnlyString = isoWithoutMsOrZ.replace(/T.*/, "");
 
 // File System
 const tempDir = path.join(os.tmpdir(), `electron-ilr_file_creator-xmls`);
+
 if (!fs.existsSync(tempDir)) {
   fs.mkdirSync(tempDir, { recursive: true });
 }
+
 let XMLfilePath = "";
 
 // Version & Year
 let versionForExport = "";
+
 const formatDateTime = (date) => {
   const yyyymmdd = date.toISOString().split("T")[0].replace(/-/g, "");
   const hhmmss = date.toTimeString().split(" ")[0].replace(/:/g, "");
   return `${yyyymmdd}-${hhmmss}`;
 };
+
 function convertAcademicYear(yearString) {
   // Validate input
   if (!/^\d{4}$/.test(yearString)) {
@@ -115,6 +119,7 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
 
     // Test for Empty Values
     const CheckBoxPattern = /0 checked out/;
+    
     for (let I = 1; I < dataArray.length; I++) {
       for (let i = 0; i < dataArray[I].length; i++) {
         if (CheckBoxPattern.test(dataArray[I][i])) {
@@ -154,7 +159,7 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
             ? [{ LLDDCat: dataArray[i][13], PrimaryLLDD: 1 }]
             : undefined,
         LearnerEmploymentStatus: [
-          ...(dataArray[i][18]
+          /* Employment Status #1 */ ...(dataArray[i][18]
             ? [
                 {
                   EmpStat: dataArray[i][18],
@@ -162,62 +167,35 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
                   EmpId: dataArray[i][19] || undefined,
                   EmploymentStatusMonitoring: [
                     ...(dataArray[i][23]
-                      ? [
-                          {
-                            ESMType: "LOE",
-                            ESMCode: dataArray[i][23],
-                          },
-                        ]
-                      : []),
+                      ? [{ ESMType: "LOE", ESMCode: dataArray[i][23] }]
+                      : []
+                    ),
                     ...(dataArray[i][24]
-                      ? [
-                          {
-                            ESMType: "EII",
-                            ESMCode: dataArray[i][24],
-                          },
-                        ]
-                      : []),
+                      ? [{ ESMType: "EII", ESMCode: dataArray[i][24] }]
+                      : []
+                    ),
                     ...(dataArray[i][25]
-                      ? [
-                          {
-                            ESMType: "LOU",
-                            ESMCode: dataArray[i][25],
-                          },
-                        ]
-                      : []),
+                      ? [{ ESMType: "LOU", ESMCode: dataArray[i][25] }]
+                      : []
+                    ),
                     ...(dataArray[i][21]
-                      ? [
-                          {
-                            ESMType: "SEI",
-                            ESMCode: "1",
-                          },
-                        ]
-                      : []),
+                      ? [{ ESMType: "SEI", ESMCode: "1" }]
+                      : []
+                    ),
                     ...(dataArray[i][20]
-                      ? [
-                          {
-                            ESMType: "SEM",
-                            ESMCode: "1",
-                          },
-                          {
-                            ESMType: "OET",
-                            ESMCode: "2",
-                          },
-                        ]
-                      : []),
+                      ? [ { ESMType: "SEM", ESMCode: "1" }, { ESMType: "OET", ESMCode: "2" } ]
+                      : []
+                    ),
                     ...(dataArray[i][22]
-                      ? [
-                          {
-                            ESMType: "OET",
-                            ESMCode: "1",
-                          },
-                        ]
-                      : []),
+                      ? [{ ESMType: "OET", ESMCode: "1" }]
+                      : []
+                    ),
                   ],
                 },
               ]
-            : []),
-          ...(dataArray[i][27]
+            : [/* No Employment Status #1 */]
+          ),
+          /* Employment Status #2 */ ...(dataArray[i][27]
             ? [
                 {
                   EmpStat: dataArray[i][27],
@@ -225,49 +203,30 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
                   EmpId: dataArray[i][28] || undefined,
                   EmploymentStatusMonitoring: [
                     ...(dataArray[i][29]
-                      ? [
-                          {
-                            ESMType: "EII",
-                            ESMCode: dataArray[i][29],
-                          },
-                        ]
-                      : []),
+                      ? [{ ESMType: "EII", ESMCode: dataArray[i][29] }]
+                      : []
+                    ),
                     ...(dataArray[i][33]
-                      ? [
-                          {
-                            ESMType: "LOE",
-                            ESMCode: dataArray[i][33],
-                          },
-                        ]
-                      : []),
+                      ? [{ ESMType: "LOE", ESMCode: dataArray[i][33] }]
+                      : []
+                    ),
                     ...(dataArray[i][31]
-                      ? [
-                          {
-                            ESMType: "SEI",
-                            ESMCode: "1",
-                          },
-                        ]
-                      : []),
+                      ? [{ ESMType: "SEI", ESMCode: "1" }]
+                      : []
+                    ),
                     ...(dataArray[i][32]
-                      ? [
-                          {
-                            ESMType: "SEM",
-                            ESMCode: "1",
-                          },
-                        ]
-                      : []),
+                      ? [{ ESMType: "SEM", ESMCode: "1" }]
+                      : []
+                    ),
                     ...(dataArray[i][30]
-                      ? [
-                          {
-                            ESMType: "OET",
-                            ESMCode: "1",
-                          },
-                        ]
-                      : []),
+                      ? [{ ESMType: "OET", ESMCode: "1" }]
+                      : []
+                    ),
                   ],
                 },
               ]
-            : []),
+            : [/* No Employment Status #2 */]
+          ),
         ],
         LearningDelivery: [
           // First aim - only include if required fields are present
@@ -694,19 +653,10 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
 
     // Create the XML file
     let xml = xmlbuilder
-      .create(
-        {
-          Message: xmlBase,
-        },
-        {
-          encoding: "utf-8",
-        },
-      )
+      .create({ Message: xmlBase }, { encoding: "utf-8" })
       .att("xmlns", `ESFA/ILR/${convertAcademicYear(version.split(".")[0])}`)
       .att("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
-      .end({
-        pretty: true,
-      });
+      .end({ pretty: true });
 
     // Build the XML file path
     XMLfilePath = path.join(
@@ -725,6 +675,7 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
         );
       }
     });
+    
     let xsd = fs.readFileSync(path.join(__dirname, "schemafile.xsd"), "utf-8");
 
     /* TODO: Replace the leaky library
