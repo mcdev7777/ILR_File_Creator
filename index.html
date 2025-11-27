@@ -1,101 +1,101 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ILR File Creator</title>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ILR File Creator</title>
 
-        <link rel="stylesheet" href="styles/normalise.css" />
-        <link rel="stylesheet" href="styles/vanilla.css" />
-        <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/normalise.css" />
+    <link rel="stylesheet" href="styles/vanilla.css" />
+    <link rel="stylesheet" href="styles/style.css" />
 
-        <script src="renderer.js" defer></script>
-    </head>
+    <script src="renderer.js" defer></script>
+</head>
 
-    <body>
-        <header class="flex-row">
-            <h1 class="flex-child-grow">ILR File Creator</h1>
-            <!-- TODO: read version number from schemafile -->
-            <p id="version-number" class="flex-child-static">2526.1.38.0</p>
-        </header>
+<body>
+    <header class="flex-row">
+        <h1 class="flex-child-grow">ILR File Creator</h1>
+        <!-- TODO: read version number from schemafile -->
+        <p id="version-number" class="flex-child-static">2526.1.38.0</p>
+    </header>
 
-        <main>
-            <section id="input">
-                <h2>Input</h2>
+    <main>
+        <section id="input">
+            <h2>Input</h2>
 
-                <form id="uploadForm">
-                    <div>
-                        <label for="releaseVersion">Release Version</label>
-                        <input type="text" id="releaseVersion" required />
-                    </div>
+            <form id="uploadForm">
+                <div>
+                    <label for="releaseVersion">Release Version</label>
+                    <input type="text" id="releaseVersion" required />
+                </div>
 
-                    <div>
-                        <label for="csvFile">CSV File</label>
-                        <input
-                            type="file"
-                            id="csvFile"
-                            accept=".csv"
-                            required
-                        />
-                    </div>
+                <div>
+                    <label for="csvFile">CSV File</label>
+                    <input
+                        type="file"
+                        id="csvFile"
+                        accept=".csv"
+                        required
+                    />
+                </div>
 
-                    <div>
-                        <button type="submit">Upload CSV</button>
-                    </div>
-                </form>
-            </section>
+                <div>
+                    <button type="submit">Upload CSV</button>
+                </div>
+            </form>
+        </section>
 
-            <section id="output">
-                <h2>Output</h2>
-            </section>
+        <section id="output">
+            <h2>Output</h2>
+        </section>
 
-            <section id="error-log">
-                <h2>Error Log</h2>
-                <div id="error-log-list"></div>
-            </section>
-        </main>
+        <section id="error-log">
+            <h2>Error Log</h2>
+            <div id="error-log-list"></div>
+        </section>
+    </main>
 
-        <hr />
+    <hr />
 
-        <footer>
-            <details>
-                <summary>Version History</summary>
-                <table>
-                    <thead>
-                        <tr>
-                            <th scope="col">Date</th>
-                            <th scope="col">Version</th>
-                            <th scope="col">Notes</th>
-                            <th scope="col">Developer</th>
-                        </tr>
-                    </thead>
+    <footer>
+        <details>
+            <summary>Version History</summary>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Version</th>
+                        <th scope="col">Notes</th>
+                        <th scope="col">Developer</th>
+                    </tr>
+                </thead>
 
-                    <tbody>
-                        <tr>
-                            <th scope="row">Aug 2025</th>
-                            <td><pre>2526.1.38.0</pre></td>
-                            <td>
-                                <ul>
-                                    <li>2025 Schema</li>
-                                    <li>Package Updates</li>
-                                    <li>Styling</li>
-                                </ul>
-                            </td>
-                            <td><a href="">Jason Warren</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2024</th>
-                            <td><pre>2024.x.x.x</pre></td>
-                            <td>
-                                <ul>
-                                    <li>Initial Build</li>
-                                </ul>
-                            </td>
-                            <td><a href="">Shaughn Anderson</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </details>
-        </footer>
-    </body>
+                <tbody>
+                    <tr>
+                        <th scope="row">Aug 2025</th>
+                        <td><pre>2526.1.38.0</pre></td>
+                        <td>
+                            <ul>
+                                <li>2025 Schema</li>
+                                <li>Package Updates</li>
+                                <li>Styling</li>
+                            </ul>
+                        </td>
+                        <td><a href="">Jason Warren</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2024</th>
+                        <td><pre>2024.x.x.x</pre></td>
+                        <td>
+                            <ul>
+                                <li>Initial Build</li>
+                            </ul>
+                        </td>
+                        <td><a href="">Shaughn Anderson</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </details>
+    </footer>
+</body>
 </html>
