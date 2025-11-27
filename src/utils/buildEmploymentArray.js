@@ -1,5 +1,4 @@
 function buildEmploymentArray(dataArray, i) {
-
   return [
     ...(dataArray[i][18] /* Employment Status #1 */
       ? [{
@@ -49,12 +48,16 @@ function buildEmploymentArray(dataArray, i) {
             ? [{ ESMType: "LOE", ESMCode: dataArray[i][33] }]
             : []
           ),
+          ...(dataArray[i][195]
+            ? [{ ESMType: "LOU", ESMCode: dataArray[i][195] }]
+            : []
+          ),
           ...(dataArray[i][31]
             ? [{ ESMType: "SEI", ESMCode: "1" }]
             : []
           ),
           ...(dataArray[i][32]
-            ? [{ ESMType: "SEM", ESMCode: "1" }]
+            ? [{ ESMType: "SEM", ESMCode: "1" }, { ESMType: "OET", ESMCode: "2" }]
             : []
           ),
           ...(dataArray[i][30]
