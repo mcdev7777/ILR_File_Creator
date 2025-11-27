@@ -85,9 +85,9 @@ function buildEmploymentArray(dataArray, i) {
             ? [{ ESMType: "LOE", ESMCode: dataArray[i][201] }]
             : []
           ),
-          ...(/* Employment intensity indicator #3 */ dataArray[i][--]
+          ...(/* Employment intensity indicator #3 */ dataArray[i][202]
             // Employment intensity indicator #3
-            ? [{ ESMType: "EII", ESMCode: dataArray[i][--] }]
+            ? [{ ESMType: "EII", ESMCode: dataArray[i][202] }]
             : []
           ),
           ...(/* Length of unemployment #3 */ dataArray[i][203]
@@ -119,12 +119,12 @@ function buildEmploymentArray(dataArray, i) {
         EmploymentStatusMonitoring: [
           ...(/* Length of employment #4 */ dataArray[i][210]
             // Length of employment #4
-            ? [{ ESMType: "LOE", ESMCode: dataArray[i][--] }]
+            ? [{ ESMType: "LOE", ESMCode: dataArray[i][210] }]
             : []
           ),
-          ...(/* Employment intensity indicator #4 */ dataArray[i][--]
+          ...(/* Employment intensity indicator #4 */ dataArray[i][211]
             // Employment intensity indicator #4
-            ? [{ ESMType: "EII", ESMCode: dataArray[i][--] }]
+            ? [{ ESMType: "EII", ESMCode: dataArray[i][211] }]
             : []
           ),
           ...(/* Length of unemployment #4 */ dataArray[i][212]
@@ -156,12 +156,12 @@ function buildEmploymentArray(dataArray, i) {
         EmploymentStatusMonitoring: [
           ...(/* Length of employment #5 */ dataArray[i][219]
             // Length of employment #
-            ? [{ ESMType: "LOE", ESMCode: dataArray[i][--] }]
+            ? [{ ESMType: "LOE", ESMCode: dataArray[i][219] }]
             : []
           ),
-          ...(/* Employment intensity indicator #5 */ dataArray[i][--]
+          ...(/* Employment intensity indicator #5 */ dataArray[i][220]
             // Employment intensity indicator #5
-            ? [{ ESMType: "EII", ESMCode: dataArray[i][--] }]
+            ? [{ ESMType: "EII", ESMCode: dataArray[i][220] }]
             : []
           ),
           ...(/* Length of unemployment #5 */ dataArray[i][221]
@@ -187,11 +187,5 @@ function buildEmploymentArray(dataArray, i) {
     ),
   ]
 }
-
-/** TODO
- * 3 | 114 | 116 | Employment Intensity
- * 4 | 140 | 142 | Employment Intensity
- * 5 | 184 | 186 | Employment Intensity
-*/
 
 module.exports = { buildEmploymentArray };
