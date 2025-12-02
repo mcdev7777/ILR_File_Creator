@@ -25,8 +25,15 @@ function buildEmploymentArray(dataArray, i) {
             ? [{ ESMType: "SEI", ESMCode: "1" }]
             : []
           ),
-          ...(/* Small employer #1 */ dataArray[i][20]
-            ? [{ ESMType: "SEM", ESMCode: "1" }, { ESMType: "OET", ESMCode: "2" }]
+          ...(/* Small employer #1 & Contract Ref */ (dataArray[i][20] && dataArray[i][44])
+            ? [
+              { ESMType: "SEM", ESMCode: "1" },
+              { ESMType: "OET", ESMCode: "2" }
+            ]
+            : []
+          ),
+          ...(/* Small employer #1, No Contract Ref */ (dataArray[i][20] && !dataArray[i][44])
+            ? [{ ESMType: "SEM", ESMCode: "1" }]
             : []
           ),
           ...(/* Has the learner been made redundant? #1 */ dataArray[i][22]
@@ -62,8 +69,15 @@ function buildEmploymentArray(dataArray, i) {
             ? [{ ESMType: "SEI", ESMCode: "1" }]
             : []
           ),
-          ...(/* Small employer #2 */ dataArray[i][32]
-            ? [{ ESMType: "SEM", ESMCode: "1" }, { ESMType: "OET", ESMCode: "2" }]
+          ...(/* Small employer #2 & Contract Ref */ (dataArray[i][32] && dataArray[i][44])
+            ? [
+              { ESMType: "SEM", ESMCode: "1" },
+              { ESMType: "OET", ESMCode: "2" }
+            ]
+            : []
+          ),
+          ...(/* Small employer #2, No Contract Ref */ (dataArray[i][32] && !dataArray[i][44])
+            ? [{ ESMType: "SEM", ESMCode: "1" }]
             : []
           ),
           ...(/* Has the learner been made redundant? #2 */ dataArray[i][30]
@@ -99,9 +113,17 @@ function buildEmploymentArray(dataArray, i) {
             ? [{ ESMType: "SEI", ESMCode: "1" }]
             : []
           ),
-          ...(/* Small employer #3 */ dataArray[i][198]
-            ? [{ ESMType: "SEM", ESMCode: "1" }, { ESMType: "OET", ESMCode: "2" }]
+          ...(/* Small employer #3 & Contract Ref */ (dataArray[i][198] && dataArray[i][44])
+            ? [
+              { ESMType: "SEM", ESMCode: "1" },
+              { ESMType: "OET", ESMCode: "2" }
+            ]
             : []
+          ),
+          ...(/* Small employer #3, No Contract Ref */ (dataArray[i][198] && !dataArray[i][44])
+            ? [{ ESMType: "SEM", ESMCode: "1" }]
+            : []
+          ),
           ),
           ...(/* Has the learner been made redundant? #3 */ dataArray[i][200]
             ? [{ ESMType: "OET", ESMCode: "1" }]
@@ -136,8 +158,15 @@ function buildEmploymentArray(dataArray, i) {
             ? [{ ESMType: "SEI", ESMCode: "1" }]
             : []
           ),
-          ...(/* Small employer #4 */ dataArray[i][207]
-            ? [{ ESMType: "SEM", ESMCode: "1" }, { ESMType: "OET", ESMCode: "2" }]
+          ...(/* Small employer #4 & Contract Ref */ (dataArray[i][207] && dataArray[i][44])
+            ? [
+              { ESMType: "SEM", ESMCode: "1" },
+              { ESMType: "OET", ESMCode: "2" }
+            ]
+            : []
+          ),
+          ...(/* Small employer #4, No Contract Ref */ (dataArray[i][207] && !dataArray[i][44])
+            ? [{ ESMType: "SEM", ESMCode: "1" }]
             : []
           ),
           ...(/* Has the learner been made redundant? #4 */ dataArray[i][209]
@@ -173,8 +202,15 @@ function buildEmploymentArray(dataArray, i) {
             ? [{ ESMType: "SEI", ESMCode: "1" }]
             : []
           ),
-          ...(/* Small employer #5 */ dataArray[i][216]
-            ? [{ ESMType: "SEM", ESMCode: "1" }, { ESMType: "OET", ESMCode: "2" }]
+          ...(/* Small employer #25 & Contract Ref */ (dataArray[i][216] && dataArray[i][44])
+            ? [
+              { ESMType: "SEM", ESMCode: "1" },
+              { ESMType: "OET", ESMCode: "2" }
+            ]
+            : []
+          ),
+          ...(/* Small employer #5, No Contract Ref */ (dataArray[i][216] && !dataArray[i][44])
+            ? [{ ESMType: "SEM", ESMCode: "1" }]
             : []
           ),
           ...(/* Has the learner been made redundant? #5 */ dataArray[i][218]
