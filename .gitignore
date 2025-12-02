@@ -64,3 +64,4 @@ temp/
 
 # Claude Code configuration
 .claude/
+.DS_Store
