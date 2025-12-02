@@ -124,7 +124,6 @@ function buildEmploymentArray(dataArray, i) {
             ? [{ ESMType: "SEM", ESMCode: "1" }]
             : []
           ),
-          ),
           ...(/* Has the learner been made redundant? #3 */ dataArray[i][200]
             ? [{ ESMType: "OET", ESMCode: "1" }]
             : []
