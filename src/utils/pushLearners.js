@@ -4,8 +4,8 @@ const { buildLearningDeliveryArray } = require("./buildLearningDeliveryArray");
 function pushLearners(dataArray, xmlBase) {
   for (let i = 1; i < dataArray.length; i++) {
     const refNumber = i
-        .toString()
-        .padStart(4, "0");
+      .toString()
+      .padStart(4, "0");
 
     const employmentStatusArray = buildEmploymentArray(dataArray, i);
     const learningDeliveryArray = buildLearningDeliveryArray(dataArray, i);
