@@ -1,15 +1,19 @@
 {
   "name": "ilr_file_creator",
-  "version": "1.1.1",
+  "version": "1.1.4",
   "description": "The DFE tool for creating XML files that can be uploaded to their website is slow and limited in its function. We have an airtable that contains all the information it asks for but its hard to move that information. To fixt this we built a tool that takes the CSV values generated from our airtable and processes them to a XML file withouth having to refill any information.",
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "codesign": "codesign --force --deep --sign - 'out/ilr_file_creator-darwin-arm64/ilr_file_creator.app'"
   },
   "keywords": [],
-  "author": "",
+  "contributors": [
+    "Shaugn Anderson",
+    "Jason Warren <jason@foundersandcoders.com> (http://github.com/JasonWarrenUK)"
+  ],
   "license": "ISC",
   "devDependencies": {
     "@electron-forge/cli": "^7.6.0",
