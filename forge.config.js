@@ -15,11 +15,11 @@ module.exports = {
         // icon: "./assets/icon.icns",
         overwrite: true,
         additionalDMGOptions: {
-          window: { size: { width: 660, height: 400 } },
-          contents: [
-            { x: 180, y: 170, type: "file", path: "/path/to/app" },
-            { x: 480, y: 170, type: "link", path: "/Applications" }
-          ]
+          // window: { size: { width: 660, height: 400 } },
+          // contents: [
+          //   { x: 180, y: 170, type: "file", path: "/path/to/app" },
+          //   { x: 480, y: 170, type: "link", path: "/Applications" }
+          // ]
         }
       }
     },
