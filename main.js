@@ -92,6 +92,7 @@ function createWindow() {
     win.webContents.toggleDevTools();
   });
 }
+
 app.whenReady().then(() => {
   createWindow();
   app.on("activate", () => {
@@ -208,6 +209,4 @@ ipcMain.on("openSave", (event) => {
   saveDialogue();
 });
 
-app.on("window-all-closed", () => {
-  app.quit();
-});
+app.on("window-all-closed", () => { app.quit() });

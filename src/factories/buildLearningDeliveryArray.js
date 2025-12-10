@@ -396,7 +396,7 @@ function buildLearningDeliveryArray(dataArray, i) {
               },
             ]
             : []),
-        ],
+        ]
       }] : []
     ),
   ]
