@@ -6,8 +6,7 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make",
-    "codesign": "codesign --force --deep --sign - 'out/ilr_file_creator-darwin-arm64/ilr_file_creator.app'"
+    "make": "electron-forge make"
   },
   "keywords": [],
   "contributors": [
