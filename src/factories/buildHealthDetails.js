@@ -1,13 +1,20 @@
-function buildHealthDetails(dataArray, i) {
+function buildLLDDHealthProb(dataArray, i) {
+  // LLDDHealthProb comes before NINumber in schema
   return {
     LLDDHealthProb: dataArray[i][13] != "99" ? 1 : 9,
-    LLDDandHealthProblem: dataArray[i][13] != "99"
-      ? [{
-        LLDDCat: dataArray[i][13],
-        PrimaryLLDD: 1
-      }]
-      : undefined
   }
 }
 
-module.exports = { buildHealthDetails };
+function buildLLDDandHealthProblem(dataArray, i) {
+  // LLDDandHealthProblem comes after PriorAttain in schema
+  return dataArray[i][13] != "99"
+    ? {
+        LLDDandHealthProblem: [{
+          LLDDCat: dataArray[i][13],
+          PrimaryLLDD: 1
+        }]
+      }
+    : {}
+}
+
+module.exports = { buildLLDDHealthProb, buildLLDDandHealthProblem };

@@ -79,7 +79,6 @@ function createWindow() {
     width: 1200,
     height: 720,
     webPreferences: {
-      preload: path.join(__dirname, "renderer.js"),
       nodeIntegration: true,
       contextIsolation: false,
       // TODO: these are bad practice and I should change if time can set isolation to true and set a file allowing only the apis I know I want to use
@@ -114,7 +113,7 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
         if (CheckBoxPattern.test(dataArray[I][i])) { dataArray[I][i] = "" }
       }
     }
-    
+
     // ====== MAIN EVENT RIGHT HERE FOLKS ======
     pushLearners(dataArray, xmlBase);
 
@@ -124,12 +123,12 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
       .att("xmlns", `ESFA/ILR/${convertAcademicYear(version.split(".")[0])}`)
       .att("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
       .end({ pretty: true });
-    
+
     XMLfilePath = path.join(
       tempDir,
       `ILR-10085696-${version.split(".")[0]}-${formatDateTime(currentDate)}-01.xml`,
     );
-    
+
     fs.writeFile(XMLfilePath, xml, (err) => {
       if (err) {
         event.reply("xml-creation-failed", err.message);
@@ -140,7 +139,7 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
         );
       }
     });
-    
+
     let xsd = fs.readFileSync(path.join(__dirname, "schemafile.xsd"), "utf-8");
 
     // ====== WALDO THE WOBBLY WORKER ======
@@ -175,6 +174,7 @@ ipcMain.on("upload-csv", (event, dataArray, version) => {
     });
   } catch (error) {
     console.error("An error occurred during XML validation:", error);
+    event.reply("xml-creation-failed", error.message);
   }
 });
 

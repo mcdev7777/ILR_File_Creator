@@ -5,16 +5,22 @@ function logToMain(message) {
   ipcRenderer.send("log-message", message);
 }
 
-const form = document.getElementById("uploadForm");
-const output = document.getElementById("output");
-
 /* Current Schema Version
   Change this when the government updates its schema.
   It should then update the UI
   */
 const schemaVersion = "2526.1.38.0";
 
-function setDefaultReleaseVersion() {
+// Create save button (can be created before DOM is ready)
+const saveButton = document.createElement("button");
+saveButton.textContent = "Save XML File";
+saveButton.onclick = async () => {
+  ipcRenderer.send("openSave");
+};
+
+// Wait for DOM to be ready before accessing elements
+document.addEventListener("DOMContentLoaded", () => {
+  // Set default version
   const versionElement = document.getElementById("version-number");
   const releaseVersionInput = document.getElementById("releaseVersion");
 
@@ -22,34 +28,39 @@ function setDefaultReleaseVersion() {
     versionElement.value = schemaVersion.trim();
     releaseVersionInput.value = schemaVersion.trim();
   }
-}
 
-document.addEventListener("DOMContentLoaded", setDefaultReleaseVersion);
+  // Set up form submission handler
+  const form = document.getElementById("uploadForm");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      let version = document.getElementById("releaseVersion").value;
+      let file = document.getElementById("csvFile").files[0];
+
+      if (!file) {
+        alert("Please select a CSV file");
+        return;
+      }
+
+      Papa.parse(file, {
+        complete: (results) => {
+          const dataArray = results.data;
+          ipcRenderer.send("upload-csv", dataArray, version);
+        },
+        error: (error) => {
+          console.error("Parse error:", error);
+          alert("Error parsing CSV file");
+        }
+      });
+
+      logToMain("submit completed");
+    });
+  }
+});
 
 ipcRenderer.on("show-alert", (event, message) => {
   alert(message);
-});
-
-const saveButton = document.createElement("button");
-saveButton.textContent = "Save XML File";
-saveButton.onclick = async () => {
-  ipcRenderer.send("openSave");
-};
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  let version = document.getElementById("releaseVersion").value;
-  let file = document.getElementById("csvFile").files[0];
-
-  Papa.parse(file, {
-    complete: (results) => {
-      const dataArray = results.data;
-      ipcRenderer.send("upload-csv", dataArray, version);
-    },
-  });
-
-  logToMain("submit completed");
 });
 
 ipcRenderer.on("xml-created", (event, filename) => {
